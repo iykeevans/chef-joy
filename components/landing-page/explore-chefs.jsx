@@ -26,13 +26,13 @@ function ExploreChefs() {
 
       <div className="flex justify-center mb-10">
         <p className="text-center text-lg md:w-4/12 text-gray-500">
-          Find chef's nearby and book them for your next party or meal.
+          Find chef&apos;s nearby and book them for your next party or meal.
         </p>
       </div>
 
       <div className="grid md:grid-cols-3 grid-cols-1 gap-x-8">
-        {chefs.map((chef) => (
-          <ChefCard chef={chef} />
+        {chefs.map((chef, index) => (
+          <ChefCard chef={chef} key={index} />
         ))}
       </div>
     </section>

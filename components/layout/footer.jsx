@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 import Twitter from "../svg/twitter";
 import Facebook from "../svg/facebook";
@@ -9,12 +10,16 @@ function Footer() {
     <footer className="w-11/12 mx-auto pb-5 pt-44">
       <section className="grid md:grid-cols-6 grid-cols-2 pb-12">
         <div className="col-span-2">
-          <img
-            src="assets/images/chef-joy-logo.png"
-            alt="logo"
-            className="mb-3"
-            style={{ width: 150 }}
-          />
+          <div
+            className="mb-3 relative"
+            style={{ width: 150, position: "relative" }}
+          >
+            <Image
+              src="/assets/images/chef-joy-logo.png"
+              alt="logo"
+              layout="fill"
+            />
+          </div>
           <div className="mb-4">
             Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit
           </div>

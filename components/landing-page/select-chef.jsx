@@ -24,8 +24,8 @@ function SelectChef() {
         className="grid md:grid-cols-4 grid-col-1 gap-y-12"
         style={{ overflowX: "auto" }}
       >
-        {dishes.map((dish) => (
-          <div className="flex flex-col items-center">
+        {dishes.map((dish, index) => (
+          <div className="flex flex-col items-center" key={index}>
             <div
               className="rounded-full"
               style={{ width: 180, height: 180, background: "#eee" }}

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import styled from "styled-components";
 
 function NavigationBar() {
@@ -6,11 +7,11 @@ function NavigationBar() {
     <NavBar>
       <div className="flex items-center justify-between h-full w-11/12 mx-auto">
         <Link href="/">
-          <a>
-            <img
-              src="assets/images/chef-joy-logo.png"
+          <a className="relative" style={{ width: 200 }}>
+            <Image
+              src="/assets/images/chef-joy-logo.png"
               alt="Logo"
-              style={{ height: 30 }}
+              layout="fill"
             />
           </a>
         </Link>

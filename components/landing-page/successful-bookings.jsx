@@ -37,8 +37,8 @@ function SuccessfulBookings() {
       </p>
 
       <div className="grid md:grid-cols-3 grid-cols-1 gap-x-8">
-        {bookings.map((booking) => (
-          <BookingCard booking={booking} />
+        {bookings.map((booking, index) => (
+          <BookingCard booking={booking} key={index} />
         ))}
       </div>
     </section>

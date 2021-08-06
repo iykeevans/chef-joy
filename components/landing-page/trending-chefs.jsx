@@ -31,8 +31,8 @@ function TrendingChefs() {
       </div>
 
       <div className="grid md:grid-cols-3 grid-cols-1 gap-x-8">
-        {chefs.map((chef) => (
-          <ChefCard chef={chef} />
+        {chefs.map((chef, index) => (
+          <ChefCard chef={chef} key={index} />
         ))}
       </div>
     </section>
