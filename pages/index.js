@@ -29,7 +29,7 @@ export default function Home() {
         <ExploreChefs />
         <TrendingChefs />
         <SuccessfulBookings />
-        <MobileAd />
+        {/* <MobileAd /> */}
       </main>
     </div>
   );
