@@ -51,7 +51,9 @@ function Login() {
               Sign in
             </button>
 
-            <span className="text-center">Don't have an Account? Signup</span>
+            <span className="text-center">
+              Don&apos;t have an Account? Signup
+            </span>
           </form>
         </section>
       </div>

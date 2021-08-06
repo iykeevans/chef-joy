@@ -15,7 +15,7 @@ function Signup() {
             }}
           >
             <h1 className="text-3xl font-bold mb-2">Get Started</h1>
-            <p className="text-gray-500 mb-4">Let's create your account</p>
+            <p className="text-gray-500 mb-4">Let&apos;s create your account</p>
 
             <label className="flex flex-col mb-4">
               Name

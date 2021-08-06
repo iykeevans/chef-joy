@@ -1,4 +1,4 @@
-import React from "react";
+import Image from "next/image";
 
 function BookAChef() {
   return (
@@ -22,21 +22,25 @@ function BookAChef() {
         </div>
 
         <div className="md:w-1/2 flex justify-end">
-          <img
-            src="assets/images/landing-page/book-a-chef/book-chef-1.png"
-            alt="book-chef"
-            style={{ width: 400 }}
-          />
+          <div className="relative" style={{ width: 400 }}>
+            <Image
+              src="/assets/images/landing-page/book-a-chef/book-chef-1.png"
+              alt="book-chef"
+              layout="fill"
+            />
+          </div>
         </div>
       </div>
 
       <div className="flex flex-col md:flex-row items-center justify-between mb-44">
         <div className="md:w-5/12">
-          <img
-            src="assets/images/landing-page/book-a-chef/book-chef-1.png"
-            alt="book-chef"
-            style={{ width: 400 }}
-          />
+          <div className="relative" style={{ width: 400 }}>
+            <Image
+              src="/assets/images/landing-page/book-a-chef/book-chef-1.png"
+              alt="book-chef"
+              layout="fill"
+            />
+          </div>
         </div>
 
         <div className="md:w-5/12 text-center md:text-left">
@@ -45,7 +49,7 @@ function BookAChef() {
           </h2>
 
           <p className="text-gray-500 text-lg mt-6 md:w-8/12">
-            Don't worry about the food, we got this.
+            Don&apos;t worry about the food, we got this.
           </p>
 
           <button
@@ -76,11 +80,13 @@ function BookAChef() {
         </div>
 
         <div className="md:w-1/2 flex justify-end">
-          <img
-            src="assets/images/landing-page/book-a-chef/book-chef-1.png"
-            alt="book-chef"
-            style={{ width: 400 }}
-          />
+          <div className="relative" style={{ width: 400 }}>
+            <Image
+              src="/assets/images/landing-page/book-a-chef/book-chef-1.png"
+              alt="book-chef"
+              layout="fill"
+            />
+          </div>
         </div>
       </div>
     </section>

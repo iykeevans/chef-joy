@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 function Hero() {
   const router = useRouter();
@@ -7,11 +8,14 @@ function Hero() {
     <section className="w-11/12 mx-auto h-screen pt-16">
       <div className="flex flex-col md:flex-row md:flex-row-reverse items-center w-full">
         <div className="md:w-6/12 flex md:justify-end justify-center">
-          <img
-            src="assets/images/hero-image.png"
-            alt="chef"
-            style={{ width: 500 }}
-          />
+          <div className="relative" style={{ width: 500, height: 380 }}>
+            <Image
+              src="/assets/images/hero-image.png"
+              alt="chef"
+              layout="fill"
+              objectFit="cover"
+            />
+          </div>
         </div>
 
         <div className="md:w-6/12 text-center md:text-left">
