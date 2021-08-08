@@ -24,9 +24,9 @@ function ChefHero(props) {
               transform="translate(-293.25 -61.08)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <line
               id="Line_151"
@@ -35,9 +35,9 @@ function ChefHero(props) {
               transform="translate(153.045 74.118)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <path
               id="Path_3127"
@@ -46,9 +46,9 @@ function ChefHero(props) {
               transform="translate(-160.727 -51.975)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <path
               id="Path_3128"
@@ -57,9 +57,9 @@ function ChefHero(props) {
               transform="translate(-214.883 -60.181)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <ellipse
               id="Ellipse_344"
@@ -71,9 +71,9 @@ function ChefHero(props) {
               transform="translate(74.351 8.942)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <path
               id="Path_3129"
@@ -82,9 +82,9 @@ function ChefHero(props) {
               transform="translate(-357.294 -60.181)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <path
               id="Path_3130"
@@ -93,9 +93,9 @@ function ChefHero(props) {
               transform="translate(-216.818 -58.904)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <path
               id="Path_3131"
@@ -104,9 +104,9 @@ function ChefHero(props) {
               transform="translate(-214.541 -58.623)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <line
               id="Line_152"
@@ -115,9 +115,9 @@ function ChefHero(props) {
               transform="translate(120.764 106.655)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <line
               id="Line_153"
@@ -126,9 +126,9 @@ function ChefHero(props) {
               transform="translate(117.612 106.655)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <line
               id="Line_154"
@@ -138,9 +138,9 @@ function ChefHero(props) {
               transform="translate(114.005 106.666)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <line
               id="Line_155"
@@ -149,9 +149,9 @@ function ChefHero(props) {
               transform="translate(110.163 106.6)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <line
               id="Line_156"
@@ -160,9 +160,9 @@ function ChefHero(props) {
               transform="translate(106.098 106.555)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <path
               id="Path_3132"
@@ -171,9 +171,9 @@ function ChefHero(props) {
               transform="translate(-357.458 -58.523)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <path
               id="Path_3133"
@@ -182,9 +182,9 @@ function ChefHero(props) {
               transform="translate(-357.447 -58.849)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <line
               id="Line_157"
@@ -193,9 +193,9 @@ function ChefHero(props) {
               transform="translate(46.245 109.617)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <line
               id="Line_158"
@@ -204,9 +204,9 @@ function ChefHero(props) {
               transform="translate(32.749 109.617)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <line
               id="Line_159"
@@ -215,9 +215,9 @@ function ChefHero(props) {
               transform="translate(42.226 107.212)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <line
               id="Line_160"
@@ -226,9 +226,9 @@ function ChefHero(props) {
               transform="translate(35.834 107.212)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <line
               id="Line_161"
@@ -237,9 +237,9 @@ function ChefHero(props) {
               transform="translate(39.108 105.052)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <ellipse
               id="Ellipse_345"
@@ -251,9 +251,9 @@ function ChefHero(props) {
               transform="translate(74.674 24.821)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <path
               id="Path_3134"
@@ -262,9 +262,9 @@ function ChefHero(props) {
               transform="translate(-289.622 -58.932)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <ellipse
               id="Ellipse_346"
@@ -276,9 +276,9 @@ function ChefHero(props) {
               transform="translate(73.806 122.089)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <path
               id="Path_3135"
@@ -287,9 +287,9 @@ function ChefHero(props) {
               transform="translate(-276.306 -48.905)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <ellipse
               id="Ellipse_347"
@@ -301,9 +301,9 @@ function ChefHero(props) {
               transform="translate(67.124 119.517)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <ellipse
               id="Ellipse_348"
@@ -315,9 +315,9 @@ function ChefHero(props) {
               transform="translate(73.806 115.397)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <path
               id="Path_3136"
@@ -326,9 +326,9 @@ function ChefHero(props) {
               transform="translate(-276.317 -49.578)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <ellipse
               id="Ellipse_349"
@@ -340,9 +340,9 @@ function ChefHero(props) {
               transform="translate(67.124 112.824)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <ellipse
               id="Ellipse_350"
@@ -354,9 +354,9 @@ function ChefHero(props) {
               transform="translate(73.806 108.715)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <path
               id="Path_3137"
@@ -365,9 +365,9 @@ function ChefHero(props) {
               transform="translate(-276.306 -50.269)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <ellipse
               id="Ellipse_351"
@@ -379,9 +379,9 @@ function ChefHero(props) {
               transform="translate(67.124 106.143)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <ellipse
               id="Ellipse_352"
@@ -393,9 +393,9 @@ function ChefHero(props) {
               transform="translate(73.806 97.391)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <path
               id="Path_3138"
@@ -404,9 +404,9 @@ function ChefHero(props) {
               transform="translate(-276.306 -50.877)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
             <ellipse
               id="Ellipse_353"
@@ -418,9 +418,9 @@ function ChefHero(props) {
               transform="translate(67.124 99.963)"
               fill="none"
               stroke="#263238"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="0.953"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="0.953"
             />
           </g>
         </g>
@@ -452,7 +452,7 @@ function ChefHero(props) {
                     transform="translate(-296.826 -48.662)"
                     fill="#fff"
                     stroke="#000"
-                    stroke-width="1"
+                    strokeWidth="1"
                   />
                 </g>
                 <g id="Group_15695" data-name="Group 15695">
@@ -491,7 +491,7 @@ function ChefHero(props) {
                         transform="translate(0)"
                         fill="#fff"
                         stroke="#000"
-                        stroke-width="1"
+                        strokeWidth="1"
                       />
                       <g
                         id="Group_15681"
@@ -505,9 +505,9 @@ function ChefHero(props) {
                           transform="translate(-252.7 -73.385)"
                           fill="none"
                           stroke="#000"
-                          stroke-linecap="round"
-                          stroke-miterlimit="10"
-                          stroke-width="1.199"
+                          strokeLinecap="round"
+                          strokeMiterlimit="10"
+                          strokeWidth="1.199"
                         />
                       </g>
                       <path
@@ -583,7 +583,7 @@ function ChefHero(props) {
                           transform="translate(-132.171 -76.672)"
                           fill="#e23744"
                           stroke="#000"
-                          stroke-width="1"
+                          strokeWidth="1"
                         />
                       </g>
                       <g
@@ -598,7 +598,7 @@ function ChefHero(props) {
                           transform="translate(-124.095 -70.105)"
                           fill="#fff"
                           stroke="#000"
-                          stroke-width="1"
+                          strokeWidth="1"
                         />
                         <path
                           id="Path_18694"
@@ -626,7 +626,7 @@ function ChefHero(props) {
                         transform="translate(25.974 58.946)"
                         fill="#fff"
                         stroke="#000"
-                        stroke-width="1"
+                        strokeWidth="1"
                       />
                     </g>
                   </g>
@@ -668,7 +668,7 @@ function ChefHero(props) {
                       transform="translate(-203.425 -193.968)"
                       fill="#fff"
                       stroke="#000"
-                      stroke-width="1"
+                      strokeWidth="1"
                     />
                     <g
                       id="Group_15737"
@@ -682,7 +682,7 @@ function ChefHero(props) {
                         transform="translate(1068.094 532.553)"
                         fill="none"
                         stroke="#000"
-                        stroke-width="1"
+                        strokeWidth="1"
                       />
                       <line
                         id="Line_554"
@@ -691,7 +691,7 @@ function ChefHero(props) {
                         transform="translate(1068.094 551.715)"
                         fill="none"
                         stroke="#000"
-                        stroke-width="1"
+                        strokeWidth="1"
                       />
                       <line
                         id="Line_555"
@@ -700,7 +700,7 @@ function ChefHero(props) {
                         transform="translate(1068.094 570.876)"
                         fill="none"
                         stroke="#000"
-                        stroke-width="1"
+                        strokeWidth="1"
                       />
                       <line
                         id="Line_556"
@@ -709,7 +709,7 @@ function ChefHero(props) {
                         transform="translate(1011.521 588.669)"
                         fill="none"
                         stroke="#000"
-                        stroke-width="1"
+                        strokeWidth="1"
                       />
                       <line
                         id="Line_557"
@@ -718,7 +718,7 @@ function ChefHero(props) {
                         transform="translate(1141.088 517.954)"
                         fill="none"
                         stroke="#000"
-                        stroke-width="1"
+                        strokeWidth="1"
                       />
                       <line
                         id="Line_558"
@@ -727,7 +727,7 @@ function ChefHero(props) {
                         transform="translate(1120.102 517.954)"
                         fill="none"
                         stroke="#000"
-                        stroke-width="1"
+                        strokeWidth="1"
                       />
                       <line
                         id="Line_559"
@@ -736,7 +736,7 @@ function ChefHero(props) {
                         transform="translate(1099.117 517.954)"
                         fill="none"
                         stroke="#000"
-                        stroke-width="1"
+                        strokeWidth="1"
                       />
                       <line
                         id="Line_560"
@@ -745,7 +745,7 @@ function ChefHero(props) {
                         transform="translate(1078.129 517.954)"
                         fill="none"
                         stroke="#000"
-                        stroke-width="1"
+                        strokeWidth="1"
                       />
                       <line
                         id="Line_561"
@@ -754,7 +754,7 @@ function ChefHero(props) {
                         transform="translate(1055.129 517.954)"
                         fill="none"
                         stroke="#000"
-                        stroke-width="1"
+                        strokeWidth="1"
                       />
                       <line
                         id="Line_562"
@@ -763,7 +763,7 @@ function ChefHero(props) {
                         transform="translate(1034.141 517.954)"
                         fill="none"
                         stroke="#000"
-                        stroke-width="1"
+                        strokeWidth="1"
                       />
                     </g>
                   </g>
@@ -846,7 +846,7 @@ function ChefHero(props) {
                             d="M0,0H143.028a0,0,0,0,1,0,0V73.34a12.234,12.234,0,0,1-12.234,12.234H12.234A12.234,12.234,0,0,1,0,73.34V0A0,0,0,0,1,0,0Z"
                             fill="#fff"
                             stroke="#000"
-                            stroke-width="1"
+                            strokeWidth="1"
                           />
                         </g>
                         <rect
@@ -890,7 +890,7 @@ function ChefHero(props) {
                             transform="translate(-91.365 -178.8)"
                             fill="#fff"
                             stroke="#000"
-                            stroke-width="1"
+                            strokeWidth="1"
                           />
                           <g
                             id="Group_15713"
@@ -904,8 +904,8 @@ function ChefHero(props) {
                               transform="translate(-97.108 -185.288)"
                               fill="none"
                               stroke="#000"
-                              stroke-miterlimit="10"
-                              stroke-width="0.845"
+                              strokeMiterlimit="10"
+                              strokeWidth="0.845"
                             />
                             <path
                               id="Path_18708"
@@ -914,8 +914,8 @@ function ChefHero(props) {
                               transform="translate(-90.581 -178.75)"
                               fill="none"
                               stroke="#000"
-                              stroke-miterlimit="10"
-                              stroke-width="0.845"
+                              strokeMiterlimit="10"
+                              strokeWidth="0.845"
                             />
                             <path
                               id="Path_18709"
@@ -924,8 +924,8 @@ function ChefHero(props) {
                               transform="translate(-84.23 -170.675)"
                               fill="none"
                               stroke="#000"
-                              stroke-miterlimit="10"
-                              stroke-width="0.845"
+                              strokeMiterlimit="10"
+                              strokeWidth="0.845"
                             />
                             <path
                               id="Path_18710"
@@ -934,8 +934,8 @@ function ChefHero(props) {
                               transform="translate(-77.834 -160.666)"
                               fill="none"
                               stroke="#d55d1e"
-                              stroke-miterlimit="10"
-                              stroke-width="0.845"
+                              strokeMiterlimit="10"
+                              strokeWidth="0.845"
                             />
                           </g>
                         </g>
@@ -953,7 +953,7 @@ function ChefHero(props) {
                             transform="translate(-20.34 -186.448)"
                             fill="#a0b481"
                             stroke="#000"
-                            stroke-width="1"
+                            strokeWidth="1"
                           />
                           <path
                             id="Path_18712"
@@ -962,7 +962,7 @@ function ChefHero(props) {
                             transform="translate(-66.283 -190.315)"
                             fill="#0b683e"
                             stroke="#000"
-                            stroke-width="1"
+                            strokeWidth="1"
                           />
                         </g>
                         <path
@@ -972,7 +972,7 @@ function ChefHero(props) {
                           transform="translate(-57.304 -156.877)"
                           fill="#fff"
                           stroke="#000"
-                          stroke-width="1"
+                          strokeWidth="1"
                         />
                       </g>
                     </g>
@@ -995,7 +995,7 @@ function ChefHero(props) {
                           transform="translate(-95.539 -211.86)"
                           fill="#fff"
                           stroke="#000"
-                          stroke-width="1"
+                          strokeWidth="1"
                         />
                       </g>
                       <g
@@ -1010,7 +1010,7 @@ function ChefHero(props) {
                           transform="translate(-113.394 -211.86)"
                           fill="#fff"
                           stroke="#000"
-                          stroke-width="1"
+                          strokeWidth="1"
                         />
                       </g>
                       <g
@@ -1025,7 +1025,7 @@ function ChefHero(props) {
                           transform="translate(-131.249 -211.86)"
                           fill="#fff"
                           stroke="#000"
-                          stroke-width="1"
+                          strokeWidth="1"
                         />
                       </g>
                       <g
@@ -1040,7 +1040,7 @@ function ChefHero(props) {
                           transform="translate(-92.656 -221.81)"
                           fill="#fff"
                           stroke="#000"
-                          stroke-width="1"
+                          strokeWidth="1"
                         />
                       </g>
                     </g>
@@ -1076,8 +1076,8 @@ function ChefHero(props) {
               d="M449.813,91.626c0,36.92-48.71,50.61-67.96,19.07a52.041,52.041,0,0,1-36.13,2.7c-17.52,34.06-69.27,21.62-69.27-16.74a36.66,36.66,0,0,1,44.36-35.84c.28.06.57.12.85.19a39.006,39.006,0,0,1,2.37-3.17c15.28-18.4,46.54-20.85,65.73-6.28a39.977,39.977,0,0,1,7.29,7.13c.4-.2.81-.39,1.21-.57C422.123,47.466,449.813,64.806,449.813,91.626Z"
               fill="#fff"
               stroke="#000"
-              stroke-miterlimit="10"
-              stroke-width="1"
+              strokeMiterlimit="10"
+              strokeWidth="1"
             />
             <path
               id="Path_18883"
@@ -1085,8 +1085,8 @@ function ChefHero(props) {
               d="M404.817,149.75c-26.46-16.517-56.969-16.517-83.43,0-1.644,1.026-3.443-.8-3.443-3.519,0-25.184-.5-25.839,1.494-27.156,42.505-28.058,88.823-4.407,88.823,3.5C408.261,142.7,409.371,152.592,404.817,149.75Z"
               fill="#fff"
               stroke="#000"
-              stroke-miterlimit="10"
-              stroke-width="1"
+              strokeMiterlimit="10"
+              strokeWidth="1"
             />
             <path
               id="Path_18884"
@@ -1094,9 +1094,9 @@ function ChefHero(props) {
               d="M425.678,96.652c0,15.811-19.726,28.629-44.058,28.629s-44.057-12.818-44.057-28.629"
               fill="#fff"
               stroke="#000"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1"
             />
             <path
               id="Path_18885"
@@ -1105,8 +1105,8 @@ function ChefHero(props) {
               transform="translate(20279.793 -10498.082) rotate(-7)"
               fill="none"
               stroke="#000"
-              stroke-linecap="round"
-              stroke-width="1"
+              strokeLinecap="round"
+              strokeWidth="1"
             />
           </g>
           <path
@@ -1116,7 +1116,7 @@ function ChefHero(props) {
             transform="translate(22144 -7887)"
             fill="none"
             stroke="#000"
-            stroke-width="1"
+            strokeWidth="1"
           />
         </g>
       </g>

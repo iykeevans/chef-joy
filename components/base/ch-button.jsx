@@ -26,9 +26,9 @@ function ChButton({ children, ...rest }) {
           transform="translate(4.583 11)"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
         />
         <line
           id="Line_148"
@@ -38,9 +38,9 @@ function ChButton({ children, ...rest }) {
           transform="translate(11.917 11)"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
         />
         <line
           id="Line_149"
@@ -50,9 +50,9 @@ function ChButton({ children, ...rest }) {
           transform="translate(11.917 5.5)"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
         />
       </svg>
     </Button>

@@ -15,6 +15,7 @@ function MobileAd() {
           <div className="relative" style={{ height: 400, width: "100%" }}>
             <Image
               src="/assets/images/landing-page/mobile-ad/ad-image.png"
+              alt="app"
               layout="fill"
               objectFit="cover"
               objectPosition="0 -50%"
@@ -31,7 +32,7 @@ function MobileAd() {
             Our mobile app makes it easy to manage your food anywhere.
           </p>
 
-          <div class="flex md:flex-row flex-col items-center">
+          <div className="flex md:flex-row flex-col items-center">
             <GoogleBadge className="md:mr-4 md:mb-0 mb-4" />
 
             <AppleBadge />

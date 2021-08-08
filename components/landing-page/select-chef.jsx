@@ -61,6 +61,7 @@ function SelectChef() {
               <Image
                 src={dish.image}
                 srcSet={`${dish.image}--mobile 1x`}
+                alt={dish.name}
                 layout="fill"
               />
             </ImageWrapper>
