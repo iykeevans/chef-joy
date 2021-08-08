@@ -90,9 +90,9 @@ function GoogleBadge(props) {
           <stop stopColor="#00A0FF" />
           <stop offset="0.0066" stopColor="#00A1FF" />
           <stop offset="0.2601" stopColor="#00BEFF" />
-          <stop offset="0.5122" stop-color="#00D2FF" />
-          <stop offset="0.7604" stop-color="#00DFFF" />
-          <stop offset="1" stop-color="#00E3FF" />
+          <stop offset="0.5122" stopColor="#00D2FF" />
+          <stop offset="0.7604" stopColor="#00DFFF" />
+          <stop offset="1" stopColor="#00E3FF" />
         </linearGradient>
         <linearGradient
           id="paint1_linear"
@@ -102,10 +102,10 @@ function GoogleBadge(props) {
           y2="25.9982"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFE000" />
-          <stop offset="0.4087" stop-color="#FFBD00" />
-          <stop offset="0.7754" stop-color="#FFA500" />
-          <stop offset="1" stop-color="#FF9C00" />
+          <stop stopColor="#FFE000" />
+          <stop offset="0.4087" stopColor="#FFBD00" />
+          <stop offset="0.7754" stopColor="#FFA500" />
+          <stop offset="1" stopColor="#FF9C00" />
         </linearGradient>
         <linearGradient
           id="paint2_linear"
@@ -115,8 +115,8 @@ function GoogleBadge(props) {
           y2="-7.27893"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FF3A44" />
-          <stop offset="1" stop-color="#C31162" />
+          <stop stopColor="#FF3A44" />
+          <stop offset="1" stopColor="#C31162" />
         </linearGradient>
         <linearGradient
           id="paint3_linear"
@@ -126,7 +126,7 @@ function GoogleBadge(props) {
           y2="38.2434"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#32A071" />
+          <stop stopColor="#32A071" />
           <stop offset="0.0685" stopColor="#2DA771" />
           <stop offset="0.4762" stopColor="#15CF74" />
           <stop offset="0.8009" stopColor="#06E775" />
