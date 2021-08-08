@@ -11,6 +11,7 @@ function ChefCard({ chef, ...rest }) {
       >
         <Image
           src={chef.image}
+          alt={chef.name}
           layout="fill"
           objectFit="cover"
           className="rounded-lg"

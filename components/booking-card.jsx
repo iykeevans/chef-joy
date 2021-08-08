@@ -90,9 +90,9 @@ function BookingCard({ booking, ...rest }) {
             transform="translate(6.106 5.111)"
             fill="none"
             stroke="#333"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1"
           />
           <line
             id="Line_320"
@@ -102,9 +102,9 @@ function BookingCard({ booking, ...rest }) {
             transform="translate(6.106 12.575)"
             fill="none"
             stroke="#333"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1"
           />
         </svg>
       </div>
