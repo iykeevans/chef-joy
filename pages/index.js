@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 
 import Hero from "../components/landing-page/hero";
 import BookAChef from "../components/landing-page/book-a-chef";
@@ -29,7 +28,7 @@ export default function Home() {
         <ExploreChefs />
         <TrendingChefs />
         <SuccessfulBookings />
-        {/* <MobileAd /> */}
+        <MobileAd />
       </main>
     </div>
   );
