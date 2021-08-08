@@ -9,14 +9,22 @@ function Search() {
       stars: 4.5,
       specialty: "indian",
       time: "5pm to 8pm",
+      image: "/assets/image/landing-page/explore-chef/beverly.jpg",
     },
     {
       name: "Kathy Hudson",
       stars: 4.5,
       specialty: "chinese, italian, thai",
       time: "5pm to 8pm",
+      image: "/assets/image/landing-page/explore-chef/beverly.jpg",
     },
-    { name: "Louis Ford", stars: 4.5, specialty: "indian", time: "5pm to 8pm" },
+    {
+      name: "Louis Ford",
+      stars: 4.5,
+      specialty: "indian",
+      time: "5pm to 8pm",
+      image: "/assets/image/landing-page/explore-chef/beverly.jpg",
+    },
   ]);
 
   return (

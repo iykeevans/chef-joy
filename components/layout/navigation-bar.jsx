@@ -1,18 +1,15 @@
 import Link from "next/link";
-import Image from "next/image";
 import styled from "styled-components";
+
+import Logo from "./logo";
 
 function NavigationBar() {
   return (
-    <NavBar>
+    <NavBar className="fixed w-full bg-white z-10">
       <div className="flex items-center justify-between h-full w-11/12 mx-auto">
         <Link href="/">
-          <a className="relative" style={{ width: 200 }}>
-            <Image
-              src="/assets/images/chef-joy-logo.png"
-              alt="Logo"
-              layout="fill"
-            />
+          <a>
+            <Logo style={{ height: 30 }} />
           </a>
         </Link>
 
