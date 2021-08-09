@@ -13,12 +13,12 @@ function BookAChef() {
             Book A Chef For Your Next House Party.
           </h2>
 
-          <p className="text-gray-500 md:text-lg text-sm md:mt-7 mt-3 md:w-8/12">
+          <p className="text-gray-500 md:text-lg md:mt-7 mt-3 md:w-8/12">
             Attend to your guests and make them feel at home.
           </p>
 
           <button
-            className="bg-black text-white py-3 px-7 mt-6 font-medium md:text-base text-sm"
+            className="bg-black text-white py-3 px-7 mt-6 font-medium"
             style={{ borderRadius: 8 }}
           >
             Book A Chef
@@ -26,17 +26,13 @@ function BookAChef() {
         </div>
 
         <div className="md:w-1/2 flex md:justify-end justify-center">
-          <ImageWrapper>
-            <PeopleToast />
-          </ImageWrapper>
+          <PeopleToast />
         </div>
       </div>
 
       <div className="flex flex-col md:flex-row items-center justify-between md:mb-44 mb-20">
         <div className="md:w-5/12">
-          <ImageWrapper>
-            <PersonScheduling />
-          </ImageWrapper>
+          <PersonScheduling />
         </div>
 
         <div className="md:w-5/12 text-center md:text-left md:mt-0 mt-6">
@@ -44,12 +40,12 @@ function BookAChef() {
             Schedule Chefs For Your Daily Meals.
           </h2>
 
-          <p className="text-gray-500 md:text-lg text-sm md:mt-6 mt-3 md:w-8/12">
+          <p className="text-gray-500 md:text-lg  md:mt-6 mt-3 md:w-8/12">
             Don&apos;t worry about the food, we got this.
           </p>
 
           <button
-            className="bg-black text-white py-3 px-7 rounded mt-6 font-medium md:text-base text-sm"
+            className="bg-black text-white py-3 px-7 rounded mt-6 font-medium"
             style={{ borderRadius: 8 }}
           >
             Book A Chef
@@ -63,12 +59,12 @@ function BookAChef() {
             All This Starts At $30/Hour
           </h2>
 
-          <p className="text-gray-500 md:text-lg text-sm md:mt-7 mt-3 md:w-8/12">
+          <p className="text-gray-500 md:text-lg md:mt-7 mt-3 md:w-8/12">
             Cheaper than ordering from a restaurant.
           </p>
 
           <button
-            className="bg-black text-white py-3 px-7 rounded mt-6 font-medium md:text-base text-sm"
+            className="bg-black text-white py-3 px-7 rounded mt-6 font-medium"
             style={{ borderRadius: 8 }}
           >
             Book A Chef
@@ -76,9 +72,7 @@ function BookAChef() {
         </div>
 
         <div className="md:w-1/2 flex justify-end">
-          <ImageWrapper>
-            <ChefCooking />
-          </ImageWrapper>
+          <ChefCooking />
         </div>
       </div>
     </section>
