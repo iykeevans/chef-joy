@@ -1,10 +1,12 @@
-import React from "react";
+import AuthChef from "../../components/svg/auth-chef.svg";
 
 function Signup() {
   return (
     <div className="w-11/12 mx-auto">
-      <div className="flex flex-col md:flex-row pt-24">
-        <section className="md:w-7/12"></section>
+      <div className="flex flex-col md:flex-row justify-between pt-24">
+        <section className="md:w-7/12 flex justify-center">
+          <AuthChef style={{ height: 520 }} />
+        </section>
 
         <section className="md:w-4/12">
           <form

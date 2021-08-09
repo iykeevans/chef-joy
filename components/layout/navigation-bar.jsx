@@ -6,10 +6,10 @@ import Logo from "./logo";
 function NavigationBar() {
   return (
     <NavBar className="fixed w-full bg-white z-10">
-      <div className="flex items-center justify-between h-full w-11/12 mx-auto">
+      <div className="w-11/12 mx-auto flex items-center justify-between h-full">
         <Link href="/">
           <a>
-            <Logo style={{ height: 30 }} />
+            <Logo className="md:h-7 h-6" />
           </a>
         </Link>
 
