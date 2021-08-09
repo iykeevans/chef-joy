@@ -1,6 +1,9 @@
+import { useRouter } from "next/router";
 import SearchIcon from "./search-icon.svg";
 
 function HeroSearch() {
+  const router = useRouter();
+
   return (
     <div className="relative flex flex-col">
       <div
