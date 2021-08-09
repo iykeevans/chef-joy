@@ -26,13 +26,13 @@ function BookAChef() {
         </div>
 
         <div className="md:w-1/2 flex md:justify-end justify-center">
-          <PeopleToast />
+          <PeopleToast className="w-full" />
         </div>
       </div>
 
       <div className="flex flex-col md:flex-row items-center justify-between md:mb-44 mb-20">
         <div className="md:w-5/12">
-          <PersonScheduling />
+          <PersonScheduling className="w-full" />
         </div>
 
         <div className="md:w-5/12 text-center md:text-left md:mt-0 mt-6">
@@ -72,7 +72,7 @@ function BookAChef() {
         </div>
 
         <div className="md:w-1/2 flex justify-end">
-          <ChefCooking />
+          <ChefCooking className="w-full" />
         </div>
       </div>
     </section>
