@@ -10,7 +10,7 @@ function CartCalculator() {
       <div className="flex items-center border-b pb-4">
         <div className="flex flex-col w-1/2">
           <span className="text-xs">Date</span>
-          <span className="font-medium text-red-600">16th Apr'2</span>
+          <span className="font-medium text-red-600">16th Apr&apos;2</span>
         </div>
 
         <div className="flex flex-col w-1/2">

@@ -16,8 +16,8 @@ function CartAddress(props) {
     <div {...props}>
       <h2 className="text-xl font-semibold mb-3">Address</h2>
 
-      {addresses.map((address) => (
-        <CartList address={address} />
+      {addresses.map((address, index) => (
+        <CartList address={address} key={index} />
       ))}
 
       <div className="mt-5">
