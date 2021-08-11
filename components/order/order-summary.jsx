@@ -1,4 +1,4 @@
-function CartCalculator() {
+function OrderSummary() {
   return (
     <div
       className="w-full p-4"
@@ -70,4 +70,4 @@ function CartCalculator() {
   );
 }
 
-export default CartCalculator;
+export default OrderSummary;
