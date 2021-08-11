@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 
-import Layout from "../components/layout";
+import Layout from "../components/layouts";
 
 import "tailwindcss/tailwind.css";
 
