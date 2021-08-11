@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styled from "styled-components";
 
-import NavigationBar from "../../components/layout/navigation-bar";
+import AuthLayout from "../../components/layouts/auth-layout";
 import AuthChef from "../../components/svg/auth-chef.svg";
 
 function Login() {
@@ -84,11 +84,6 @@ const Form = styled.form`
   }
 `;
 
-Login.getLayout = (page) => (
-  <>
-    <NavigationBar />
-    {page}
-  </>
-);
+Login.getLayout = AuthLayout;
 
 export default Login;

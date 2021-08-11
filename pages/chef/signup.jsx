@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Link from "next/link";
 
-import NavigationBar from "../../components/layout/navigation-bar";
+import AuthLayout from "../../components/layouts/auth-layout";
 
 import AuthChef from "../../components/svg/auth-chef.svg";
 
@@ -93,11 +93,6 @@ const Form = styled.form`
   }
 `;
 
-Signup.getLayout = (page) => (
-  <>
-    <NavigationBar />
-    {page}
-  </>
-);
+Signup.getLayout = AuthLayout;
 
 export default Signup;
