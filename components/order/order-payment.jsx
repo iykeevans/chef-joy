@@ -1,7 +1,7 @@
 import { useState } from "react";
-import CartList from "./cart-list";
+import OrderCard from "./order-card";
 
-function CartAddress(props) {
+function OrderPayment(props) {
   const [cards, setCards] = useState([
     {
       name: "American Express",
@@ -17,7 +17,7 @@ function CartAddress(props) {
       <h2 className="text-xl font-semibold mb-3">Address</h2>
 
       {cards.map((card, index) => (
-        <CartList address={card} key={index} />
+        <OrderCard address={card} key={index} />
       ))}
 
       <div className="mt-8">
@@ -73,4 +73,4 @@ function CartAddress(props) {
   );
 }
 
-export default CartAddress;
+export default OrderPayment;

@@ -28,7 +28,7 @@ function Search() {
   ]);
 
   return (
-    <div className="w-11/12 mx-auto">
+    <div className="w-11/12 mx-auto pt-32">
       <div className="flex items-center">
         <div className="mr-5 flex flex-col items-center w-56 border-b-2 py-2">
           <span className="font-medium">Party</span>

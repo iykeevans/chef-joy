@@ -1,7 +1,7 @@
 import { useState } from "react";
-import CartList from "./cart-list";
+import OrderCard from "./order-card";
 
-function CartAddress(props) {
+function OrderAddress(props) {
   const [addresses, setAddresses] = useState([
     {
       name: "Home",
@@ -17,7 +17,7 @@ function CartAddress(props) {
       <h2 className="text-xl font-semibold mb-3">Address</h2>
 
       {addresses.map((address, index) => (
-        <CartList address={address} key={index} />
+        <OrderCard address={address} key={index} />
       ))}
 
       <div className="mt-5">
@@ -75,4 +75,4 @@ function CartAddress(props) {
   );
 }
 
-export default CartAddress;
+export default OrderAddress;
