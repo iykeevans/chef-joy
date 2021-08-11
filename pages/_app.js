@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 
-import Layout from "../components/layout";
+import Layout from "../components/layouts";
 
 import "tailwindcss/tailwind.css";
 
@@ -21,6 +21,9 @@ const theme = {
 };
 
 function MyApp({ Component, pageProps }) {
+  // Use the layout defined at the page level, if available
+  const getLayout = Component.getLayout || ((page) => <Layout>{page}</Layout>);
+
   return (
     <>
       <Head>
@@ -38,9 +41,7 @@ function MyApp({ Component, pageProps }) {
 
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        {getLayout(<Component {...pageProps} />)}
       </ThemeProvider>
     </>
   );
