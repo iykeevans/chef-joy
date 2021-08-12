@@ -5,7 +5,9 @@ function CartList({ address }) {
 
       <div className="flex flex-col ml-4">
         <span className="font-semibold">{address.name}</span>
-        <span className="text-gray-500">{address.details}</span>
+        <span className="text-gray-500 md:text-base text-xs">
+          {address.details}
+        </span>
       </div>
     </div>
   );

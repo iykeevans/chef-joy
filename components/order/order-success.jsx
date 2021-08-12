@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import OrderChefInfo from "./order-chef-info";
 
 import CheckMark from "./check-mark.svg";
@@ -10,7 +11,7 @@ import FakeCalender from "./fake-calender.svg";
 
 function Order() {
   return (
-    <div className="w-9/12 mx-auto flex flex-col items-center">
+    <div className="md:w-7/12 w-11/12 mx-auto pt-32 md:pb-0 pb-10  flex flex-col items-center">
       <CheckMark />
       <h1 className="text-2xl font-semibold mt-3 mb-7">Chef Booked</h1>
 
@@ -24,9 +25,9 @@ function Order() {
       </div>
 
       <div className="border rounded-lg px-4 py-5 w-full mb-5">
-        <div className="flex items-center justify-between border-b-2 border-dashed pb-4 mb-5">
+        <div className="flex md:flex-row flex-col items-center justify-between border-b-2 border-dashed pb-4 mb-5">
           <div className="flex items-center">
-            <div>
+            <div className="w-1/2 md:w-auto">
               <div className="flex items-center text-sm text-gray-500 mb-3">
                 <OrderIcon className="mr-1" />
                 Order ID
@@ -35,7 +36,7 @@ function Order() {
               <div className="font-medium">1448</div>
             </div>
 
-            <div className="ml-24">
+            <div className="md:ml-24 w-1/2 md:w-auto">
               <div className="flex items-center text-sm text-gray-500 mb-3">
                 <Scheduling className="mr-1" />
                 Booked For
@@ -55,7 +56,7 @@ function Order() {
           </div>
         </div>
 
-        <div className="flex justify-between">
+        <div className="flex md:flex-row flex-col justify-between">
           <div className="flex items-center">
             <div className="h-28 w-52 bg-gray-200 rounded-lg"></div>
 
@@ -74,18 +75,22 @@ function Order() {
         </div>
 
         <div className="flex justify-center mt-10">
-          <button className="font-medium text-red-600">View Order</button>
+          <Link href="/chef/order/1">
+            <a className="font-medium text-red-600">View Order</a>
+          </Link>
         </div>
       </div>
 
-      <div className="border w-full rounded-lg px-4 py-5">
-        <h2 className="text-xl font-semibold mb-7">Add Recurring Meal</h2>
-        <div className="flex">
-          <div className="w-1/2">
+      <div className="md:border w-full rounded-lg md:px-4 md:py-5 md:mt-0 mt-5">
+        <h2 className="text-xl font-semibold md:mb-7 mb-4">
+          Add Recurring Meal
+        </h2>
+        <div className="flex md:flex-row flex-col">
+          <div className="md:w-1/2">
             <FakeCalender />
           </div>
 
-          <div className="w-1/2">
+          <div className="md:w-1/2 md:mt-0 mt-5">
             <h3 className="font-medium text-lg mb-3">
               Select multiple dates from calendar & select time for booking.
             </h3>
@@ -97,7 +102,7 @@ function Order() {
               <input type="time" className="border rounded-lg px-3 py-1" />
             </div>
 
-            <button className="font-medium text-white bg-black rounded-lg py-3 px-6">
+            <button className="font-medium text-white bg-black rounded-lg py-3 px-6 md:w-auto w-full">
               Search
             </button>
           </div>

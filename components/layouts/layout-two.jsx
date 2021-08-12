@@ -1,6 +1,6 @@
 import NavigationBar from "./navigation-bar";
 
-function AuthLayout(page) {
+function LayoutTwo(page) {
   return (
     <>
       <NavigationBar />
@@ -9,4 +9,4 @@ function AuthLayout(page) {
   );
 }
 
-export default AuthLayout;
+export default LayoutTwo;
