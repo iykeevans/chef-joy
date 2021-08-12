@@ -1,4 +1,5 @@
 import React from "react";
+import LayoutTwo from "../../../components/layouts/layout-two";
 import OrderChefInfo from "../../../components/order/order-chef-info";
 
 import More from "../../../components/order/more.svg";
@@ -7,9 +8,9 @@ import OrderIcon from "../../../components/order/order.svg";
 import Scheduling from "../../../components/order/scheduling.svg";
 import Dollar from "../../../components/order/dollar.svg";
 
-function ViewOrder() {
+function OrderDetails() {
   return (
-    <div className="w-9/12 mx-auto pt-32">
+    <div className="md:w-7/12 w-11/12 mx-auto pt-32 pb-10">
       <div className="mb-8 text-sm">
         Home / <span className="text-gray-400">Booking</span>
       </div>
@@ -148,4 +149,6 @@ function ViewOrder() {
   );
 }
 
-export default ViewOrder;
+OrderDetails.getLayout = LayoutTwo;
+
+export default OrderDetails;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Link from "next/link";
 
-import AuthLayout from "../../components/layouts/auth-layout";
+import LayoutTwo from "../../components/layouts/layout-two";
 
 import AuthChef from "../../components/svg/auth-chef.svg";
 
@@ -89,10 +89,10 @@ const StyledAuthChef = styled(AuthChef)`
 const Form = styled.form`
   @media screen and (min-width: 768px) {
     box-shadow: 0px 7px 64px rgba(0, 0, 0, 0.1);
-    border-radius: 8;
+    border-radius: 8px;
   }
 `;
 
-Signup.getLayout = AuthLayout;
+Signup.getLayout = LayoutTwo;
 
 export default Signup;

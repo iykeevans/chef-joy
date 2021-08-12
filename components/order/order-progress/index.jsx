@@ -1,14 +1,26 @@
 import OrderProgressItem from "./order-progress-item";
 import Line from "../line.svg";
 
-function OrderProgress() {
+function OrderProgress({ step }) {
   return (
-    <div className="flex items-center justify-center mb-12">
-      <OrderProgressItem name="Cart" number="1" />
-      <Line className="ml-4 mr-2" />
-      <OrderProgressItem name="Address" number="2" />
-      <Line className="ml-4 mr-2" />
-      <OrderProgressItem name="Payments" number="3" />
+    <div className="flex md:items-center justify-center mb-12">
+      <OrderProgressItem isActive={step == 0} name="Cart" number="1" />
+
+      <div
+        className={`border-t-2 w-full border-dashed ${
+          step == 0 && "border-red-500"
+        } md:mt-0 mt-3 md:ml-2 md:mr-2 ml-2`}
+      ></div>
+
+      <OrderProgressItem isActive={step == 1} name="Address" number="2" />
+
+      <div
+        className={`border-t-2 w-full border-dashed ${
+          step == 1 && "border-red-500"
+        } md:mt-0 mt-3 md:ml-2 md:mr-2`}
+      ></div>
+
+      <OrderProgressItem isActive={step == 2} name="Payments" number="3" />
     </div>
   );
 }

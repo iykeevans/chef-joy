@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-function ChButton({ children, ...rest }) {
+function ChButton({ children, onClick, ...rest }) {
   return (
-    <Button {...rest}>
+    <Button {...rest} onClick={onClick}>
       {children}
       <svg
         id="Group_11691"

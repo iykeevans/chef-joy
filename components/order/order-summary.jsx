@@ -1,21 +1,21 @@
+import styled from "styled-components";
+
 function OrderSummary() {
   return (
-    <div
-      className="w-full p-4"
-      style={{
-        boxShadow: "0px 7px 64px rgba(0, 0, 0, 0.1)",
-        borderRadius: 10,
-      }}
-    >
+    <Wrapper className="w-full p-4">
       <div className="flex items-center border-b pb-4">
         <div className="flex flex-col w-1/2">
           <span className="text-xs">Date</span>
-          <span className="font-medium text-red-600">16th Apr&apos;2</span>
+          <span className="md:text-base text-sm font-medium text-red-600">
+            16th Apr&apos;2
+          </span>
         </div>
 
         <div className="flex flex-col w-1/2">
           <span className="text-xs">Time</span>
-          <span className="font-medium text-red-600">7:00PM - 8:55PM</span>
+          <span className="md:text-base text-sm font-medium text-red-600">
+            7:00PM - 8:55PM
+          </span>
         </div>
       </div>
 
@@ -66,8 +66,13 @@ function OrderSummary() {
 
         <div className="font-semibold">$56.00</div>
       </div>
-    </div>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  box-shadow: 0px 7px 64px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+`;
 
 export default OrderSummary;
