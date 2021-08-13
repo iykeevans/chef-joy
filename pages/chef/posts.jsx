@@ -36,7 +36,7 @@ function Posts() {
 
       <h1 className="text-3xl font-bold mb-2">Post By Chef</h1>
       <p className="mb-12 text-gray-500">
-        Chef's completing their bookings & experiences
+        Chef&apos;s completing their bookings & experiences
       </p>
 
       <div className="grid md:grid-cols-3 grid-cols-1 gap-x-8">
