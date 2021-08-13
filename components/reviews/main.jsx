@@ -2,6 +2,7 @@ import React from "react";
 import Star from "../svg/star";
 import { ReviewData } from "./review data";
 
+
 function Main(props) {
   const [Reviewdata] = ReviewData;
   const { match } = props;
@@ -17,7 +18,7 @@ function Main(props) {
   //   }
 
   const ReviewRows = () => (
-    <div className="w-full p-4 h-100 shadoe-md border">
+    <div className="w-full p-4 h-100 shadow-sm border">
       <span className="flex justify-between w-32">
         <Star /> <Star /> <Star /> <Star /> <Star />
       </span>
@@ -47,11 +48,9 @@ function Main(props) {
 
   return (
     <>
-      <table>
-        <tr className="w-full">
+      
           <ReviewRows />
-        </tr>
-      </table>
+        
     </>
   );
 }
