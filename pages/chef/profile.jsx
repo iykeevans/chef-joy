@@ -106,8 +106,11 @@ function Profile() {
 
         <h2 className="font-semibold text-3xl mb-6">Dishes</h2>
         <div className="grid md:grid-cols-4 grid-cols-1 gap-x-8 mb-14">
-          {dishes.map((dish) => (
-            <div className="flex items-center border p-5 rounded-lg">
+          {dishes.map((dish, index) => (
+            <div
+              className="flex items-center border p-5 rounded-lg"
+              key={index}
+            >
               <div className="bg-gray-200 h-16 w-16 rounded-full"></div>
               <div className="ml-5">
                 <h4 className="text-lg font-semibold mb-1">{dish.name}</h4>
@@ -119,8 +122,8 @@ function Profile() {
 
         <h2 className="font-semibold text-3xl mb-6">Chinese Dishes</h2>
         <div className="grid md:grid-cols-4 grid-cols-1 gap-x-8">
-          {chefs.map((chef) => (
-            <div>
+          {chefs.map((chef, index) => (
+            <div key={index}>
               <div
                 className="mb-5 relative rounded-lg"
                 style={{ height: 200, background: "#eee" }}
