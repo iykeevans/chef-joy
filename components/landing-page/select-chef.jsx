@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import styled from "styled-components";
+import GridToScroll from "../grid-to-scroll";
 
 function SelectChef() {
-  const [dishes, setDishes] = useState([
+  const [dishes1, setDishes1] = useState([
     {
       name: "Chinese",
       chefs: 59,
@@ -24,6 +25,9 @@ function SelectChef() {
       chefs: 10,
       image: "/assets/images/landing-page/select-chef/japanese.jpg",
     },
+  ]);
+
+  const [dishes2, setDishes2] = useState([
     {
       name: "Spanish",
       chefs: 20,
@@ -49,13 +53,34 @@ function SelectChef() {
   return (
     <section className="w-10/12 mx-auto md:pt-44 pt-32">
       <div className="flex justify-center md:mb-20 mb-12">
-        <h2 className="md:text-4xl text-2xl text-center font-semibold md:w-5/12">
+        <h2 className="md:text-4xl text-2xl md:text-center font-semibold md:w-5/12">
           Select Chefs That Cook Your Favourites
         </h2>
       </div>
 
-      <div className="grid md:grid-cols-4 grid-col-1 gap-y-12">
-        {dishes.map((dish, index) => (
+      <div className="mb-12">
+        <GridToScroll gridCols={4} gapX={16}>
+          {dishes1.map((dish, index) => (
+            <div className="flex flex-col items-center" key={index}>
+              <ImageWrapper className="rounded-full relative bg-gray-200">
+                <Image
+                  src={dish.image}
+                  srcSet={`${dish.image}--mobile 1x`}
+                  alt={dish.name}
+                  layout="fill"
+                />
+              </ImageWrapper>
+              <div className="mt-5 font-semibold text-lg text-gray-800">
+                {dish.name}
+              </div>
+              <div className="text-gray-500">{dish.chefs} Chefs</div>
+            </div>
+          ))}
+        </GridToScroll>
+      </div>
+
+      <GridToScroll gridCols={4} gapX={16}>
+        {dishes1.map((dish, index) => (
           <div className="flex flex-col items-center" key={index}>
             <ImageWrapper className="rounded-full relative bg-gray-200">
               <Image
@@ -71,7 +96,11 @@ function SelectChef() {
             <div className="text-gray-500">{dish.chefs} Chefs</div>
           </div>
         ))}
-      </div>
+      </GridToScroll>
+
+      {/* <div className="grid md:grid-cols-4 grid-col-1 gap-y-12">
+        
+      </div> */}
 
       <div className="flex justify-center mt-16">
         <button

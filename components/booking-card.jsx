@@ -5,7 +5,10 @@ import Stargazer from "./stargazer";
 function BookingCard({ booking, ...rest }) {
   return (
     <div
-      style={{ boxShadow: "0px 7px 64px rgba(0, 0, 0, 0.10)", borderRadius: 8 }}
+      style={{
+        boxShadow: "0px 7px 64px rgba(0, 0, 0, 0.10)",
+        borderRadius: 8,
+      }}
       {...rest}
     >
       <div className="flex items-center justify-between mb-5">

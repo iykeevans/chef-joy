@@ -15,6 +15,7 @@ function Search() {
       specialty: "indian",
       time: "5pm to 8pm",
       image: "/assets/images/chefs/beverly.jpg",
+      link: "/chef/profile",
     },
     {
       name: "Kathy Hudson",
@@ -22,6 +23,7 @@ function Search() {
       specialty: "chinese, italian, thai",
       time: "5pm to 8pm",
       image: "/assets/images/chefs/kathy.jpg",
+      link: "/chef/profile",
     },
     {
       name: "Louis Ford",
@@ -29,6 +31,7 @@ function Search() {
       specialty: "indian",
       time: "5pm to 8pm",
       image: "/assets/images/chefs/louis.jpg",
+      link: "/chef/profile",
     },
   ]);
 
