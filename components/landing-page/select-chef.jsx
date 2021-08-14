@@ -59,7 +59,7 @@ function SelectChef() {
       </div>
 
       <div className="mb-12">
-        <GridToScroll gridCols={4} gapX={16}>
+        <GridToScroll gridCols={4} gapX={8}>
           {dishes1.map((dish, index) => (
             <div className="flex flex-col items-center" key={index}>
               <ImageWrapper className="rounded-full relative bg-gray-200">
@@ -79,7 +79,7 @@ function SelectChef() {
         </GridToScroll>
       </div>
 
-      <GridToScroll gridCols={4} gapX={16}>
+      <GridToScroll gridCols={4} gapX={8}>
         {dishes1.map((dish, index) => (
           <div className="flex flex-col items-center" key={index}>
             <ImageWrapper className="rounded-full relative bg-gray-200">
