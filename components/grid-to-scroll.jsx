@@ -3,9 +3,9 @@ import styled from "styled-components";
 function GridToScroll({ children, gridCols, gapX, gapY }) {
   return (
     <Wrapper
-      className={`flex md:grid grid-cols-${gridCols} ${
-        gapX && `gap-x-${gapX}`
-      } ${gapY && `gap-y-${gapY}`}`}
+      className={`flex md:grid md:grid-cols-${gridCols} ${
+        gapX ? `gap-x-${gapX}` : ""
+      } ${gapY ? `gap-y-${gapY}` : ""}`}
     >
       {children}
     </Wrapper>
