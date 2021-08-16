@@ -30,7 +30,7 @@ function Top ({}) {
                   </div>
             </div>
 
-            <div className="border text-center   ">
+            <div className="text-center   ">
                 <button
                     className="border border-black py-3 px-7 mt-6 font-medium md:text-base text-sm"
                     style={{ borderRadius: 8 }}
