@@ -15,9 +15,7 @@ function Footer() {
             <Logo />
           </div>
 
-          <div className="mb-4">
-            Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit
-          </div>
+          <div className="mb-4">Your personal chef to cook anything.</div>
 
           <div className="flex">
             <Facebook />

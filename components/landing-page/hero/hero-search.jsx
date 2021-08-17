@@ -15,16 +15,14 @@ function HeroSearch() {
           style={{ height: 70 }}
         >
           <div className="flex flex-col justify-center border-r h-full px-5 w-6/12">
-            <input
-              type="text"
-              placeholder="City"
-              className="md:text-base text-sm"
-            />
+            <select name="" id="" className="md:text-base text-sm">
+              <option value="">City</option>
+            </select>
           </div>
 
           <div className="flex flex-col justify-center md:border-r px-5 w-6/12">
             <input
-              type="datetime"
+              type="date"
               placeholder="Date / Time"
               className="md:text-base text-sm"
             />

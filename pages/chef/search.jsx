@@ -35,6 +35,8 @@ function Search() {
     },
   ]);
 
+  const [currentTab, setCurrentTab] = useState("meals");
+
   return (
     <>
       <div
@@ -42,7 +44,12 @@ function Search() {
         style={{ top: 80 }}
       >
         <div className="flex items-center md:w-11/12 w-full md:mx-auto">
-          <div className="md:mr-5 flex justify-center items-center md:w-48 w-1/2 border-b-2 border-red-500 py-2">
+          <div
+            className={`md:mr-5 flex justify-center items-center md:w-48 w-1/2 ${
+              currentTab === "party" ? "border-b-2 border-red-500" : ""
+            } py-2 cursor-pointer`}
+            onClick={() => setCurrentTab("party")}
+          >
             <Champagne className="h-7" />
             <div className="flex flex-col ml-3">
               <span className="font-medium">Party</span>
@@ -50,7 +57,12 @@ function Search() {
             </div>
           </div>
 
-          <div className="flex justify-center items-center md:w-48 w-1/2 py-2">
+          <div
+            className={`flex justify-center items-center md:w-48 w-1/2 ${
+              currentTab === "meals" ? "border-b-2 border-red-500" : ""
+            } py-2 cursor-pointer`}
+            onClick={() => setCurrentTab("meals")}
+          >
             <Dinner className="h-7" />
             <div className="flex flex-col ml-3">
               <span className="font-medium">Meals</span>
