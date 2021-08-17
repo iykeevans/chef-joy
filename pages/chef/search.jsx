@@ -6,18 +6,11 @@ import MobileAd from "../../components/landing-page/mobile-ad";
 import Dinner from "../../components/dinner.svg";
 import Champagne from "../../components/champagne-glass.svg";
 import Close from "../../components/close.svg";
+import Modal from "../../components/modal/searchModal";
 
 function Search() {
 
-  const [showModal, setShowModal] = useState(false);
-
-    const displayModal = () =>{
-        setShowModal(!showModal)
-    }
-    
-    const hide = () => {
-        setShowModal(false)
-    }
+ 
 
 
 
@@ -44,6 +37,8 @@ function Search() {
       image: "/assets/images/chefs/louis.jpg",
     },
   ]);
+
+  const [show, setShow] = useState(false)
 
   return (
     <>
@@ -77,7 +72,7 @@ function Search() {
           </h2>
 
           <div  className="text-sm flex items-center md:mb-0 mb-5">
-            <button onClick={displayModal} className="border p-2 rounded-lg mr-3 flex items-center" >
+            <button onClick={() => setShow(true)} className="border p-2 rounded-lg mr-3 flex items-center" >
               <div className="bg-red-500 text-white rounded-full h-4 w-4 text-xs mr-1">
                 1
               </div>
@@ -98,12 +93,7 @@ function Search() {
         </div>
       </div>
 
-      <div showModal={showModal} className="modal border w-32 h-32 visible" ari-modal aria-hidden tabIndex={-1} role="dialog">
-            <button type="button"  aria-label="Close" >
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <p>hello I'm a modal</p>
-        </div>
+      <Modal onClose={() => setShow(false)} show={show} />
 
       <MobileAd />
     </>
