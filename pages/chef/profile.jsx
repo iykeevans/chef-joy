@@ -43,15 +43,18 @@ const DishGallery = () => (
   </div>
 );
 
-const Dish = ({ dish, index }) => (
+const Dish = ({ dish, selected, setSelected }) => (
   <div
     className={`${
-      index !== 0 ? "bg-gray-100" : "bg-white"
-    } flex items-center md:p-5 p-3 md:mb-0 mb-5`}
+      selected !== dish.name.toLowerCase() ? "bg-gray-100" : "bg-white"
+    } flex items-center md:p-5 p-3 md:mb-0 mb-5 cursor-pointer`}
     style={{
-      boxShadow: index == 0 && "0px 7px 64px rgba(0, 0, 0, 0.10)",
+      boxShadow:
+        selected === dish.name.toLowerCase() &&
+        "0px 7px 64px rgba(0, 0, 0, 0.10)",
       borderRadius: 12,
     }}
+    onClick={() => setSelected(dish.name.toLowerCase())}
   >
     <div className="bg-gray-500 h-16 w-16 rounded-full relative">
       <Image src={dish.image} alt={dish.name} layout="fill" />
@@ -125,6 +128,8 @@ function Profile() {
     { name: "Italian", value: 3, image: "/assets/images/dishes/italian.png" },
     { name: "Japanese", value: 6, image: "/assets/images/dishes/japanese.png" },
   ]);
+
+  const [selectedDish, setSelectedDish] = useState("chinese");
 
   const [dishDetails, setDishDetails] = useState([
     {
@@ -241,7 +246,12 @@ function Profile() {
         <div className="mb-14">
           <GridToScroll gridCols={4} gapX={8}>
             {dishes.map((dish, index) => (
-              <Dish dish={dish} index={index} key={index} />
+              <Dish
+                dish={dish}
+                selected={selectedDish}
+                setSelected={setSelectedDish}
+                key={index}
+              />
             ))}
           </GridToScroll>
         </div>

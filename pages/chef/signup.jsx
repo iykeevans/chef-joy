@@ -43,7 +43,7 @@ function Signup() {
             <label className="flex flex-col">
               Password
               <input
-                type="text"
+                type="password"
                 className="border mt-1"
                 style={{ borderRadius: 8, height: 42 }}
               />

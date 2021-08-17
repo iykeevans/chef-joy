@@ -12,12 +12,16 @@ function OrderPayment(props) {
     {
       name: "American Express",
       details: "Xxxx Xxxx Xxxx 1008",
+      slug: "american-express",
     },
     {
       name: "HDFC",
       details: "Xxxx Xxxx Xxxx 1008",
+      slug: "hdfc",
     },
   ]);
+
+  const [selectedPayment, setSelectedPayment] = useState("american-express");
 
   const [showNewPayment, setShowNewPayment] = useState(false);
 
@@ -26,7 +30,12 @@ function OrderPayment(props) {
       <h2 className="text-xl font-semibold mb-3">Address</h2>
 
       {cards.map((card, index) => (
-        <OrderCard address={card} key={index} />
+        <OrderCard
+          data={card}
+          key={index}
+          selected={selectedPayment}
+          setSelected={setSelectedPayment}
+        />
       ))}
 
       {!showNewPayment && (

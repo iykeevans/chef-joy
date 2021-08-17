@@ -6,21 +6,39 @@ function OrderAddress(props) {
     {
       name: "Home",
       details: "Vivamus Eget Aliquam Dui. Integer Eu Arcu Vel Arcu Suscipit",
+      slug: "home",
     },
     {
       name: "Work",
       details: "Vivamus Eget Aliquam Dui. Integer Eu Arcu Vel Arcu Suscipit",
+      slug: "work",
     },
   ]);
 
+  const [newAddress, setNewAddress] = useState({
+    addressNickName: "",
+    address: "",
+    state: "",
+    city: "",
+    pincode: "",
+    mobile: "",
+  });
+
   const [showNewAddress, setShowNewAddress] = useState(false);
+
+  const [selectedAddress, setSelectedAddress] = useState("home");
 
   return (
     <div {...props}>
       <h2 className="md:text-xl text-lg font-semibold mb-3">Address</h2>
 
       {addresses.map((address, index) => (
-        <OrderCard address={address} key={index} />
+        <OrderCard
+          data={address}
+          key={index}
+          selected={selectedAddress}
+          setSelected={setSelectedAddress}
+        />
       ))}
 
       {!showNewAddress && (
@@ -50,7 +68,7 @@ function OrderAddress(props) {
               className="col-span-12 border rounded-lg py-2 px-3"
               placeholder="Address"
             />
-            <input
+            {/* <input
               type="text"
               className="md:col-span-6 col-span-12  border rounded-lg py-2 px-3"
               placeholder="Locality"
@@ -59,26 +77,31 @@ function OrderAddress(props) {
               type="text"
               className="col-span-6 border rounded-lg py-2 px-3"
               placeholder="Landmark"
-            />
+            /> */}
             <input
               type="text"
-              className="md:col-span-4 col-span-6 border rounded-lg py-2 px-3"
+              className="col-span-6 border rounded-lg py-2 px-3"
               placeholder="State"
             />
+
+            <select
+              className="col-span-6 border rounded-lg py-2 px-3"
+              value={newAddress.city}
+            >
+              <option value="" disabled>
+                City
+              </option>
+            </select>
+
             <input
               type="text"
-              className="md:col-span-4 col-span-6 border rounded-lg py-2 px-3"
-              placeholder="City"
-            />
-            <input
-              type="text"
-              className="md:col-span-4 col-span-6 border rounded-lg py-2 px-3"
+              className="col-span-6 border rounded-lg py-2 px-3"
               placeholder="Pincode"
             />
 
             <input
               type="text"
-              className="md:col-span-4 col-span-12 border rounded-lg py-2 px-3"
+              className="col-span-6 border rounded-lg py-2 px-3"
               placeholder="Mobile"
             />
 
