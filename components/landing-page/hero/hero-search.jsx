@@ -15,7 +15,7 @@ function HeroSearch() {
           style={{ height: 70 }}
         >
           <div className="flex flex-col justify-center border-r h-full px-5 w-6/12">
-            <select name="" id="" className="md:text-base text-sm">
+            <select className="md:text-base text-sm focus:outline-none appearance-none">
               <option value="">City</option>
             </select>
           </div>
@@ -24,7 +24,7 @@ function HeroSearch() {
             <input
               type="date"
               placeholder="Date / Time"
-              className="md:text-base text-sm"
+              className="md:text-base text-sm focus:outline-none appearance-none"
             />
           </div>
         </div>
@@ -33,7 +33,11 @@ function HeroSearch() {
           className="flex flex-col justify-center md:border-b-0 border-b md:border-r px-5 md:w-2/12"
           style={{ height: 70 }}
         >
-          <select name="" id="" className="md:text-base text-sm">
+          <select
+            name=""
+            id=""
+            className="md:text-base text-sm focus:outline-none appearance-none"
+          >
             <option value="">Party</option>
           </select>
         </div>
@@ -45,7 +49,7 @@ function HeroSearch() {
           <input
             type="search"
             placeholder="Search For Cuisines, Chef"
-            className="text-sm"
+            className="text-sm focus:outline-none"
           />
         </div>
       </div>
