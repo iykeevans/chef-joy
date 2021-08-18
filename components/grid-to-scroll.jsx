@@ -18,6 +18,15 @@ const Wrapper = styled.div`
   @media screen and (min-width: 768px) {
     overflow-x: unset;
   }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  -webkit-overflow-scrolling: touch;
 `;
 
 export default GridToScroll;

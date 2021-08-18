@@ -53,7 +53,7 @@ function OrderPayment(props) {
         <div className="mt-8">
           <h2 className="text-xl font-semibold mb-3">Payment Method</h2>
 
-          <div className="md:flex hidden border border-b-0 rounded-t-lg">
+          <div className="hidden border border-b-0 rounded-t-lg">
             <div className="w-1/4 flex items-center justify-center py-4 border-b-2 border-red-500">
               <PaymentCard />
               <span className="ml-2">Card</span>
@@ -75,13 +75,13 @@ function OrderPayment(props) {
             </div>
           </div>
 
-          <div className="border md:hidden block rounded-lg">
-            <div className="flex items-center p-4">
+          <div className="md:border-0 border block rounded-lg">
+            <div className="flex md:hidden items-center p-4">
               <PaymentCard />
               <span className="ml-2">Card</span>
             </div>
 
-            <div className="md:border rounded-b-lg grid grid-cols-12 gap-x-4 gap-y-5 p-4 md:pt-8">
+            <div className="md:border rounded-lg grid grid-cols-12 gap-x-4 gap-y-5 p-4 md:pt-8">
               <label className="md:col-span-7 col-span-12 flex flex-col">
                 Credit Card Type
                 <input
@@ -135,7 +135,7 @@ function OrderPayment(props) {
             </div>
           </div>
 
-          <div className="border md:hidden block rounded-lg mt-5">
+          {/* <div className="border md:hidden block rounded-lg mt-5">
             <div className="flex items-center p-4">
               <PaymentPaypal />
               <span className="ml-2">Paypal</span>
@@ -154,7 +154,7 @@ function OrderPayment(props) {
               <PaymentApple />
               <span className="ml-2">Apple Pay</span>
             </div>
-          </div>
+          </div> */}
         </div>
       )}
     </div>

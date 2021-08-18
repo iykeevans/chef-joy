@@ -41,7 +41,11 @@ function SuccessfulBookings() {
 
       <GridToScroll gridCols={3} gapX={8}>
         {bookings.map((booking, index) => (
-          <BookingCard booking={booking} key={index} className="mb-10 p-5" />
+          <BookingCard
+            booking={booking}
+            key={index}
+            className="mb-10 p-5 flex-none w-full"
+          />
         ))}
       </GridToScroll>
 
