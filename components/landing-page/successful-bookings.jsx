@@ -44,7 +44,7 @@ function SuccessfulBookings() {
           <BookingCard
             booking={booking}
             key={index}
-            className="mb-10 p-5 flex-none w-full"
+            className="mb-10 p-5 flex-none w-11/12"
           />
         ))}
       </GridToScroll>

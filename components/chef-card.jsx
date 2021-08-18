@@ -6,7 +6,7 @@ import Stargazer from "./stargazer";
 
 function ChefCard({ chef }) {
   return (
-    <div className="w-full flex-none">
+    <div className="w-11/12 flex-none">
       <div
         className="mb-5 relative rounded-lg"
         style={{ height: 200, background: "#eee" }}
