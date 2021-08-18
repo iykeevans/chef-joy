@@ -1,5 +1,7 @@
 import Head from "next/head";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
+import DateFnsUtils from "@date-io/date-fns";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 
 import Layout from "../components/layouts";
 
@@ -45,9 +47,11 @@ function MyApp({ Component, pageProps }) {
       </Head>
 
       <GlobalStyle />
-      <ThemeProvider theme={theme}>
-        {getLayout(<Component {...pageProps} />)}
-      </ThemeProvider>
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <ThemeProvider theme={theme}>
+          {getLayout(<Component {...pageProps} />)}
+        </ThemeProvider>
+      </MuiPickersUtilsProvider>
     </>
   );
 }

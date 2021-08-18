@@ -1,10 +1,14 @@
 import { useRouter } from "next/router";
-
+import { DateTimePicker } from "@material-ui/pickers";
+import styled from "styled-components";
 import ChSelectField from "../../base/ch-select-field";
 import SearchIcon from "./search-icon.svg";
 
 function HeroSearch() {
   const router = useRouter();
+
+  const handleDateChange = () => {};
+  const selectedDate = null;
 
   return (
     <div className="relative flex flex-col">
@@ -21,10 +25,11 @@ function HeroSearch() {
           </div>
 
           <div className="flex flex-col justify-center md:border-r px-5 w-6/12">
-            <input
-              type="date bg-white"
-              placeholder="Date / Time"
+            <StyledDatePicker
               className="md:text-base text-sm focus:outline-none appearance-none"
+              value={selectedDate}
+              placeholder="Date / Time"
+              onChange={handleDateChange}
             />
           </div>
         </div>
@@ -64,5 +69,20 @@ function HeroSearch() {
     </div>
   );
 }
+
+const StyledDatePicker = styled(DateTimePicker)`
+  /* default */
+  .MuiInput-underline:before {
+    border-bottom: none;
+  }
+  /* hover (double-ampersand needed for specificity reasons. */
+  && .MuiInput-underline:hover:before {
+    border-bottom: none;
+  }
+  /* focused */
+  .MuiInput-underline:after {
+    border-bottom: none;
+  }
+`;
 
 export default HeroSearch;
