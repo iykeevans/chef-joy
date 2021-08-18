@@ -22,7 +22,7 @@ function HeroSearch() {
 
           <div className="flex flex-col justify-center md:border-r px-5 w-6/12">
             <input
-              type="date"
+              type="date bg-white"
               placeholder="Date / Time"
               className="md:text-base text-sm focus:outline-none appearance-none"
             />
