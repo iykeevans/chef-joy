@@ -7,7 +7,7 @@ function ChSelectField({
   return (
     <div>
       <div className="relative">
-        <select className="md:text-base text-sm focus:outline-none appearance-none">
+        <select className="md:text-base text-sm focus:outline-none appearance-none bg-white">
           {defaultOption && (
             <option value={defaultOption.value}>{defaultOption.name}</option>
           )}
