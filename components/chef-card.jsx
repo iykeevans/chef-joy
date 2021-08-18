@@ -4,9 +4,9 @@ import Link from "next/link";
 
 import Stargazer from "./stargazer";
 
-function ChefCard({ chef, isVariant }) {
+function ChefCard({ chef }) {
   return (
-    <div>
+    <div className="w-full flex-none">
       <div
         className="mb-5 relative rounded-lg"
         style={{ height: 200, background: "#eee" }}

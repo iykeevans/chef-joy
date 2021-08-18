@@ -104,7 +104,7 @@ function SelectChef() {
 
       <div className="flex justify-center mt-16">
         <button
-          className="bg-black text-white py-3 px-7 font-medium mt-6 md:text-base text-sm"
+          className="bg-black text-white py-3 px-7 font-medium mt-6"
           style={{ borderRadius: 8 }}
         >
           45 More Cuisines

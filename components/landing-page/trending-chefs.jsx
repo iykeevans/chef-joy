@@ -43,7 +43,12 @@ function TrendingChefs() {
 
       <GridToScroll gridCols={3} gapX={8}>
         {chefs.map((chef, index) => (
-          <ChefCard chef={chef} key={index} className="mb-14" />
+          <ChefCard
+            chef={chef}
+            key={index}
+            className="mb-14"
+            style={{ flex: "0 0 auto" }}
+          />
         ))}
       </GridToScroll>
 

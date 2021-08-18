@@ -1,4 +1,6 @@
 import { useRouter } from "next/router";
+
+import ChSelectField from "../../base/ch-select-field";
 import SearchIcon from "./search-icon.svg";
 
 function HeroSearch() {
@@ -15,9 +17,7 @@ function HeroSearch() {
           style={{ height: 70 }}
         >
           <div className="flex flex-col justify-center border-r h-full px-5 w-6/12">
-            <select className="md:text-base text-sm focus:outline-none appearance-none">
-              <option value="">City</option>
-            </select>
+            <ChSelectField defaultOption={{ name: "City", value: "" }} />
           </div>
 
           <div className="flex flex-col justify-center md:border-r px-5 w-6/12">
@@ -33,13 +33,7 @@ function HeroSearch() {
           className="flex flex-col justify-center md:border-b-0 border-b md:border-r px-5 md:w-2/12"
           style={{ height: 70 }}
         >
-          <select
-            name=""
-            id=""
-            className="md:text-base text-sm focus:outline-none appearance-none"
-          >
-            <option value="">Party</option>
-          </select>
+          <ChSelectField defaultOption={{ name: "Party", value: "" }} />
         </div>
 
         <div
