@@ -1,4 +1,4 @@
-import React from "react";
+import Image from "next/image";
 
 function HowItWorks() {
   return (
@@ -9,10 +9,12 @@ function HowItWorks() {
 
       <div className="flex flex-col md:flex-row justify-between ">
         <div className="md:w-3/12 flex flex-col items-center md:mb-0 mb-24">
-          <div
-            className="mb-8"
-            style={{ height: 200, width: 200, background: "#eee" }}
-          ></div>
+          <div className="mb-8 relative" style={{ height: 150, width: 200 }}>
+            <Image
+              src="/assets/images/landing-page/how-it-works/order-menu.png"
+              layout="fill"
+            />
+          </div>
 
           <div className="flex justify-center items-center rounded-full mb-4 font-medium h-9 w-9 bg-red-600 text-white">
             1
@@ -27,10 +29,12 @@ function HowItWorks() {
         </div>
 
         <div className="md:w-3/12 flex flex-col items-center md:mb-0 mb-24">
-          <div
-            className="mb-8"
-            style={{ height: 200, width: 200, background: "#eee" }}
-          ></div>
+          <div className="mb-8 relative" style={{ height: 150, width: 150 }}>
+            <Image
+              src="/assets/images/landing-page/how-it-works/bottle-chef.png"
+              layout="fill"
+            />
+          </div>
 
           <div className="flex justify-center items-center rounded-full mb-4 font-medium h-9 w-9 bg-red-600 text-white">
             2
@@ -45,10 +49,12 @@ function HowItWorks() {
         </div>
 
         <div className="md:w-3/12 flex flex-col items-center">
-          <div
-            className="mb-8"
-            style={{ height: 200, width: 200, background: "#eee" }}
-          ></div>
+          <div className="mb-8 relative" style={{ height: 150, width: 110 }}>
+            <Image
+              src="/assets/images/landing-page/how-it-works/girl-sitting.png"
+              layout="fill"
+            />
+          </div>
 
           <div className="flex justify-center items-center rounded-full mb-4 font-medium h-9 w-9 bg-red-600 text-white">
             3
