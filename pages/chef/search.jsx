@@ -6,8 +6,14 @@ import MobileAd from "../../components/landing-page/mobile-ad";
 import Dinner from "../../components/dinner.svg";
 import Champagne from "../../components/champagne-glass.svg";
 import Close from "../../components/close.svg";
+import Modal from "../../components/modal/searchModal";
 
 function Search() {
+
+ 
+
+
+
   const [chefs, setChefs] = useState([
     {
       name: "Beverly James",
@@ -35,7 +41,9 @@ function Search() {
     },
   ]);
 
+  const [show, setShow] = useState(false)
   const [currentTab, setCurrentTab] = useState("meals");
+
 
   return (
     <>
@@ -78,8 +86,8 @@ function Search() {
             Chefs Near {"San Diego"}
           </h2>
 
-          <div className="text-sm flex items-center md:mb-0 mb-5">
-            <button className="border p-2 rounded-lg mr-3 flex items-center">
+          <div  className="text-sm flex items-center md:mb-0 mb-5">
+            <button onClick={() => setShow(true)} className="border p-2 rounded-lg mr-3 flex items-center" >
               <div className="bg-red-500 text-white rounded-full h-4 w-4 text-xs mr-1">
                 1
               </div>
@@ -99,6 +107,8 @@ function Search() {
           ))}
         </div>
       </div>
+
+      <Modal onClose={() => setShow(false)} show={show} />
 
       <MobileAd />
     </>
