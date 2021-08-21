@@ -7,7 +7,7 @@ import AuthChef from "../../components/svg/auth-chef.svg";
 
 function Signup() {
   return (
-    <div className="w-11/12 mx-auto">
+    <div className="w-11/12 mx-auto md:pb-10">
       <div className="flex flex-col md:flex-row justify-between pt-32">
         <section className="md:w-7/12 flex justify-center">
           <StyledAuthChef />
@@ -43,7 +43,7 @@ function Signup() {
             <label className="flex flex-col">
               Password
               <input
-                type="text"
+                type="password"
                 className="border mt-1"
                 style={{ borderRadius: 8, height: 42 }}
               />

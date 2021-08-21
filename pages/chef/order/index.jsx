@@ -28,7 +28,7 @@ function Order() {
   return (
     <div className="w-11/12 mx-auto pt-32 pb-10">
       <div>
-        <div className="md:w-8/12 w-10/12 mx-auto">
+        <div className="md:w-7/12 w-10/12 mx-auto">
           <OrderProgress step={step} />
         </div>
 

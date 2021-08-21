@@ -1,10 +1,12 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
+
 import Stargazer from "./stargazer";
 
-function ChefCard({ chef, isVariant }) {
+function ChefCard({ chef }) {
   return (
-    <div>
+    <div className="w-11/12 flex-none">
       <div
         className="mb-5 relative rounded-lg"
         style={{ height: 200, background: "#eee" }}
@@ -20,7 +22,14 @@ function ChefCard({ chef, isVariant }) {
 
       <div>
         <div className="flex justify-between">
-          <span className="font-semibold text-lg">{chef.name}</span>
+          {chef.link ? (
+            <Link href={chef.link}>
+              <a className="font-semibold text-lg">{chef.name}</a>
+            </Link>
+          ) : (
+            <span className="font-semibold text-lg">{chef.name}</span>
+          )}
+
           <Stargazer stars={chef.stars} />
         </div>
 
