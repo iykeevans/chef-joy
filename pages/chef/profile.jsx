@@ -266,7 +266,7 @@ function Profile() {
 
       <SuccessfulBookings />
 
-      <MobileAd />
+      {/* <MobileAd /> */}
     </div>
   );
 }

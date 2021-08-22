@@ -60,12 +60,12 @@ function OrderAddress(props) {
           <div className="md:border rounded-lg grid grid-cols-12 gap-x-4 gap-y-5 md:p-4">
             <input
               type="text"
-              className="col-span-12 border rounded-lg py-2 px-3"
+              className="col-span-12 border rounded-lg py-2 px-3 appearance-none"
               placeholder="Address Nick Name"
             />
             <input
               type="text"
-              className="col-span-12 border rounded-lg py-2 px-3"
+              className="col-span-12 border rounded-lg py-2 px-3 appearance-none"
               placeholder="Address"
             />
             {/* <input
@@ -80,28 +80,25 @@ function OrderAddress(props) {
             /> */}
             <input
               type="text"
-              className="col-span-6 border rounded-lg py-2 px-3"
+              className="col-span-6 border rounded-lg py-2 px-3 appearance-none"
               placeholder="State"
             />
 
-            <select
-              className="col-span-6 border rounded-lg py-2 px-3"
-              value={newAddress.city}
-            >
-              <option value="" disabled>
-                City
-              </option>
-            </select>
-
             <input
               type="text"
-              className="col-span-6 border rounded-lg py-2 px-3"
-              placeholder="Pincode"
+              className="col-span-6 border rounded-lg py-2 px-3 appearance-none"
+              placeholder="City"
             />
 
             <input
               type="text"
-              className="col-span-6 border rounded-lg py-2 px-3"
+              className="col-span-6 border rounded-lg py-2 px-3 appearance-none"
+              placeholder="Zip Code"
+            />
+
+            <input
+              type="text"
+              className="col-span-6 border rounded-lg py-2 px-3 appearance-none"
               placeholder="Mobile"
             />
 
