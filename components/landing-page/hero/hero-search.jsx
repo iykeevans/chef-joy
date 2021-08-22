@@ -3,6 +3,7 @@ import { DateTimePicker } from "@material-ui/pickers";
 import styled from "styled-components";
 import ChSelectField from "../../base/ch-select-field";
 import SearchIcon from "./search-icon.svg";
+import ChTextField from "../../base/ch-text-field";
 
 function HeroSearch() {
   const router = useRouter();
@@ -21,7 +22,11 @@ function HeroSearch() {
           style={{ height: 70 }}
         >
           <div className="flex flex-col justify-center border-r h-full px-5 w-6/12">
-            <ChSelectField defaultOption={{ name: "City", value: "" }} />
+            <input
+              type="text"
+              placeholder="City"
+              className={`md:text-base text-sm focus:outline-none appearance-none`}
+            />
           </div>
 
           <div className="flex flex-col justify-center md:border-r px-5 w-6/12">
@@ -45,11 +50,12 @@ function HeroSearch() {
           className="flex flex-col md:flex-row justify-center px-5"
           style={{ height: 70 }}
         >
-          <input
+          {/* <input
             type="search"
-            placeholder="Search For Cuisines, Chef"
+            placeholder="Search for Cuisine, Dishes, Chefs.."
             className="text-sm focus:outline-none"
-          />
+          /> */}
+          <ChTextField placeholder="Search for Cuisine, Dishes, Chefs.." />
         </div>
       </div>
 

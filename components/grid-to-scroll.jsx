@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-function GridToScroll({ children, gridCols, gapX, gapY }) {
+function GridToScroll({ children, gridCols, gapX, gapXSm = 4, gapY }) {
   return (
     <Wrapper
       className={`flex md:grid md:grid-cols-${gridCols} ${
-        gapX ? `gap-x-${gapX}` : ""
+        gapX ? `md:gap-x-${gapX} gap-x-${gapXSm}` : ""
       } ${gapY ? `gap-y-${gapY}` : ""}`}
     >
       {children}
