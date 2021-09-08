@@ -1,47 +1,79 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
+import useSWR from "swr";
 import Image from "next/image";
 import Link from "next/link";
+import { Dialog, Transition } from "@headlessui/react";
+
+import fetcher from "../../utils/fetcher";
 
 import SuccessfulBookings from "../../components/landing-page/successful-bookings";
 import MobileAd from "../../components/landing-page/mobile-ad";
 import GridToScroll from "../../components/grid-to-scroll";
 import CartButton from "../../components/cart-button";
+import { fetchChefProfile } from "../../services/chef-api";
 
-const DishGallery = () => (
-  <div className="h-full w-10/12 ml-auto grid grid-cols-4 grid-rows-2 gap-3">
-    <div className="relative row-span-2 col-span-2 bg-gray-200 rounded-lg">
-      <Image
-        src="/assets/images/dishes/gallery-1.jpg"
-        alt="gallery-1"
-        layout="fill"
-      />
+function MyDialog() {
+  const [isOpen, setIsOpen] = useState(true);
+
+  return (
+    <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
+      <Dialog.Overlay />
+
+      <Dialog.Title>Deactivate account</Dialog.Title>
+      <Dialog.Description>
+        This will permanently deactivate your account
+      </Dialog.Description>
+
+      <p>
+        Are you sure you want to deactivate your account? All of your data will
+        be permanently removed. This action cannot be undone.
+      </p>
+
+      <button onClick={() => setIsOpen(false)}>Deactivate</button>
+      <button onClick={() => setIsOpen(false)}>Cancel</button>
+    </Dialog>
+  );
+}
+
+const DishGallery = () => {
+  const [galleryItems, setGalleryItems] = useState([
+    {
+      name: "gallery-1",
+      image: "/assets/images/dishes/gallery-1.jpg",
+    },
+    {
+      name: "gallery-2",
+      image: "/assets/images/dishes/gallery-2.jpg",
+    },
+    {
+      name: "gallery-3",
+      image: "/assets/images/dishes/gallery-3.jpg",
+    },
+    {
+      name: "gallery-4",
+      image: "/assets/images/dishes/gallery-4.jpg",
+    },
+  ]);
+
+  return (
+    <div className="h-full w-10/12 ml-auto grid grid-cols-4 grid-rows-2 gap-3">
+      {galleryItems.map((item, index) => (
+        <div
+          className={`relative ${
+            index === 0 ? "row-span-2 col-span-2" : "row-span-1 col-span-1"
+          }  bg-gray-200 rounded-lg`}
+          key={index}
+        >
+          <Image src={item.image} alt={item.name} layout="fill" />
+        </div>
+      ))}
+
+      <div className="flex items-center justify-center row-span-1 col-span-1 bg-gray-400 rounded-lg">
+        <button>View More</button>
+      </div>
     </div>
-    <div className="relative row-span-1 col-span-1 bg-gray-200 rounded-lg">
-      <Image
-        src="/assets/images/dishes/gallery-2.jpg"
-        alt="gallery-2"
-        layout="fill"
-      />
-    </div>
-    <div className="relative row-span-1 col-span-1 bg-gray-200 rounded-lg">
-      <Image
-        src="/assets/images/dishes/gallery-3.jpg"
-        alt="gallery-3"
-        layout="fill"
-      />
-    </div>
-    <div className="relative row-span-1 col-span-1 bg-gray-200 rounded-lg">
-      <Image
-        src="/assets/images/dishes/gallery-4.jpg"
-        alt="gallery-4"
-        layout="fill"
-      />
-    </div>
-    <div className="flex items-center justify-center row-span-1 col-span-1 bg-gray-400 rounded-lg">
-      <button>View More</button>
-    </div>
-  </div>
-);
+  );
+};
 
 const Dish = ({ dish, selected, setSelected }) => (
   <div
@@ -122,12 +154,20 @@ const StickyCart = () => (
 );
 
 function Profile() {
+  const { data, error, loading } = useSWR("chef_profile", fetchChefProfile);
+
+  console.log("------->", data);
+  console.log("-------> err", error);
+  console.log("-------> loading", loading);
+
   const [dishes, setDishes] = useState([
     { name: "Chinese", value: 9, image: "/assets/images/dishes/chinese.png" },
     { name: "French", value: 5, image: "/assets/images/dishes/french.png" },
     { name: "Italian", value: 3, image: "/assets/images/dishes/italian.png" },
     { name: "Japanese", value: 6, image: "/assets/images/dishes/japanese.png" },
   ]);
+
+  const [isOpen, setIsOpen] = useState(true);
 
   const [selectedDish, setSelectedDish] = useState("chinese");
 
@@ -190,6 +230,14 @@ function Profile() {
     },
   ]);
 
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
   return (
     <div className="pt-32">
       {/* sticky cart */}
@@ -207,6 +255,7 @@ function Profile() {
               <div className="relative bg-gray-200 h-16 w-16 rounded-full">
                 <Image
                   src="/assets/images/chefs/louis--circle.png"
+                  alt="chef"
                   layout="fill"
                 />
               </div>

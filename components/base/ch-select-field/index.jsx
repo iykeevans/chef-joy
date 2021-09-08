@@ -9,7 +9,9 @@ function ChSelectField({
       <div className="relative">
         <select className="md:text-base text-sm focus:outline-none appearance-none bg-white">
           {defaultOption && (
-            <option value={defaultOption.value}>{defaultOption.name}</option>
+            <option disabled value={defaultOption.value}>
+              {defaultOption.name}
+            </option>
           )}
 
           {options.length &&

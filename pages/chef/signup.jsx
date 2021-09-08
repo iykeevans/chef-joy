@@ -1,11 +1,19 @@
+import { useState } from "react";
 import styled from "styled-components";
 import Link from "next/link";
 
 import LayoutTwo from "../../components/layouts/layout-two";
+import ChTextField from "../../components/base/ch-text-field";
 
 import AuthChef from "../../components/svg/auth-chef.svg";
 
 function Signup() {
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
   return (
     <div className="w-11/12 mx-auto md:pb-10">
       <div className="flex flex-col md:flex-row justify-between pt-32">
@@ -22,32 +30,29 @@ function Signup() {
               Let&apos;s create your account
             </p>
 
-            <label className="flex flex-col mb-4">
-              Name
-              <input
-                type="text"
-                className="border mt-1"
-                style={{ borderRadius: 8, height: 42 }}
-              />
-            </label>
+            <ChTextField
+              label="Name"
+              className="mb-4 px-3 focus:outline-none"
+              handleChange={({ target }) =>
+                setUser({ ...user, name: target.value })
+              }
+            />
 
-            <label className="flex flex-col mb-4">
-              Email
-              <input
-                type="text"
-                className="border mt-1"
-                style={{ borderRadius: 8, height: 42 }}
-              />
-            </label>
+            <ChTextField
+              label="Email"
+              className="mb-4 px-3 focus:outline-none"
+              handleChange={({ target }) =>
+                setUser({ ...user, email: target.value })
+              }
+            />
 
-            <label className="flex flex-col">
-              Password
-              <input
-                type="password"
-                className="border mt-1"
-                style={{ borderRadius: 8, height: 42 }}
-              />
-            </label>
+            <ChTextField
+              label="Password"
+              className="px-3 focus:outline-none"
+              handleChange={({ target }) =>
+                setUser({ ...user, password: target.value })
+              }
+            />
 
             <div className="flex items-center justify-between text-sm mt-5 mb-5">
               <div className="flex items-center">

@@ -1,15 +1,17 @@
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { DateTimePicker } from "@material-ui/pickers";
 import styled from "styled-components";
 import ChSelectField from "../../base/ch-select-field";
 import SearchIcon from "./search-icon.svg";
-import ChTextField from "../../base/ch-text-field";
 
 function HeroSearch() {
   const router = useRouter();
 
   const handleDateChange = () => {};
   const selectedDate = null;
+
+  const [bookingType, setBookingType] = useState("");
 
   return (
     <div className="relative flex flex-col">
@@ -43,19 +45,25 @@ function HeroSearch() {
           className="flex flex-col justify-center md:border-b-0 border-b md:border-r px-5 md:w-2/12"
           style={{ height: 70 }}
         >
-          <ChSelectField defaultOption={{ name: "Party", value: "" }} />
+          <ChSelectField
+            options={[
+              { name: "Party", value: "" },
+              { name: "Meals", value: "" },
+            ]}
+            value={bookingType}
+            handleChange={({ target }) => setBookingType(target.value)}
+          />
         </div>
 
         <div
           className="flex flex-col md:flex-row justify-center px-5"
           style={{ height: 70 }}
         >
-          {/* <input
+          <input
             type="search"
             placeholder="Search for Cuisine, Dishes, Chefs.."
             className="text-sm focus:outline-none"
-          /> */}
-          <ChTextField placeholder="Search for Cuisine, Dishes, Chefs.." />
+          />
         </div>
       </div>
 
