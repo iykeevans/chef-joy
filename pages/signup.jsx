@@ -5,7 +5,7 @@ import Link from "next/link";
 import LayoutTwo from "../components/layouts/layout-two";
 import ChTextField from "../components/base/ch-text-field";
 
-import AuthChef from "../../components/svg/auth-chef.svg";
+import AuthChef from "../components/svg/auth-chef.svg";
 
 function Signup() {
   const [user, setUser] = useState({
