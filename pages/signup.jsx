@@ -2,8 +2,8 @@ import { useState } from "react";
 import styled from "styled-components";
 import Link from "next/link";
 
-import LayoutTwo from "../../components/layouts/layout-two";
-import ChTextField from "../../components/base/ch-text-field";
+import LayoutTwo from "../components/layouts/layout-two";
+import ChTextField from "../components/base/ch-text-field";
 
 import AuthChef from "../../components/svg/auth-chef.svg";
 

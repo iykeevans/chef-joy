@@ -1,19 +1,28 @@
-import { useRouter } from "next/router";
+import Router from "next/router";
+import { useEffect } from "react";
 import Link from "next/link";
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
 import { Formik } from "formik";
+import { toast, ToastContainer } from "react-nextjs-toast";
 
-import { loginChef } from "../../store/actions/auth-actions";
-import ChTextField from "../../components/base/ch-text-field";
-import { loginSchema } from "../../utils/validate-schema";
+import useUser from "../custom-hooks/use-user";
 
-import LayoutTwo from "../../components/layouts/layout-two";
-import AuthChef from "../../components/svg/auth-chef.svg";
+import { loginUser } from "../services/auth-api/user";
+import ChTextField from "../components/base/ch-text-field";
+import { loginSchema } from "../utils/validate-schema";
+import { setToken } from "../utils/token-manager";
+
+import LayoutTwo from "../components/layouts/layout-two";
+import AuthChef from "../components/svg/auth-chef.svg";
 
 function Login() {
-  const dispatch = useDispatch();
-  const router = useRouter();
+  const { user, mutate, loggedOut } = useUser();
+
+  useEffect(() => {
+    if (user && !loggedOut) {
+      Router.replace("/chef/search");
+    }
+  }, [user, loggedOut]);
 
   const hasError = (formik, field) => {
     const { touched, errors } = formik;
@@ -22,20 +31,28 @@ function Login() {
 
   const initialValues = { email: "", password: "" };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log("--===-->>", user);
-  //   dispatch(loginChef(user));
-  // };
-
   const handleSubmit = async (values, { setSubmitting }) => {
-    await dispatch(loginChef(values));
-    router.push("/chef/profile");
-    setSubmitting(false);
+    try {
+      const { data } = await loginUser(values);
+      setToken("token", data.userlogin.token);
+      toast.notify("Successfully logged in", { type: "success" });
+      mutate();
+    } catch (err) {
+      if (err.message.includes(403)) {
+        toast.notify("User not verified", { type: "error" });
+        return;
+      }
+      toast.notify("An Error occurred", { type: "error" });
+      console.log(err.message);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
     <div className="w-11/12 mx-auto">
+      <ToastContainer align={"right"} />
+
       <div className="flex flex-col md:flex-row justify-between pt-32">
         <section className="md:w-7/12 flex justify-center">
           <StyledAuthChef />
@@ -98,11 +115,16 @@ function Login() {
                 </div>
 
                 <button
-                  className="bg-black text-white py-4 mb-5"
+                  className={`${
+                    formik.isSubmitting
+                      ? "bg-gray-200 text-gray-400"
+                      : "bg-black text-white"
+                  } py-4 mb-5`}
                   style={{ borderRadius: 8 }}
                   type="submit"
+                  disabled={formik.isSubmitting}
                 >
-                  Sign in
+                  {formik.isSubmitting ? "Submitting" : "Sign in"}
                 </button>
 
                 <span className="text-center text-sm">

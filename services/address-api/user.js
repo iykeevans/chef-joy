@@ -8,9 +8,7 @@ import apiClient from "..";
  */
 export const fetchUserAddresses = async () => {
   try {
-    const data = await apiClient
-      .get("user/api/consumer/get-address", { json: payload })
-      .json();
+    const data = await apiClient.get("user/api/consumer/get-address").json();
     return data;
   } catch (err) {
     throw new Error(err);
