@@ -51,7 +51,7 @@ function Login() {
 
   return (
     <div className="w-11/12 mx-auto">
-      <ToastContainer align={"right"} />
+      <ToastContainer align={"right"} position={"top"} />
 
       <div className="flex flex-col md:flex-row justify-between pt-32">
         <section className="md:w-7/12 flex justify-center">
@@ -82,13 +82,10 @@ function Login() {
                   className="px-3 focus:outline-none"
                   {...formik.getFieldProps("email")}
                   hasError={hasError(formik, "email")}
+                  errorMessage={
+                    hasError(formik, "email") && formik.errors.email
+                  }
                 />
-
-                {hasError(formik, "email") && (
-                  <div className="text-sm text-red-500 mt-1">
-                    {formik.errors.email}
-                  </div>
-                )}
 
                 <div className="mt-4">
                   <ChTextField
@@ -96,13 +93,10 @@ function Login() {
                     className="px-3 focus:outline-none"
                     {...formik.getFieldProps("password")}
                     hasError={hasError(formik, "password")}
+                    errorMessage={
+                      hasError(formik, "password") && formik.errors.password
+                    }
                   />
-
-                  {hasError(formik, "password") && (
-                    <div className="text-sm text-red-500 mt-1">
-                      {formik.errors.password}
-                    </div>
-                  )}
                 </div>
 
                 <div className="flex items-center justify-between mt-5 mb-5 text-sm">
@@ -129,7 +123,7 @@ function Login() {
 
                 <span className="text-center text-sm">
                   Don&apos;t have an Account?{" "}
-                  <Link href="/chef/signup">
+                  <Link href="/signup">
                     <a className="text-red-600">Signup</a>
                   </Link>
                 </span>

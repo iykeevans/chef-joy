@@ -34,19 +34,19 @@ function NavigationBar() {
 
         {!user && (
           <div className="hidden md:flex items-center">
-            <Link href="/login">
+            <button>
               <a className="mr-8 text-sm font-medium">Login As Chef</a>
-            </Link>
-
-            <Link href="/signup">
-              <a className="mr-8 text-sm font-medium">Signup As Chef</a>
-            </Link>
+            </button>
 
             <button>
+              <a className="mr-8 text-sm font-medium">Signup As Chef</a>
+            </button>
+
+            <Link href="/login">
               <a className="border-2 px-4 py-2 rounded border-black text-sm font-medium">
                 Login / Signup
               </a>
-            </button>
+            </Link>
           </div>
         )}
 

@@ -1,11 +1,13 @@
+import isBrowser from "./is-browser";
+
 export const setToken = (tokenName, token) => {
-  return localStorage.setItem(tokenName, token);
+  return isBrowser() ? localStorage.setItem(tokenName, token) : "";
 };
 
 export const getToken = (tokenName) => {
-  return localStorage.getItem(tokenName);
+  return isBrowser() ? localStorage.getItem(tokenName) : "";
 };
 
 export const crushToken = (tokenName) => {
-  return localStorage.removeItem(tokenName);
+  return isBrowser() ? localStorage.removeItem(tokenName) : "";
 };

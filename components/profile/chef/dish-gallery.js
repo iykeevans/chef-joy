@@ -23,22 +23,27 @@ const DishGallery = ({ images }) => {
 
   return (
     <div className="h-full w-10/12 ml-auto grid grid-cols-4 grid-rows-2 gap-3">
-      {galleryItems.map((image, index) => (
+      {images?.map((item, index) => (
         <div
           className={`relative ${
             index === 0 ? "row-span-2 col-span-2" : "row-span-1 col-span-1"
           }  bg-gray-200 rounded-lg`}
           key={index}
         >
-          {/* <Image src={image} alt="gallery image" layout="fill" /> */}
+          <Image
+            src={item.image}
+            alt={item.name}
+            layout="fill"
+            className="rounded-lg"
+          />
         </div>
       ))}
 
-      {galleryItems.length > 4 && (
+      {/* {galleryItems.length > 4 && (
         <div className="flex items-center justify-center row-span-1 col-span-1 bg-gray-400 rounded-lg">
           <button>View More</button>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

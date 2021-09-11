@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 import Stargazer from "./stargazer";
 
@@ -14,9 +15,17 @@ function BookingCard({ booking, ...rest }) {
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center">
           <span
-            className="rounded-full"
-            style={{ height: 36, width: 36, background: "#eee" }}
-          ></span>
+            className="rounded-full relative"
+            style={{ height: 38, width: 38, background: "#eee" }}
+          >
+            <Image
+              src={booking.profilePic}
+              alt="booking image"
+              layout="fill"
+              className="rounded-full"
+              objectFit="cover"
+            />
+          </span>
 
           <div className="flex flex-col ml-4">
             <span className="font-medium">{booking.name}</span>
@@ -27,14 +36,22 @@ function BookingCard({ booking, ...rest }) {
       </div>
 
       <p className="mb-5">
-        In at iacuis lrem. Praesent tempor dictum tellus ut molestle, Sed sed
-        ullamcorper lorem, id faucibus odio.
+        {/* In at iacuis lrem. Praesent tempor dictum tellus ut molestle, Sed sed
+        ullamcorper lorem, id faucibus odio. */}
+        {booking.description}
       </p>
 
       <div
-        className="mb-5"
-        style={{ height: 200, background: "#eee", borderRadius: 8 }}
-      ></div>
+        className="mb-5 relative rounded-lg"
+        style={{ height: 200, background: "#eee" }}
+      >
+        <Image
+          src={booking.images[0]}
+          alt="booking image"
+          layout="fill"
+          className="rounded-lg"
+        />
+      </div>
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           <svg width="24.85" height="21.868" viewBox="0 0 24.85 21.868">

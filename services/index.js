@@ -1,7 +1,6 @@
 import ky from "ky";
 import setEnv from "../utils/set-env";
-
-const getToken = () => localStorage.getItem("token") || "";
+import { getToken } from "../utils/token-manager";
 
 const { apiUrl: prefixUrl } = setEnv(process.env.NODE_ENV);
 
@@ -10,7 +9,7 @@ export default ky.create({
   hooks: {
     beforeRequest: [
       (request) => {
-        request.headers.set("x-token", getToken());
+        request.headers.set("x-token", getToken("token"));
       },
     ],
     // afterResponse: [
