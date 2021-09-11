@@ -1,4 +1,15 @@
 import apiClient from ".";
+import { IMAGE_URL } from "../constants/enviroment-vars";
+
+const transformTrendingChefs = ({ data }) => {
+  return data.map((item) => ({
+    name: item.first_name,
+    stars: 4.5,
+    cuisine: item.chef_cuisines.map((data) => data.name).join(", "),
+    time: "5pm to 8pm",
+    profilePic: `${IMAGE_URL}${item.profile_pic}`,
+  }));
+};
 
 /**
  * fetch trending chef.
@@ -9,7 +20,7 @@ import apiClient from ".";
 export const fetchTrendingChefs = async () => {
   try {
     const data = await apiClient.get("user/pub/get-trending-chef").json();
-    return data;
+    return transformTrendingChefs(data);
   } catch (err) {
     throw new Error(err);
   }
@@ -25,6 +36,51 @@ export const fetchChefProfile = async () => {
   try {
     const data = await apiClient.get("api/chef/get-chef-profile").json();
     return data;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
+const transformUserChefProfile = ({ data }) => {
+  const item = data[0];
+
+  return {
+    profilePic: item.profile_pic,
+    fullName: `${item.first_name} ${item.last_name}`,
+    description: item.description,
+    chefCuisines: item.chef_cuisines.map((cuisine, index) => ({
+      index,
+      id: cuisine._id,
+      name: cuisine.name,
+      value: 6,
+      image: "/assets/images/dishes/japanese.png",
+    })),
+    city: {
+      stateCode: item.home_city[0].state_code,
+      name: item.home_city[0].name,
+    },
+    galleryImages: item.images.map((image, index) => ({
+      image: `${IMAGE_URL}${image}`,
+      name: `gallery-${index + 1}`,
+    })),
+  };
+};
+
+/**
+ * fetch user chef.profile
+ *
+ * @function
+ * @return {Promise<Object>} chef object
+ */
+export const fetchUserChefProfile = async (
+  payload = "60f79a66640169e9d8b2162a"
+) => {
+  try {
+    const data = await apiClient
+      .get(`user/pub/get-chef-profile/${payload}`)
+      .json();
+
+    return transformUserChefProfile(data);
   } catch (err) {
     throw new Error(err);
   }

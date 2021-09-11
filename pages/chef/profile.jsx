@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useSWR from "swr";
 import Image from "next/image";
 import Skeleton from "react-loading-skeleton";
@@ -10,137 +10,23 @@ import Dish from "../../components/profile/chef/dish";
 import DishGallery from "../../components/profile/chef/dish-gallery";
 import DishDetails from "../../components/profile/chef/dish-details";
 
-import { fetchChefProfile } from "../../services/chef-api";
+import { fetchUserChefProfile } from "../../services/chef-api";
 import { IMAGE_URL } from "../../constants/enviroment-vars";
-import { fetchChefDishesByCuisineId } from "../../services/dish-api/chef";
-import { fetchUserSuccessfulBookings } from "../../services/booking-api/user";
-
-const formatProfileData = (data) => {
-  return {
-    profilePic: data?.data[0].profile_pic,
-    fullName: `${data?.data[0].first_name} ${data?.data[0].last_name}`,
-    description: data?.data[0].description,
-    chefCuisines: data?.data[0].chef_cuisines,
-    city: {
-      stateCode: data?.data[0].home_city[0].state_code,
-      name: data?.data[0].home_city[0].name,
-    },
-    galleryImages: data?.data[0].images,
-  };
-};
+import { fetchUserChefDishesByCuisineId } from "../../services/dish-api/user";
 
 function Profile() {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
 
-  const { data, error } = useSWR("chef_profile", fetchChefProfile);
-  const { data: successfulBooking } = useSWR(
-    "successful_bookings",
-    fetchUserSuccessfulBookings
-  );
+  const { data, error } = useSWR("chef_profile", () => fetchUserChefProfile());
 
-  console.log("------->", successfulBooking);
+  const [selectedDish, setSelectedDish] = useState({});
 
-  const [dishes, setDishes] = useState([
-    {
-      name: "Chinese",
-      _id: 1,
-      value: 9,
-      image: "/assets/images/dishes/chinese.png",
-    },
-    {
-      name: "French",
-      _id: 2,
-      value: 5,
-      image: "/assets/images/dishes/french.png",
-    },
-    {
-      name: "Italian",
-      _id: 3,
-      value: 3,
-      image: "/assets/images/dishes/italian.png",
-    },
-    {
-      name: "Japanese",
-      _id: 4,
-      value: 6,
-      image: "/assets/images/dishes/japanese.png",
-    },
-  ]);
+  const [dishDetails, setDishDetails] = useState([]);
 
-  // const [cart, setCart] = useState([]);
-
-  const [selectedDish, setSelectedDish] = useState({
-    name: "Chinese",
-    _id: 1,
-  });
-
-  const [dishDetails, setDishDetails] = useState([
-    {
-      id: 1,
-      name: "Jiaozi dumplings",
-      duration: "Serves 2 - 45 mins",
-      description: "Vegetables usually used include peas, green",
-      image: "/assets/images/chefs/james.jpg",
-      count: 0,
-    },
-    {
-      id: 2,
-      name: "Vegetable chow mein",
-      duration: "Serves 2 - 45 mins",
-      description: "Vegetables usually used include peas, green",
-      image: "/assets/images/chefs/james.jpg",
-      count: 0,
-    },
-    {
-      id: 3,
-      name: "Szechuan chicken",
-      duration: "Serves 2 - 45 mins",
-      description: "Vegetables usually used include peas, green",
-      image: "/assets/images/chefs/james.jpg",
-      count: 0,
-    },
-    {
-      id: 4,
-      name: "Chicken Noodles",
-      duration: "Serves 2 - 45 mins",
-      description: "Vegetables usually used include peas, green",
-      image: "/assets/images/chefs/james.jpg",
-      count: 0,
-    },
-    {
-      id: 5,
-      name: "Jiaozi dumplings",
-      duration: "Serves 2 - 45 mins",
-      description: "Vegetables usually used include peas, green",
-      image: "/assets/images/chefs/james.jpg",
-      count: 0,
-    },
-    {
-      id: 6,
-      name: "Vegetable chow mein",
-      duration: "Serves 2 - 45 mins",
-      description: "Vegetables usually used include peas, green",
-      image: "/assets/images/chefs/james.jpg",
-      count: 0,
-    },
-    {
-      id: 7,
-      name: "Szechuan chicken",
-      duration: "Serves 2 - 45 mins",
-      description: "Vegetables usually used include peas, green",
-      image: "/assets/images/chefs/james.jpg",
-      count: 0,
-    },
-    {
-      id: 8,
-      name: "Chicken Noodles",
-      duration: "Serves 2 - 45 mins",
-      description: "Vegetables usually used include peas, green",
-      image: "/assets/images/chefs/james.jpg",
-      count: 0,
-    },
-  ]);
+  useEffect(() => {
+    setSelectedDish({ index: 0 });
+  }, [data]);
 
   const handleCart = (actionType, cartId) => {
     const dishDetailIindex = dishDetails.findIndex(
@@ -180,7 +66,8 @@ function Profile() {
   const handleSelectedDish = async (dish) => {
     setSelectedDish(dish);
     try {
-      const data = await fetchChefDishesByCuisineId(dish._id);
+      const data = await fetchUserChefDishesByCuisineId(dish.id);
+      setDishDetails(data);
     } catch (err) {
       console.log(err);
     }
@@ -189,7 +76,7 @@ function Profile() {
   return (
     <div className="pt-32">
       {/* sticky cart */}
-      {cart.length && <StickyCart total={getCartTotalCount(cart)} />}
+      {cart.length ? <StickyCart total={getCartTotalCount(cart)} /> : null}
 
       <div className="w-11/12 mx-auto">
         {/* breadcrumbs */}
@@ -203,7 +90,7 @@ function Profile() {
               <div className="relative bg-gray-200 h-16 w-16 rounded-full">
                 {data && (
                   <Image
-                    src={`${IMAGE_URL}${formatProfileData(data).profilePic}`}
+                    src={`${IMAGE_URL}${data.profilePic}`}
                     alt="chef"
                     layout="fill"
                     objectFit="cover"
@@ -214,7 +101,7 @@ function Profile() {
 
               <div className="ml-5">
                 <h4 className="text-lg capitalize font-semibold mb-1">
-                  {!data ? <Skeleton /> : formatProfileData(data).fullName}
+                  {!data ? <Skeleton /> : data.fullName}
                 </h4>
 
                 <p>
@@ -222,15 +109,14 @@ function Profile() {
                     <Skeleton />
                   ) : (
                     <span>
-                      {formatProfileData(data).city.name}{" "}
-                      {formatProfileData(data).city.stateCode}
+                      {data.city.name} {data.city.stateCode}
                     </span>
                   )}
                 </p>
               </div>
             </div>
 
-            <p className="mb-8">{formatProfileData(data).description}</p>
+            <p className="mb-8">{data?.description}</p>
 
             <div className="flex items-center">
               <button className="border border-black font-medium py-3 px-4 rounded-lg mr-4">
@@ -243,7 +129,7 @@ function Profile() {
           </section>
 
           <section className="w-1/2 hidden md:block" style={{ height: 240 }}>
-            <DishGallery images={formatProfileData(data).galleryImages} />
+            <DishGallery images={data?.galleryImages} />
           </section>
         </div>
 
@@ -253,10 +139,10 @@ function Profile() {
 
         <div className="mb-14">
           <div className="flex" style={{ overflowX: "auto", columnGap: 30 }}>
-            {dishes.map((dish, index) => (
+            {data?.chefCuisines.map((dish, index) => (
               <Dish
                 dish={dish}
-                selected={selectedDish}
+                isActive={selectedDish.index === index}
                 setSelected={(dish) => handleSelectedDish(dish)}
                 key={index}
               />
@@ -264,7 +150,9 @@ function Profile() {
           </div>
         </div>
 
-        <h2 className="font-semibold text-3xl mb-6">Chinese Dishes</h2>
+        <h2 className="font-semibold text-3xl mb-6">
+          {selectedDish.name} Dishes
+        </h2>
 
         <div className="grid md:grid-cols-4 grid-cols-1 gap-x-8 gap-y-16">
           {dishDetails.map((dishDetail, index) => (

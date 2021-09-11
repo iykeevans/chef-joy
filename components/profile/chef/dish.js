@@ -1,14 +1,14 @@
 import Image from "next/image";
 
-const Dish = ({ dish, selected, setSelected }) => (
+const Dish = ({ dish, setSelected, isActive }) => (
   <div
     className={`${
-      selected._id !== dish._id ? "bg-gray-100" : "bg-white"
+      !isActive ? "bg-gray-100" : "bg-white"
     } flex items-center md:p-5 p-3 md:mb-0 mb-5 cursor-pointer flex-none`}
     style={{
       borderRadius: 12,
       width: "23%",
-      border: selected._id === dish._id && "1px solid #eee",
+      border: isActive && "1px solid #eee",
     }}
     onClick={() => setSelected(dish)}
   >

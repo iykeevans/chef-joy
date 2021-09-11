@@ -3,6 +3,8 @@ import { useState } from "react";
 import ChefCard from "../chef-card";
 import ChButton from "../base/ch-button";
 import GridToScroll from "../grid-to-scroll";
+import useSWR from "swr";
+import { fetchTrendingChefs } from "../../services/chef-api";
 
 function TrendingChefs() {
   const [chefs, setChefs] = useState([
@@ -29,6 +31,9 @@ function TrendingChefs() {
     },
   ]);
 
+  const { data, error } = useSWR("fetch_trending_chefs", fetchTrendingChefs);
+  console.log("------>", data);
+
   return (
     <section className="w-11/12 mx-auto md:pt-44 pt-32">
       <h2 className="md:text-4xl text-2xl font-semibold md:text-center md:mb-4 mb-2">
@@ -42,7 +47,7 @@ function TrendingChefs() {
       </div>
 
       <GridToScroll gridCols={3} gapX={8}>
-        {chefs.map((chef, index) => (
+        {data?.map((chef, index) => (
           <ChefCard
             chef={chef}
             key={index}
@@ -52,11 +57,13 @@ function TrendingChefs() {
         ))}
       </GridToScroll>
 
-      <div className="flex justify-center md:mt-16 mt-8">
-        <ChButton className="bg-black text-white py-3 px-7 font-medium">
-          45 More Chefs
-        </ChButton>
-      </div>
+      {data?.length > 3 && (
+        <div className="flex justify-center md:mt-16 mt-8">
+          <ChButton className="bg-black text-white py-3 px-7 font-medium">
+            45 More Chefs
+          </ChButton>
+        </div>
+      )}
     </section>
   );
 }

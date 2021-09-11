@@ -11,13 +11,15 @@ function ChefCard({ chef }) {
         className="mb-5 relative rounded-lg"
         style={{ height: 200, background: "#eee" }}
       >
-        <Image
-          src={chef.image}
-          alt={chef.name}
-          layout="fill"
-          objectFit="cover"
-          className="rounded-lg"
-        />
+        {chef?.profilePic && (
+          <Image
+            src={chef.profilePic}
+            alt={chef.name}
+            layout="fill"
+            objectFit="cover"
+            className="rounded-lg"
+          />
+        )}
       </div>
 
       <div>
@@ -33,7 +35,7 @@ function ChefCard({ chef }) {
           <Stargazer stars={chef.stars} />
         </div>
 
-        <div className="border-b pb-3 pt-1 text-gray-500">{chef.specialty}</div>
+        <div className="border-b pb-3 pt-2 text-gray-500">{chef.cuisine}</div>
 
         <div className="mt-3 text-gray-700">{chef.time}</div>
       </div>

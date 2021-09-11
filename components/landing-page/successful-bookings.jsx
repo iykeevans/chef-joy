@@ -3,31 +3,14 @@ import { useState } from "react";
 import BookingCard from "../booking-card";
 import ChButton from "../base/ch-button";
 import GridToScroll from "../grid-to-scroll";
+import useSWR from "swr";
+import { fetchUserSuccessfulBookings } from "../../services/booking-api/user";
 
 function SuccessfulBookings() {
-  const [bookings, setBookings] = useState([
-    {
-      name: "Anthony James",
-      relativeTime: "4 mins ago",
-      stars: 4.5,
-      likes: 129,
-      image: "",
-    },
-    {
-      name: "Kathryn Schneider",
-      relativeTime: "4 mins ago",
-      stars: 4.5,
-      likes: 129,
-      image: "",
-    },
-    {
-      name: "Jugal shah",
-      relativeTime: "4 mins ago",
-      stars: 4.5,
-      likes: 129,
-      image: "",
-    },
-  ]);
+  const { data, error } = useSWR(
+    "fetch_successful_bookings",
+    fetchUserSuccessfulBookings
+  );
 
   return (
     <section className="w-11/12 mx-auto md:pt-44 pt-32">
@@ -40,7 +23,7 @@ function SuccessfulBookings() {
       </p>
 
       <GridToScroll gridCols={3} gapX={8}>
-        {bookings.map((booking, index) => (
+        {data?.map((booking, index) => (
           <BookingCard
             booking={booking}
             key={index}
@@ -49,11 +32,13 @@ function SuccessfulBookings() {
         ))}
       </GridToScroll>
 
-      <div className="flex justify-center md:mt-16 mt-8">
-        <ChButton className="bg-black text-white py-3 px-7 font-medium">
-          View All Bookings
-        </ChButton>
-      </div>
+      {data?.length > 3 && (
+        <div className="flex justify-center md:mt-16 mt-8">
+          <ChButton className="bg-black text-white py-3 px-7 font-medium">
+            View All Bookings
+          </ChButton>
+        </div>
+      )}
     </section>
   );
 }

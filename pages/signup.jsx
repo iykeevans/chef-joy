@@ -1,82 +1,138 @@
-import { useState } from "react";
 import styled from "styled-components";
 import Link from "next/link";
+import { Formik } from "formik";
+import { toast, ToastContainer } from "react-nextjs-toast";
 
 import LayoutTwo from "../components/layouts/layout-two";
 import ChTextField from "../components/base/ch-text-field";
+import { signupSchema } from "../utils/validate-schema";
+import { signUpUser } from "../services/auth-api/user";
 
 import AuthChef from "../components/svg/auth-chef.svg";
+import router from "next/router";
 
 function Signup() {
-  const [user, setUser] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
+  const initialValues = { first_name: "", email: "", password: "" };
+
+  const handleSubmit = async (values, { setSubmitting }) => {
+    try {
+      await signUpUser(values);
+      toast.notify(
+        "Successfully registered your account check your mail to verify your account",
+        { type: "success", duration: 5000 }
+      );
+      setTimeout(() => {
+        router.replace("/login");
+      }, 5000);
+    } catch (err) {
+      if (err.message.includes(409)) {
+        toast.notify("Email already exist please login", { type: "error" });
+        return;
+      }
+      toast.notify("An Error occurred", { type: "error" });
+      console.log(err.message);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const hasError = (formik, field) => {
+    const { touched, errors } = formik;
+    return touched[field] && errors[field] ? true : false;
+  };
 
   return (
     <div className="w-11/12 mx-auto md:pb-10">
+      <ToastContainer align={"right"} position={"top"} />
+
       <div className="flex flex-col md:flex-row justify-between pt-32">
         <section className="md:w-7/12 flex justify-center">
           <StyledAuthChef />
         </section>
 
         <section className="md:w-4/12">
-          <Form className="md:p-7 py-5 flex flex-col">
-            <h1 className="text-3xl font-bold md:text-left text-center mb-2">
-              Get Started
-            </h1>
-            <p className="text-gray-500 md:text-left text-center mb-4">
-              Let&apos;s create your account
-            </p>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={signupSchema}
+            onSubmit={handleSubmit}
+          >
+            {(formik) => (
+              <Form
+                className="md:p-7 py-5 flex flex-col"
+                onSubmit={formik.handleSubmit}
+              >
+                <h1 className="text-3xl font-bold md:text-left text-center mb-2">
+                  Get Started
+                </h1>
+                <p className="text-gray-500 md:text-left text-center mb-4">
+                  Let&apos;s create your account
+                </p>
 
-            <ChTextField
-              label="Name"
-              className="mb-4 px-3 focus:outline-none"
-              handleChange={({ target }) =>
-                setUser({ ...user, name: target.value })
-              }
-            />
+                <div className="mb-4">
+                  <ChTextField
+                    label="Name"
+                    className="px-3 focus:outline-none"
+                    {...formik.getFieldProps("first_name")}
+                    hasError={hasError(formik, "first_name")}
+                    errorMessage={
+                      hasError(formik, "first_name") && formik.errors.first_name
+                    }
+                  />
+                </div>
 
-            <ChTextField
-              label="Email"
-              className="mb-4 px-3 focus:outline-none"
-              handleChange={({ target }) =>
-                setUser({ ...user, email: target.value })
-              }
-            />
+                <div className="mb-4">
+                  <ChTextField
+                    label="Email"
+                    className="px-3 focus:outline-none"
+                    {...formik.getFieldProps("email")}
+                    hasError={hasError(formik, "email")}
+                    errorMessage={
+                      hasError(formik, "email") && formik.errors.email
+                    }
+                  />
+                </div>
 
-            <ChTextField
-              label="Password"
-              className="px-3 focus:outline-none"
-              handleChange={({ target }) =>
-                setUser({ ...user, password: target.value })
-              }
-            />
+                <ChTextField
+                  label="Password"
+                  className="px-3 focus:outline-none"
+                  {...formik.getFieldProps("password")}
+                  hasError={hasError(formik, "password")}
+                  errorMessage={
+                    hasError(formik, "password") && formik.errors.password
+                  }
+                />
 
-            <div className="flex items-center justify-between text-sm mt-5 mb-5">
-              <div className="flex items-center">
-                <input type="checkbox" className="mr-2" />
-                Keep me signed in
-              </div>
+                <div className="flex items-center justify-between text-sm mt-5 mb-5">
+                  <div className="flex items-center">
+                    <input type="checkbox" className="mr-2" />
+                    Keep me signed in
+                  </div>
 
-              <div className="text-red-600">forgot password?</div>
-            </div>
+                  <div className="text-red-600">forgot password?</div>
+                </div>
 
-            <button
-              className="bg-black text-white py-4 mb-5"
-              style={{ borderRadius: 8 }}
-            >
-              Sign up
-            </button>
+                <button
+                  className={`${
+                    formik.isSubmitting
+                      ? "bg-gray-200 text-gray-400"
+                      : "bg-black text-white"
+                  } py-4 mb-5`}
+                  style={{ borderRadius: 8 }}
+                  type="submit"
+                  disabled={formik.isSubmitting}
+                >
+                  {formik.isSubmitting ? "Submitting" : "Sign up"}
+                </button>
 
-            <div className="text-center text-sm">
-              Already have an account?{" "}
-              <Link href="/chef/login">
-                <a className="text-red-600">Login</a>
-              </Link>
-            </div>
-          </Form>
+                <div className="text-center text-sm">
+                  Already have an account?{" "}
+                  <Link href="/login">
+                    <a className="text-red-600">Login</a>
+                  </Link>
+                </div>
+              </Form>
+            )}
+          </Formik>
         </section>
       </div>
     </div>

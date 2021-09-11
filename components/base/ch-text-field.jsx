@@ -7,6 +7,7 @@ function ChTextField({
   placeholder = "",
   name,
   value,
+  errorMessage,
   ...rest
 }) {
   return (
@@ -26,6 +27,10 @@ function ChTextField({
         onChange={onChange}
         onBlur={onBlur}
       />
+
+      {errorMessage && (
+        <div className="text-sm text-red-500 mt-1">{errorMessage}</div>
+      )}
     </div>
   );
 }

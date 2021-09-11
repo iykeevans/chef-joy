@@ -1,54 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import styled from "styled-components";
+import useSWR from "swr";
+
 import GridToScroll from "../grid-to-scroll";
+import { fetchUserCusinesAndChefs } from "../../services/cuisine-api/user";
 
 function SelectChef() {
-  const [dishes1, setDishes1] = useState([
-    {
-      name: "Chinese",
-      chefs: 59,
-      image: "/assets/images/landing-page/select-chef/chinese.jpg",
-    },
-    {
-      name: "French",
-      chefs: 24,
-      image: "/assets/images/landing-page/select-chef/french.jpg",
-    },
-    {
-      name: "Italian",
-      chefs: 31,
-      image: "/assets/images/landing-page/select-chef/italian.jpg",
-    },
-    {
-      name: "Japanese",
-      chefs: 10,
-      image: "/assets/images/landing-page/select-chef/japanese.jpg",
-    },
-  ]);
+  const { data, error } = useSWR(
+    "fetch_cusines_and_chefs",
+    fetchUserCusinesAndChefs
+  );
+  console.log("-------->", data);
 
-  const [dishes2, setDishes2] = useState([
-    {
-      name: "Spanish",
-      chefs: 20,
-      image: "/assets/images/landing-page/select-chef/spanish.jpg",
-    },
-    {
-      name: "Indian",
-      chefs: 5,
-      image: "/assets/images/landing-page/select-chef/indian.jpg",
-    },
-    {
-      name: "Moroccan",
-      chefs: 15,
-      image: "/assets/images/landing-page/select-chef/moroccan.jpg",
-    },
-    {
-      name: "Thai",
-      chefs: 28,
-      image: "/assets/images/landing-page/select-chef/thai.jpg",
-    },
-  ]);
+  data?.slice(0, 8);
 
   return (
     <section className="w-10/12 mx-auto md:pt-44 pt-32">
@@ -59,15 +24,17 @@ function SelectChef() {
       </div>
 
       <div className="mb-12">
-        <GridToScroll gridCols={4} gapX={8} gapXSm={12}>
-          {dishes1.map((dish, index) => (
+        <GridToScroll gridCols={4} gapX={8} gapY={12} gapXSm={12}>
+          {data?.map((dish, index) => (
             <div className="flex flex-col items-center" key={index}>
               <ImageWrapper className="rounded-full relative bg-gray-200">
                 <Image
+                  className="rounded-full"
                   src={dish.image}
                   srcSet={`${dish.image}--mobile 1x`}
                   alt={dish.name}
                   layout="fill"
+                  objectFit="cover"
                 />
               </ImageWrapper>
               <div className="mt-5 font-semibold text-lg text-gray-800">
@@ -79,7 +46,7 @@ function SelectChef() {
         </GridToScroll>
       </div>
 
-      <GridToScroll gridCols={4} gapX={8} gapXSm={12}>
+      {/* <GridToScroll gridCols={4} gapX={8} gapXSm={12}>
         {dishes2.map((dish, index) => (
           <div className="flex flex-col items-center" key={index}>
             <ImageWrapper className="rounded-full relative bg-gray-200">
@@ -96,20 +63,16 @@ function SelectChef() {
             <div className="text-gray-500">{dish.chefs} Chefs</div>
           </div>
         ))}
-      </GridToScroll>
+      </GridToScroll> */}
 
-      {/* <div className="grid md:grid-cols-4 grid-col-1 gap-y-12">
-        
-      </div> */}
-
-      <div className="flex justify-center mt-16">
+      {/* <div className="flex justify-center mt-16">
         <button
           className="bg-black text-white py-3 px-7 font-medium mt-6"
           style={{ borderRadius: 8 }}
         >
           45 More Cuisines
         </button>
-      </div>
+      </div> */}
     </section>
   );
 }

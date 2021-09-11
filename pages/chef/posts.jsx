@@ -6,25 +6,14 @@ import LayoutTwo from "../../components/layouts/layout-two";
 function Posts() {
   const [bookings, setBookings] = useState([
     {
+      id: 1,
       name: "Anthony James",
       relativeTime: "4 mins ago",
       stars: 4.5,
+      description: "",
       likes: 129,
-      image: "",
-    },
-    {
-      name: "Kathryn Schneider",
-      relativeTime: "4 mins ago",
-      stars: 4.5,
-      likes: 129,
-      image: "",
-    },
-    {
-      name: "Jugal shah",
-      relativeTime: "4 mins ago",
-      stars: 4.5,
-      likes: 129,
-      image: "",
+      images: "",
+      profilePic: "",
     },
   ]);
 
