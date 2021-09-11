@@ -13,7 +13,7 @@ function SelectChef() {
   );
   console.log("-------->", data);
 
-  data.length = 8;
+  data?.slice(0, 8);
 
   return (
     <section className="w-10/12 mx-auto md:pt-44 pt-32">

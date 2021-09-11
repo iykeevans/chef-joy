@@ -18,13 +18,15 @@ function BookingCard({ booking, ...rest }) {
             className="rounded-full relative"
             style={{ height: 38, width: 38, background: "#eee" }}
           >
-            <Image
-              src={booking.profilePic}
-              alt="booking image"
-              layout="fill"
-              className="rounded-full"
-              objectFit="cover"
-            />
+            {booking.profilePic && (
+              <Image
+                src={booking.profilePic}
+                alt="booking image"
+                layout="fill"
+                className="rounded-full"
+                objectFit="cover"
+              />
+            )}
           </span>
 
           <div className="flex flex-col ml-4">
@@ -45,12 +47,14 @@ function BookingCard({ booking, ...rest }) {
         className="mb-5 relative rounded-lg"
         style={{ height: 200, background: "#eee" }}
       >
-        <Image
-          src={booking.images[0]}
-          alt="booking image"
-          layout="fill"
-          className="rounded-lg"
-        />
+        {booking.images && (
+          <Image
+            src={booking.images[0]}
+            alt="booking image"
+            layout="fill"
+            className="rounded-lg"
+          />
+        )}
       </div>
       <div className="flex items-center justify-between">
         <div className="flex items-center">
