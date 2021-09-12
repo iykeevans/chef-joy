@@ -19,8 +19,13 @@ function NavigationBar() {
   const router = useRouter();
   const [isLoggedIn] = useState(true);
 
+  const isSearchPath = () => router.pathname.includes("search");
+
   return (
-    <NavBar className="fixed w-full bg-white z-20">
+    <NavBar
+      className="fixed w-full bg-white z-20"
+      isSearchPath={isSearchPath()}
+    >
       <div className="w-11/12 mx-auto flex items-center justify-between h-full">
         <div className="flex items-center">
           <Link href="/">
@@ -29,7 +34,7 @@ function NavigationBar() {
             </a>
           </Link>
 
-          {router.pathname.includes("search") && <SearchBar />}
+          {isSearchPath() && <SearchBar />}
         </div>
 
         {!user && (
@@ -119,5 +124,5 @@ export default NavigationBar;
 
 const NavBar = styled.nav`
   height: 80px;
-  border-bottom: 1px solid #eee;
+  ${(props) => !props.isSearchPath && "border-bottom: 1px solid #eee;"}
 `;

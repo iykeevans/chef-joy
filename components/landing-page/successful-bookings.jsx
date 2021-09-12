@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import BookingCard from "../booking-card";
 import ChButton from "../base/ch-button";
 import GridToScroll from "../grid-to-scroll";

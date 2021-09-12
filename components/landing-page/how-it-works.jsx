@@ -13,6 +13,7 @@ function HowItWorks() {
             <Image
               src="/assets/images/landing-page/how-it-works/order-menu.png"
               layout="fill"
+              alt="order menu"
             />
           </div>
 
@@ -33,6 +34,7 @@ function HowItWorks() {
             <Image
               src="/assets/images/landing-page/how-it-works/bottle-chef.png"
               layout="fill"
+              alt="bottle chef"
             />
           </div>
 
@@ -53,6 +55,7 @@ function HowItWorks() {
             <Image
               src="/assets/images/landing-page/how-it-works/girl-sitting.png"
               layout="fill"
+              alt="girl sitting"
             />
           </div>
 

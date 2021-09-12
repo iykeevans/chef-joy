@@ -32,7 +32,6 @@ function TrendingChefs() {
   ]);
 
   const { data, error } = useSWR("fetch_trending_chefs", fetchTrendingChefs);
-  console.log("------>", data);
 
   return (
     <section className="w-11/12 mx-auto md:pt-44 pt-32">

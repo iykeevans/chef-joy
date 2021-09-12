@@ -2,7 +2,6 @@ import React from "react";
 import Star from "../svg/star";
 import { ReviewData } from "./review data";
 
-
 function Main(props) {
   const [Reviewdata] = ReviewData;
   const { match } = props;
@@ -48,9 +47,7 @@ function Main(props) {
 
   return (
     <>
-      
-          <ReviewRows />
-        
+      <ReviewRows />
     </>
   );
 }
