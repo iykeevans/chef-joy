@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styled from "styled-components";
 import useSWR from "swr";
@@ -11,9 +11,15 @@ function SelectChef() {
     "fetch_cusines_and_chefs",
     fetchUserCusinesAndChefs
   );
-  console.log("-------->", data);
 
-  data?.slice(0, 8);
+  const [cusines, setCuisines] = useState([]);
+  const [showMore, setShowMore] = useState(false);
+
+  useEffect(() => {
+    if (data) {
+      setCuisines(data.slice(0, 8));
+    }
+  }, [data]);
 
   return (
     <section className="w-10/12 mx-auto md:pt-44 pt-32">
@@ -24,8 +30,8 @@ function SelectChef() {
       </div>
 
       <div className="mb-12">
-        <GridToScroll gridCols={4} gapX={8} gapY={12} gapXSm={12}>
-          {data?.map((dish, index) => (
+        <GridToScroll gridCols={4} gapX={8} gapY={10} gapXSm={12}>
+          {cusines.map((dish, index) => (
             <div className="flex flex-col items-center" key={index}>
               <ImageWrapper className="rounded-full relative bg-gray-200">
                 <Image
@@ -65,14 +71,20 @@ function SelectChef() {
         ))}
       </GridToScroll> */}
 
-      {/* <div className="flex justify-center mt-16">
-        <button
-          className="bg-black text-white py-3 px-7 font-medium mt-6"
-          style={{ borderRadius: 8 }}
-        >
-          45 More Cuisines
-        </button>
-      </div> */}
+      {data && (
+        <div className="flex justify-center mt-16">
+          <button
+            className="bg-black text-white py-3 px-7 font-medium mt-6"
+            style={{ borderRadius: 8 }}
+            onClick={() => {
+              setCuisines(!showMore ? data : data.slice(0, 8));
+              setShowMore(!showMore);
+            }}
+          >
+            {!showMore ? `${data.length} More Cuisines` : "Less Cuisines"}
+          </button>
+        </div>
+      )}
     </section>
   );
 }
