@@ -6,11 +6,7 @@ import styled, { keyframes } from "styled-components";
 import ChSelectField from "../../base/ch-select-field";
 import SearchIcon from "./search-icon.svg";
 import { useOuterClick } from "../../../utils/useOuterClicks";
-import {
-  searchChef,
-  fetchCity,
-  fetchDishCuisineAndChef,
-} from "../../../services/chef-api";
+import { fetchCity, fetchDishCuisineAndChef } from "../../../services/chef-api";
 import { getDay } from "date-fns";
 
 const fetchData = async (query, api, cb) => {
@@ -44,7 +40,7 @@ function HeroSearch() {
     setDate(e);
   };
 
-  const showData = (returnType, data, id) => {
+  const pluckByIdentifier = (returnType, data, id) => {
     if (returnType === "name") {
       const findData = data.find((item) => item._id === id);
       return findData.name;
@@ -74,11 +70,12 @@ function HeroSearch() {
 
   const handleSelectedCityResult = (id) => {
     setOpenCityMenu(false);
-    setCity(showData("name", cities, id));
+    setCity(pluckByIdentifier("name", cities, id));
   };
+
   const handleSelectedCuisineResult = (id) => {
     setOpenCuisineMenu(false);
-    setCuisine(showData("name", cuisines, id));
+    setCuisine(pluckByIdentifier("name", cuisines, id));
   };
 
   useOuterClick(dropdownRef, () => {
@@ -88,23 +85,18 @@ function HeroSearch() {
     if (openCuisineMenu) setOpenCuisineMenu(false);
   });
 
-  const handleSearch = async () => {
-    const payload = {
-      city: showData("id", cities, city),
-      time,
-      day,
-      name: showData("id", cuisines, cuisine),
-      type: bookingType,
-      cuisine_category: 1,
-    };
-    try {
-      const { data } = await searchChef(payload);
-      console.log({ data });
-    } catch (error) {
-      console.log(error);
-    }
+  const handleSearch = () => {
+    const cityId = city ? pluckByIdentifier("id", cities, city) : "";
+    const nameId = cuisine ? pluckByIdentifier("id", cuisines, cuisine) : "";
+
+    router.push(
+      `/chef/search?city=${cityId}&time=${time}&day=${
+        day ? day : ""
+      }&name=${nameId}&type=${
+        bookingType ? bookingType : 1
+      }&cuisine_category=${1}`
+    );
   };
-  const selectedDate = null;
 
   return (
     <div className="relative flex flex-col">
