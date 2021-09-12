@@ -131,7 +131,7 @@ export const fetchDishCuisineAndChef = async (
       .json();
     return data;
   } catch (err) {
-    throw new Error(err);
+    throw [];
   }
 };
 
@@ -153,6 +153,6 @@ export const fetchCity = async (
       .json();
     return data;
   } catch (err) {
-    throw new Error(err);
+    return [];
   }
 };
