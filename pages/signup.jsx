@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Link from "next/link";
 import { Formik } from "formik";
-import { toast, ToastContainer } from "react-nextjs-toast";
+import { useSnackbar } from "nextjs-toast";
 
 import LayoutTwo from "../components/layouts/layout-two";
 import ChTextField from "../components/base/ch-text-field";
@@ -12,24 +12,32 @@ import AuthChef from "../components/svg/auth-chef.svg";
 import router from "next/router";
 
 function Signup() {
+  const snackbar = useSnackbar();
   const initialValues = { first_name: "", email: "", password: "" };
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
       await signUpUser(values);
-      toast.notify(
+
+      snackbar.showMessage(
         "Successfully registered your account check your mail to verify your account",
-        { type: "success", duration: 5000 }
+        "success",
+        "filled"
       );
       setTimeout(() => {
         router.replace("/login");
-      }, 5000);
+      }, 4000);
     } catch (err) {
       if (err.message.includes(409)) {
-        toast.notify("Email already exist please login", { type: "error" });
+        snackbar.showMessage(
+          "Email already exist please login",
+          "error",
+          "filled"
+        );
         return;
       }
-      toast.notify("An Error occurred", { type: "error" });
+
+      snackbar.showMessage("An error occured", "error", "filled");
       console.log(err.message);
     } finally {
       setSubmitting(false);
@@ -43,8 +51,6 @@ function Signup() {
 
   return (
     <div className="w-11/12 mx-auto md:pb-10">
-      <ToastContainer align={"right"} position={"top"} />
-
       <div className="flex flex-col md:flex-row justify-between pt-32">
         <section className="md:w-7/12 flex justify-center">
           <StyledAuthChef />

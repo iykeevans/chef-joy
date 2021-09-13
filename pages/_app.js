@@ -2,6 +2,7 @@ import Head from "next/head";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import DateFnsUtils from "@date-io/date-fns";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import { SnackbarProvider } from "nextjs-toast";
 
 import { wrapper } from "../store";
 import Layout from "../components/layouts";
@@ -50,7 +51,9 @@ function MyApp({ Component, pageProps }) {
       <GlobalStyle />
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <ThemeProvider theme={theme}>
-          {getLayout(<Component {...pageProps} />)}
+          <SnackbarProvider SnackbarProps={{ autoHideDuration: 4000 }}>
+            {getLayout(<Component {...pageProps} />)}
+          </SnackbarProvider>
         </ThemeProvider>
       </MuiPickersUtilsProvider>
     </>
