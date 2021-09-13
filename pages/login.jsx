@@ -37,7 +37,7 @@ function Login() {
       const { data } = await loginUser(values);
       setToken("token", data.userlogin.token);
       snackbar.showMessage("User successfully logged in", "success", "filled");
-      mutate();
+      mutate(data);
     } catch (err) {
       if (err.message.includes(403)) {
         snackbar.showMessage(
