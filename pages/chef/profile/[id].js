@@ -3,22 +3,27 @@ import useSWR from "swr";
 import Image from "next/image";
 import Skeleton from "react-loading-skeleton";
 import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
 
-import SuccessfulBookings from "../../components/landing-page/successful-bookings";
-import StickyCart from "../../components/profile/chef/sticky-cart";
-import Dish from "../../components/profile/chef/dish";
-import DishGallery from "../../components/profile/chef/dish-gallery";
-import DishDetails from "../../components/profile/chef/dish-details";
+import SuccessfulBookings from "../../../components/landing-page/successful-bookings";
+import StickyCart from "../../../components/profile/chef/sticky-cart";
+import Cuisine from "../../../components/profile/chef/cuisine";
+import DishGallery from "../../../components/profile/chef/dish-gallery";
+import DishDetails from "../../../components/profile/chef/dish-details";
 
-import { fetchUserChefProfile } from "../../services/chef-api";
-import { IMAGE_URL } from "../../constants/enviroment-vars";
-import { fetchUserChefDishesByCuisineId } from "../../services/dish-api/user";
+import { fetchUserChefProfile } from "../../../services/chef-api";
+import { IMAGE_URL } from "../../../constants/enviroment-vars";
+import { fetchUserChefDishesByCuisineId } from "../../../services/dish-api/user";
 
-function Profile() {
+function Profile(props) {
+  const router = useRouter();
+  // console.log("======/>", router);
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
 
-  const { data, error } = useSWR("chef_profile", () => fetchUserChefProfile());
+  const { data, error } = useSWR("chef_profile", () =>
+    fetchUserChefProfile(router.query.id)
+  );
 
   const [selectedDish, setSelectedDish] = useState({});
 
@@ -153,7 +158,7 @@ function Profile() {
         <div className="mb-14">
           <div className="flex" style={{ overflowX: "auto", columnGap: 30 }}>
             {data?.chefCuisines.map((dish, index) => (
-              <Dish
+              <Cuisine
                 dish={dish}
                 isActive={selectedDish.index === index}
                 setSelected={(dish) => handleSelectedDish(dish)}

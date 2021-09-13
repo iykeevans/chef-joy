@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { IMAGE_URL } from "../../../constants/enviroment-vars";
+import trimString from "../../../utils/trim-string";
 import CartButton from "../../cart-button";
 
 const DishDetails = ({ dishDetail, handleCart }) => {
@@ -24,7 +25,7 @@ const DishDetails = ({ dishDetail, handleCart }) => {
         <div className="text-sm mb-2">{dishDetail.duration}</div>
 
         <div className="border-b pb-5 pt-1 text-gray-500">
-          {dishDetail.description}
+          {dishDetail.description && trimString(dishDetail.description, 40)}
         </div>
 
         <div className="mt-6 text-gray-700">

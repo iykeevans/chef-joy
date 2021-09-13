@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const Dish = ({ dish, setSelected, isActive }) => (
+const Cuisine = ({ dish, setSelected, isActive }) => (
   <div
     className={`${
       !isActive ? "bg-gray-100" : "bg-white"
@@ -26,4 +26,4 @@ const Dish = ({ dish, setSelected, isActive }) => (
   </div>
 );
 
-export default Dish;
+export default Cuisine;
