@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import Stargazer from "./stargazer";
+import trimString from "../utils/trim-string";
 
 function ChefCard({ chef }) {
   return (
@@ -35,7 +36,9 @@ function ChefCard({ chef }) {
           <Stargazer stars={chef.stars} />
         </div>
 
-        <div className="border-b pb-3 pt-2 text-gray-500">{chef.cuisine}</div>
+        <div className="border-b pb-3 pt-2 text-gray-500">
+          {chef.cuisine && trimString(chef.cuisine, 55)}
+        </div>
 
         <div className="mt-3 text-gray-700">{chef.time}</div>
       </div>

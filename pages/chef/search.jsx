@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import ChefCard from "../../components/chef-card";
 
@@ -9,6 +10,7 @@ import Modal from "../../components/modal/searchModal";
 import { useRouter } from "next/router";
 import { searchChef } from "../../services/chef-api";
 import Empty from "../../components/empty";
+import { IMAGE_URL } from "../../constants/enviroment-vars";
 
 function Search() {
   const [chefs, setChefs] = useState([
@@ -42,19 +44,33 @@ function Search() {
   const [currentTab, setCurrentTab] = useState(1);
 
   const router = useRouter();
+  const searchPayload = useSelector((state) => state.searchPayload);
+
+  const transformSearchResult = ({ data }) => {
+    return data.getChef.map((item) => ({
+      id: item._id,
+      name: `${item.first_name} ${item.last_name}`,
+      stars: "4.2" || item.chef_review[0].rate_chef,
+      cuisine: item.chef_cuisines.map((data) => data.name).join(", "),
+      time: `${item.availability.routine_schedule[0].start_time} to ${item.availability.routine_schedule[0].end_time}`,
+      profilePic: `${IMAGE_URL}${item.profile_pic}`,
+      link: `/chef/profile/${item._id}`,
+    }));
+  };
 
   useEffect(() => {
-    setCurrentTab(Number(router.query.type));
-    searchChef(router.query)
+    // setCurrentTab(Number(router.query.type));
+    searchChef(searchPayload)
       .then((res) => {
-        setChefs(res.data);
+        setChefs(transformSearchResult(res));
       })
       .catch((err) => {
         if (err.message.includes("404")) {
           setChefs([]);
         }
+        console.log(err);
       });
-  }, [router.query]);
+  }, [searchPayload]);
 
   return (
     <>

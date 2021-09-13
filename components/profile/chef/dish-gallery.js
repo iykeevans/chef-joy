@@ -35,6 +35,7 @@ const DishGallery = ({ images }) => {
             alt={item.name}
             layout="fill"
             className="rounded-lg"
+            objectFit="cover"
           />
         </div>
       ))}
