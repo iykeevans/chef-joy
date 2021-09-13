@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import { Formik } from "formik";
-import { toast, ToastContainer } from "react-nextjs-toast";
+import { useSnackbar } from "nextjs-toast";
 
 import useUser from "../custom-hooks/use-user";
 
@@ -17,6 +17,7 @@ import AuthChef from "../components/svg/auth-chef.svg";
 
 function Login() {
   const { user, mutate, loggedOut } = useUser();
+  const snackbar = useSnackbar();
 
   useEffect(() => {
     if (user && !loggedOut) {
@@ -35,14 +36,18 @@ function Login() {
     try {
       const { data } = await loginUser(values);
       setToken("token", data.userlogin.token);
-      toast.notify("Successfully logged in", { type: "success" });
+      snackbar.showMessage("User successfully logged in", "success", "filled");
       mutate();
     } catch (err) {
       if (err.message.includes(403)) {
-        toast.notify("User not verified", { type: "error" });
+        snackbar.showMessage(
+          "User may not exist or is not verified",
+          "error",
+          "filled"
+        );
         return;
       }
-      toast.notify("An Error occurred", { type: "error" });
+      snackbar.showMessage("An error occured", "error", "filled");
       console.log(err.message);
     } finally {
       setSubmitting(false);
@@ -51,8 +56,6 @@ function Login() {
 
   return (
     <div className="w-11/12 mx-auto">
-      <ToastContainer align={"right"} position={"top"} />
-
       <div className="flex flex-col md:flex-row justify-between pt-32">
         <section className="md:w-7/12 flex justify-center">
           <StyledAuthChef />
