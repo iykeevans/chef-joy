@@ -111,7 +111,7 @@ function HeroSearch() {
           <div className="w-6/12 flex flex-col justify-center border-r">
             <div
               ref={dropdownRef}
-              className="flex flex-col justify-center h-full px-5 w-6/12"
+              className="flex flex-col justify-center h-full"
             >
               <input
                 type="text"
@@ -121,7 +121,7 @@ function HeroSearch() {
                   setCity(e.target.value);
                   setOpenCityMenu(true);
                 }}
-                className={`md:text-base text-sm focus:outline-none appearance-none`}
+                className="md:text-base text-sm focus:outline-none appearance-none w-full h-full px-5"
               />
             </div>
             {openCityMenu && (
@@ -144,7 +144,7 @@ function HeroSearch() {
         </div>
 
         <div
-          className="flex flex-col justify-center md:border-b-0 border-b md:border-r px-5 md:w-2/12"
+          className="flex flex-col justify-center md:border-b-0 border-b md:border-r md:w-2/12"
           style={{ height: 70 }}
         >
           <ChSelectField
@@ -159,7 +159,7 @@ function HeroSearch() {
         <div>
           <div
             ref={dropdownRef}
-            className="flex flex-col md:flex-row justify-center px-5"
+            className="flex flex-col md:flex-row justify-center"
             style={{ height: 70 }}
           >
             <input
@@ -169,13 +169,12 @@ function HeroSearch() {
               onChange={(e) => {
                 setCuisine(e.target.value), setOpenCuisineMenu(true);
               }}
-              className="text-sm focus:outline-none"
+              className="text-sm focus:outline-none pr-40 pl-3 h-full"
             />
           </div>
           {openCuisineMenu && (
             <DropDownMenu
               options={cuisines}
-              width="25%"
               handleOnClick={handleSelectedCuisineResult}
             />
           )}
@@ -201,7 +200,7 @@ function HeroSearch() {
 
 const DropDownMenu = ({ options, width, handleOnClick }) => {
   return (
-    <StyledSection style={{ width }}>
+    <StyledSection>
       {options.map((option) => (
         <StyledList
           tabIndex={option._id}
@@ -271,7 +270,7 @@ const menu = keyframes`
   `;
 const StyledSection = styled.div`
   border-radius: 5px;
-  z-index: 0;
+  z-index: 2;
   margin-top: 0.25rem;
   position: absolute;
   top: 50px;
