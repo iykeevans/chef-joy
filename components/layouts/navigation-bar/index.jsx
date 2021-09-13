@@ -56,7 +56,7 @@ function NavigationBar() {
         )}
 
         {user && (
-          <div className="flex items-center">
+          <div className="hidden md:flex items-center">
             <Bell className="mr-5" />
             <Message className="mr-5" />
 
@@ -90,6 +90,7 @@ function NavigationBar() {
           </div>
         )}
 
+        {/* Mobile Navigation Starts Here */}
         <div className="md:hidden">
           <Popover className="relative">
             <Popover.Button>
@@ -98,21 +99,38 @@ function NavigationBar() {
               </div>
             </Popover.Button>
 
-            <Popover.Panel className="absolute z-10 border right-1 bg-white rounded-lg">
-              <div className="flex flex-col w-44 py-2">
-                <Link href="/chef/login">
+            {user ? (
+              <Popover.Panel className="absolute z-10 border right-1 bg-white rounded-lg">
+                <div className="flex flex-col w-44 py-2">
+                  <a className="px-4 py-2">Notification</a>
+
+                  <a className="px-4 py-2">Messages</a>
+
+                  <button
+                    className="px-4 py-2 text-left"
+                    onClick={() => {
+                      crushToken("token");
+                      mutate(null);
+                      router.replace("/");
+                    }}
+                  >
+                    Log out
+                  </button>
+                </div>
+              </Popover.Panel>
+            ) : (
+              <Popover.Panel className="absolute z-10 border right-1 bg-white rounded-lg">
+                <div className="flex flex-col w-44 py-2">
                   <a className="px-4 py-2">Login As Chef</a>
-                </Link>
 
-                <Link href="/chef/signup">
                   <a className="px-4 py-2">Signup As Chef</a>
-                </Link>
 
-                <Link href="/">
-                  <a className="px-4 py-2">Login /Signup</a>
-                </Link>
-              </div>
-            </Popover.Panel>
+                  <Link href="/login">
+                    <a className="px-4 py-2">Login /Signup</a>
+                  </Link>
+                </div>
+              </Popover.Panel>
+            )}
           </Popover>
         </div>
       </div>

@@ -5,25 +5,22 @@ function ChSelectField({
   defaultOption = { name: "Select", value: "" },
 }) {
   return (
-    <div>
-      <div className="relative">
-        <select className="md:text-base text-sm focus:outline-none appearance-none bg-white">
-          {defaultOption && (
-            <option disabled value={defaultOption.value}>
-              {defaultOption.name}
+    <div className="relative h-full">
+      <select className="md:text-base text-sm focus:outline-none appearance-none bg-white w-full h-full px-5">
+        {defaultOption && (
+          <option disabled value={defaultOption.value}>
+            {defaultOption.name}
+          </option>
+        )}
+
+        {options.length &&
+          options.map(({ value, name }, index) => (
+            <option value={value} key={index}>
+              {name}
             </option>
-          )}
-
-          {options.length &&
-            options.map(({ value, name }, index) => (
-              <option value={value} key={index}>
-                {name}
-              </option>
-            ))}
-        </select>
-
-        <Down className="absolute right-0 top-1/2 transform -translate-y-1/2" />
-      </div>
+          ))}
+      </select>
+      <Down className="absolute right-5 top-1/2 transform -translate-y-1/2" />
     </div>
   );
 }
