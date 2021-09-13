@@ -24,8 +24,19 @@ function Profile() {
 
   const [dishDetails, setDishDetails] = useState([]);
 
+  const [loadingDishes, setLoadingDishes] = useState(true);
+
   useEffect(() => {
     setSelectedDish({ index: 0 });
+    if (data) {
+      (async () => {
+        const response = await fetchUserChefDishesByCuisineId(
+          data.chefCuisines[0].id
+        );
+        setDishDetails(response);
+        setLoadingDishes(false);
+      })();
+    }
   }, [data]);
 
   const handleCart = (actionType, cartId) => {
@@ -66,8 +77,10 @@ function Profile() {
   const handleSelectedDish = async (dish) => {
     setSelectedDish(dish);
     try {
+      setLoadingDishes(true);
       const data = await fetchUserChefDishesByCuisineId(dish.id);
       setDishDetails(data);
+      setLoadingDishes(false);
     } catch (err) {
       console.log(err);
     }
@@ -134,7 +147,7 @@ function Profile() {
         </div>
 
         <h2 className="font-semibold md:text-3xl text-xl md:mb-6 mb-5">
-          Dishes
+          Cuisines
         </h2>
 
         <div className="mb-14">
@@ -155,13 +168,19 @@ function Profile() {
         </h2>
 
         <div className="grid md:grid-cols-4 grid-cols-1 gap-x-8 gap-y-16">
-          {dishDetails.map((dishDetail, index) => (
-            <DishDetails
-              dishDetail={dishDetail}
-              handleCart={handleCart}
-              key={index}
-            />
-          ))}
+          {loadingDishes ? (
+            <div>Loading...</div>
+          ) : (
+            <>
+              {dishDetails.map((dishDetail, index) => (
+                <DishDetails
+                  dishDetail={dishDetail}
+                  handleCart={handleCart}
+                  key={index}
+                />
+              ))}
+            </>
+          )}
         </div>
       </div>
 

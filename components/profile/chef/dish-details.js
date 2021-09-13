@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { IMAGE_URL } from "../../../constants/enviroment-vars";
 import CartButton from "../../cart-button";
 
 const DishDetails = ({ dishDetail, handleCart }) => {
@@ -9,7 +10,7 @@ const DishDetails = ({ dishDetail, handleCart }) => {
         style={{ height: 180, background: "#eee" }}
       >
         <Image
-          src={dishDetail.image}
+          src={`${IMAGE_URL}${dishDetail.images[0]}`}
           alt={dishDetail.name}
           layout="fill"
           objectFit="cover"
