@@ -1,11 +1,11 @@
-const cartReducer = (state = [], action) => {
-  switch (action.type) {
+const cartReducer = (state = [], { type, payload }) => {
+  switch (type) {
     case "ADD_TO_CART": {
-      const cartItemIndex = state.findIndex(
-        (item) => item.id === action.payload.id
-      );
+      return [...state, { ...payload, count: 1 }];
+    }
 
-      if (cartItemIndex < 0) return [...state, { ...action.payload }];
+    case "UPDATE_CART": {
+      const cartItemIndex = state.findIndex((item) => item.id === payload);
 
       const clonedState = [...state];
       clonedState[cartItemIndex].count++;
@@ -14,11 +14,9 @@ const cartReducer = (state = [], action) => {
     }
 
     case "REMOVE_FROM_CART": {
-      const clonedState = [...state];
-      const cartItemIndex = state.findIndex(
-        (item) => item.id === action.payload
-      );
+      const cartItemIndex = state.findIndex((item) => item.id === payload);
 
+      const clonedState = [...state];
       clonedState[cartItemIndex].count--;
 
       return clonedState.filter((item) => Number(item.count) !== 0);

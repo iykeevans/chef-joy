@@ -45,6 +45,7 @@ const transformUserChefProfile = ({ data }) => {
   const item = data[0];
 
   return {
+    id: item._id,
     profilePic: item.profile_pic,
     fullName: `${item.first_name} ${item.last_name}`,
     description: item.description,
@@ -72,9 +73,7 @@ const transformUserChefProfile = ({ data }) => {
  * @function
  * @return {Promise<Object>} chef object
  */
-export const fetchUserChefProfile = async (
-  payload = "60f79a66640169e9d8b2162a"
-) => {
+export const fetchUserChefProfile = async (payload) => {
   try {
     const data = await apiClient
       .get(`user/pub/get-chef-profile/${payload}`)

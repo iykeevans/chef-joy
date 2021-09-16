@@ -1,8 +1,8 @@
 import Link from "next/link";
 
-const StickyCart = ({ total }) => (
+const StickyCart = ({ total, canProceed }) => (
   <div
-    className="fixed w-full border bg-white z-10"
+    className={`fixed w-full border bg-white z-10`}
     style={{ bottom: 0, left: 0, height: 80 }}
   >
     <div className="w-11/12 h-full mx-auto flex items-center justify-between">
@@ -14,9 +14,15 @@ const StickyCart = ({ total }) => (
 
       <div className="flex items-center">
         <span className="mr-6 hidden md:block">Subtotal $0</span>
-        <Link href="/chef/order">
-          <a className="bg-black py-4 px-8 rounded-lg text-white">Proceed</a>
-        </Link>
+        {canProceed ? (
+          <Link href="/chef/order">
+            <a className="bg-black py-4 px-8 rounded-lg text-white">Proceed</a>
+          </Link>
+        ) : (
+          <Link href="/login">
+            <a className="bg-black py-4 px-8 rounded-lg text-white">Proceed</a>
+          </Link>
+        )}
       </div>
     </div>
   </div>

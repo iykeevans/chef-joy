@@ -23,7 +23,7 @@ function CartButton({ count, onClick }) {
   return (
     <button
       className="h-10 border border-black px-7 font-medium rounded-lg"
-      onClick={() => onClick("INCREMENT")}
+      onClick={() => onClick("ADD")}
     >
       <span className="font-semibold text-red-600">+</span> ADD
     </button>

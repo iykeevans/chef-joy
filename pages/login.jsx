@@ -14,16 +14,22 @@ import { setToken } from "../utils/token-manager";
 
 import LayoutTwo from "../components/layouts/layout-two";
 import AuthChef from "../components/svg/auth-chef.svg";
+import useCart from "../custom-hooks/use-cart";
 
 function Login() {
   const { user, mutate, loggedOut } = useUser();
   const snackbar = useSnackbar();
+  const { cart } = useCart();
 
   useEffect(() => {
     if (user && !loggedOut) {
+      if (cart.length) {
+        Router.replace("/chef/order");
+        return;
+      }
       Router.replace("/chef/search");
     }
-  }, [user, loggedOut]);
+  }, [user, loggedOut, cart]);
 
   const hasError = (formik, field) => {
     const { touched, errors } = formik;
