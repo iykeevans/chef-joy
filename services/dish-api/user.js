@@ -2,9 +2,9 @@ import apiClient from "..";
 
 const transformDishesByCuisineId = ({ data }) => {
   return data.map((item) => ({
-    id: item._id,
+    id: item.dish_Id,
     duration: "Serves 2 - 45 mins",
-    name: item.dish_name[0].name,
+    name: item.name,
     description: item.description,
     image: "/assets/images/chefs/james.jpg",
     images: item.images,
@@ -18,12 +18,10 @@ const transformDishesByCuisineId = ({ data }) => {
  * @function
  * @return {Promise<Array>} All Dishes by cuisineId
  */
-export const fetchUserChefDishesByCuisineId = async (
-  identifier = "5dad4e007b81173328ab0bff"
-) => {
+export const fetchUserChefDishesByCuisineId = async (payload) => {
   try {
     const data = await apiClient
-      .get(`user/pub/get-dish-by-cusineId/${identifier}`)
+      .post("user/pub/get-dish-by-cusineId", { json: payload })
       .json();
     return transformDishesByCuisineId(data);
   } catch (err) {

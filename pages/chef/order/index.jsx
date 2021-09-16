@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import styled from "styled-components";
 import useSWR from "swr";
 
@@ -17,31 +16,21 @@ import {
   addUserAddress,
 } from "../../../services/address-api/user";
 
+import cartHandler from "../../../utils/cart-handler";
+import useCart from "../../../custom-hooks/use-cart";
+import useChef from "../../../custom-hooks/use-chef";
+
 function Order() {
   const {
     data: addresses,
     error,
     mutate,
   } = useSWR("user_addresses", fetchUserAddresses);
-  const cart = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   fetchUserAddresses().then((res) => console.log(res));
-  // }, []);
+  const { cart, mutateCart } = useCart();
+  const { chef } = useChef();
 
   const [step, setStep] = useState(0);
-
-  const handleCart = (actionType, cartId) => {
-    if (actionType === "INCREMENT") {
-      dispatch({
-        type: "ADD_TO_CART",
-        payload: { id: cartId },
-      });
-    } else {
-      dispatch({ type: "REMOVE_FROM_CART", payload: cartId });
-    }
-  };
 
   const addAddress = async (address) => {
     try {
@@ -55,8 +44,6 @@ function Order() {
   const handleSteps = () => {
     setStep(step + 1);
   };
-
-  // console.log("------> userAddress", data);
 
   if (step === 3) {
     return (
@@ -76,7 +63,13 @@ function Order() {
         <div className="flex md:flex-row flex-col justify-between">
           <div className="md:w-7/12">
             {step === 0 && (
-              <OrderContents cart={cart} handleCart={handleCart} />
+              <OrderContents
+                cart={cart}
+                chef={chef}
+                handleCart={(actionType, dishId, cuisineId) =>
+                  cartHandler(actionType, dishId, cuisineId, cart, mutateCart)
+                }
+              />
             )}
 
             {step === 1 && (
@@ -92,10 +85,16 @@ function Order() {
             <OrderSummary handleSteps={handleSteps} />
 
             <ChButton
-              className="w-full bg-black text-white flex justify-center py-3 mt-7"
+              className={`w-full ${
+                cart.length
+                  ? "bg-black text-white"
+                  : "bg-gray-200 text-gray-400 cursor-not-allowed"
+              }  flex justify-center py-3 mt-7 font-medium`}
+              disabled={!cart.length}
+              hasIcon={cart.length ? true : false}
               onClick={handleSteps}
             >
-              Proceed
+              {cart.length ? "Proceed" : "Cart must have at least one item"}
             </ChButton>
           </OrderSummaryWrapper>
         </div>

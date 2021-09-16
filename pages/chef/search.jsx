@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useSnackbar } from "nextjs-toast";
 
 import ChefCard from "../../components/chef-card";
 
@@ -7,12 +8,15 @@ import Dinner from "../../components/dinner.svg";
 import Champagne from "../../components/champagne-glass.svg";
 import Close from "../../components/close.svg";
 import Modal from "../../components/modal/searchModal";
-import { useRouter } from "next/router";
+
 import { searchChef } from "../../services/chef-api";
 import Empty from "../../components/empty";
 import { IMAGE_URL } from "../../constants/enviroment-vars";
 
 function Search() {
+  const searchPayload = useSelector((state) => state.searchPayload);
+  const snackbar = useSnackbar();
+
   const [chefs, setChefs] = useState([
     {
       name: "Beverly James",
@@ -43,9 +47,6 @@ function Search() {
   const [show, setShow] = useState(false);
   const [currentTab, setCurrentTab] = useState(1);
 
-  const router = useRouter();
-  const searchPayload = useSelector((state) => state.searchPayload);
-
   const transformSearchResult = ({ data }) => {
     return data.getChef.map((item) => ({
       id: item._id,
@@ -59,7 +60,6 @@ function Search() {
   };
 
   useEffect(() => {
-    // setCurrentTab(Number(router.query.type));
     searchChef(searchPayload)
       .then((res) => {
         setChefs(transformSearchResult(res));
@@ -67,10 +67,16 @@ function Search() {
       .catch((err) => {
         if (err.message.includes("404")) {
           setChefs([]);
+          snackbar.showMessage("No chefs found", "error", "filled");
         }
-        console.log(err);
+        console.log("-------->", err.message);
+        snackbar.showMessage(
+          "An error occured while fetching chefs probably a network error",
+          "error",
+          "filled"
+        );
       });
-  }, [searchPayload]);
+  }, [searchPayload, snackbar]);
 
   return (
     <>
