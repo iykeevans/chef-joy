@@ -10,6 +10,7 @@ import { signUpUser } from "../services/auth-api/user";
 
 import AuthChef from "../components/svg/auth-chef.svg";
 import router from "next/router";
+import hasError from "../utils/has-error";
 
 function Signup() {
   const snackbar = useSnackbar();
@@ -42,11 +43,6 @@ function Signup() {
     } finally {
       setSubmitting(false);
     }
-  };
-
-  const hasError = (formik, field) => {
-    const { touched, errors } = formik;
-    return touched[field] && errors[field] ? true : false;
   };
 
   return (
