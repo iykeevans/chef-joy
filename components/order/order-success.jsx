@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -11,6 +11,12 @@ import FakeCalender from "./fake-calender.svg";
 import LocationPin from "./location-pin.svg";
 
 function Order() {
+  useEffect(() => {
+    return () => {
+      localStorage.removeItem("currentStep");
+      localStorage.removeItem("completedSteps");
+    };
+  }, []);
   return (
     <div className="md:w-7/12 w-11/12 mx-auto pt-32 pb-10 flex flex-col items-center">
       <CheckMark className="md:w-24 w-16" />

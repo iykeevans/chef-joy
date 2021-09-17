@@ -15,7 +15,7 @@ import { setToken } from "../utils/token-manager";
 import LayoutTwo from "../components/layouts/layout-two";
 import AuthChef from "../components/svg/auth-chef.svg";
 import useCart from "../custom-hooks/use-cart";
-
+import hasError from "../utils/has-error";
 function Login() {
   const { user, mutate, loggedOut } = useUser();
   const snackbar = useSnackbar();
@@ -30,11 +30,6 @@ function Login() {
       Router.replace("/chef/search");
     }
   }, [user, loggedOut, cart]);
-
-  const hasError = (formik, field) => {
-    const { touched, errors } = formik;
-    return touched[field] && errors[field] ? true : false;
-  };
 
   const initialValues = { email: "", password: "" };
 

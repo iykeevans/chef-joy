@@ -1,7 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import OrderCard from "./order-card";
 
-function OrderAddress({ addresses, addAddress, ...rest }) {
+function OrderAddress({
+  addresses,
+  addAddress,
+  selectedAddress,
+  setSelectedAddress,
+  ...rest
+}) {
   const [newAddress, setNewAddress] = useState({
     address_name: "",
     address: "",
@@ -10,6 +16,15 @@ function OrderAddress({ addresses, addAddress, ...rest }) {
     pincode: "",
     mobile: "",
   });
+
+  const [showNewAddress, setShowNewAddress] = useState(false);
+
+  useEffect(() => {
+    if (addresses && formatAddresses(addresses).length) {
+      const firstAddress = formatAddresses(addresses)[0];
+      setSelectedAddress(firstAddress.slug);
+    }
+  }, [addresses]);
 
   const formatAddresses = (response) => {
     if (!response) return [];
@@ -20,10 +35,6 @@ function OrderAddress({ addresses, addAddress, ...rest }) {
       slug: item.address_name,
     }));
   };
-
-  const [showNewAddress, setShowNewAddress] = useState(false);
-
-  const [selectedAddress, setSelectedAddress] = useState("");
 
   return (
     <div {...rest}>

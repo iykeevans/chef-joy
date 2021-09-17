@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styled from "styled-components";
 import useSWR from "swr";
 
@@ -19,6 +18,8 @@ import {
 import cartHandler from "../../../utils/cart-handler";
 import useCart from "../../../custom-hooks/use-cart";
 import useChef from "../../../custom-hooks/use-chef";
+import useOrderProgress from "../../../custom-hooks/use-order-progess";
+import { useState } from "react";
 
 function Order() {
   const {
@@ -29,8 +30,10 @@ function Order() {
 
   const { cart, mutateCart } = useCart();
   const { chef } = useChef();
+  const { step, updateStep, hasCompletedStep } = useOrderProgress();
 
-  const [step, setStep] = useState(0);
+  const [selectedAddress, setSelectedAddress] = useState("");
+  const [selectedPayment, setSelectedPayment] = useState("");
 
   const addAddress = async (address) => {
     try {
@@ -41,8 +44,20 @@ function Order() {
     }
   };
 
-  const handleSteps = () => {
-    setStep(step + 1);
+  const canProceed = () => {
+    if (step === 0) {
+      return cart.length ? true : false;
+    }
+
+    if (step === 1) {
+      return selectedAddress ? true : false;
+    }
+
+    if (step === 2) {
+      return selectedPayment ? true : false;
+    }
+
+    return false;
   };
 
   if (step === 3) {
@@ -57,7 +72,11 @@ function Order() {
     <div className="w-11/12 mx-auto pt-32 pb-10">
       <div>
         <div className="md:w-7/12 w-10/12 mx-auto">
-          <OrderProgress step={step} />
+          <OrderProgress
+            step={step}
+            updateStep={updateStep}
+            hasCompletedStep={hasCompletedStep}
+          />
         </div>
 
         <div className="flex md:flex-row flex-col justify-between">
@@ -73,7 +92,12 @@ function Order() {
             )}
 
             {step === 1 && (
-              <OrderAddress addresses={addresses} addAddress={addAddress} />
+              <OrderAddress
+                addresses={addresses}
+                addAddress={addAddress}
+                selectedAddress={selectedAddress}
+                setSelectedAddress={setSelectedAddress}
+              />
             )}
 
             {step === 2 && <OrderPayment />}
@@ -82,19 +106,19 @@ function Order() {
           <OrderSummaryWrapper className="md:mt-0 mt-12">
             <h3 className="text-xl font-semibold mb-2">Summary</h3>
 
-            <OrderSummary handleSteps={handleSteps} />
+            <OrderSummary />
 
             <ChButton
               className={`w-full ${
-                cart.length
+                canProceed()
                   ? "bg-black text-white"
                   : "bg-gray-200 text-gray-400 cursor-not-allowed"
               }  flex justify-center py-3 mt-7 font-medium`}
-              disabled={!cart.length}
-              hasIcon={cart.length ? true : false}
-              onClick={handleSteps}
+              disabled={!canProceed()}
+              hasIcon={canProceed()}
+              onClick={() => updateStep(step + 1)}
             >
-              {cart.length ? "Proceed" : "Cart must have at least one item"}
+              Proceed
             </ChButton>
           </OrderSummaryWrapper>
         </div>
