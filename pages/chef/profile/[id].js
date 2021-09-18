@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Skeleton from "react-loading-skeleton";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
@@ -19,6 +20,7 @@ import useSyncDish from "../../../custom-hooks/use-sync-dish";
 import cartHandler from "../../../utils/cart-handler";
 import useChef from "../../../custom-hooks/use-chef";
 import useUser from "../../../custom-hooks/use-user";
+import ReviewModal from "../../../components/modals/review-modal";
 
 function Profile() {
   const router = useRouter();
@@ -33,6 +35,7 @@ function Profile() {
   const [selectedCuisine, setSelectedCuisine] = useState({});
   const [loadingDishes, setLoadingDishes] = useState(true);
   const [loadingCuisines, setLoadingCuisines] = useState(true);
+  const [showReviewModal, setShowReviewModal] = useState(false);
 
   const { syncedDishes, mutateCart, cartCount } = useSyncDish(
     selectedCuisine.id,
@@ -119,6 +122,13 @@ function Profile() {
 
   return (
     <div className="pt-32">
+      {/* modal */}
+      <ReviewModal
+        chefId={router.query.id}
+        show={showReviewModal}
+        setShowReviewModal={setShowReviewModal}
+      />
+
       {/* sticky cart */}
       {cartCount && !loadingDishes ? (
         <StickyCart total={cartCount} canProceed={user ? true : false} />
@@ -157,10 +167,16 @@ function Profile() {
             <p className="mb-8">{chef?.description}</p>
 
             <div className="flex items-center">
-              <button className="border border-black font-medium py-3 px-4 rounded-lg mr-4">
-                Past Bookings
-              </button>
-              <button className="text-red-600 font-medium">
+              <Link href={`/chef/reviews/${chef.id}`}>
+                <a className="border border-black font-medium py-3 px-4 rounded-lg mr-4">
+                  Past Bookings
+                </a>
+              </Link>
+
+              <button
+                className="text-red-600 font-medium"
+                onClick={() => setShowReviewModal(true)}
+              >
                 + Add A Review
               </button>
             </div>

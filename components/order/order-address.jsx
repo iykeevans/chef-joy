@@ -24,7 +24,7 @@ function OrderAddress({
       const firstAddress = formatAddresses(addresses)[0];
       setSelectedAddress(firstAddress.slug);
     }
-  }, [addresses]);
+  }, [addresses, setSelectedAddress]);
 
   const formatAddresses = (response) => {
     if (!response) return [];

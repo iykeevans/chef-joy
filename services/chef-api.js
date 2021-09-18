@@ -64,6 +64,9 @@ const transformUserChefProfile = ({ data }) => {
       image: `${IMAGE_URL}${image}`,
       name: `gallery-${index + 1}`,
     })),
+    rating: item.chef_review.length
+      ? item.chef_review[0].rate_chef
+      : item.default_star,
   };
 };
 
