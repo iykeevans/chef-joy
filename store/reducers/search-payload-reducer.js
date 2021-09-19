@@ -3,6 +3,7 @@ const initialState = {
   city: "60d9717d0aeee56963e2139c",
   time: "10:30",
   day: 3,
+  name: "",
 };
 
 const searchPayloadReducer = (state = initialState, action) => {

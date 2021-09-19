@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
 import debounce from "lodash.debounce";
 import { useRouter } from "next/router";
 import { DateTimePicker } from "@material-ui/pickers";
@@ -19,6 +20,11 @@ const debouncedFetchData = debounce((query, api, cb) => {
 }, 500);
 
 function HeroSearch() {
+  // hooks
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  // state
   const [city, setCity] = useState("");
   const [cities, setCities] = useState([]);
   const dropdownRef = useRef(null);
@@ -30,14 +36,13 @@ function HeroSearch() {
   const [time, setTime] = useState("");
   const [day, setDay] = useState(null);
   const [bookingType, setBookingType] = useState("");
-  const router = useRouter();
 
-  const handleDateChange = (e) => {
-    const date = e.toString();
+  const handleDateChange = (event) => {
+    const date = event.toString();
     const splitTime = date.split(" ")[4].split(":");
     setTime(`${splitTime[0]}:${splitTime[1]}`);
     setDay(getDay(new Date(date)));
-    setDate(e);
+    setDate(event);
   };
 
   const pluckByIdentifier = (returnType, data, id) => {
@@ -89,13 +94,16 @@ function HeroSearch() {
     const cityId = city ? pluckByIdentifier("id", cities, city) : "";
     const nameId = cuisine ? pluckByIdentifier("id", cuisines, cuisine) : "";
 
-    router.push(
-      `/chef/search?city=${cityId}&time=${time}&day=${
-        day ? day : ""
-      }&name=${nameId}&type=${
-        bookingType ? bookingType : 1
-      }&cuisine_category=${1}`
-    );
+    const searchPayload = {
+      city: cityId,
+      day,
+      time,
+      cuisine_category: bookingType || 1,
+      name: nameId,
+    };
+
+    dispatch({ type: "SET_SEARCH_PAYLOAD", payload: searchPayload });
+    router.push("/chef/search");
   };
 
   return (
@@ -149,11 +157,11 @@ function HeroSearch() {
         >
           <ChSelectField
             options={[
-              { name: "Party", value: "party" },
-              { name: "Meals", value: "meals" },
+              { name: "Party", value: "1" },
+              { name: "Meals", value: "2" },
             ]}
             value={bookingType}
-            handleChange={({ target }) => setBookingType(target.value)}
+            onChange={({ target }) => setBookingType(target.value)}
           />
         </div>
         <div>

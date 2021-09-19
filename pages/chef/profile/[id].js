@@ -21,8 +21,10 @@ import cartHandler from "../../../utils/cart-handler";
 import useChef from "../../../custom-hooks/use-chef";
 import useUser from "../../../custom-hooks/use-user";
 import ReviewModal from "../../../components/modals/review-modal";
+import Empty from "../../../components/empty";
 
 function Profile() {
+  // hooks
   const router = useRouter();
   const dispatch = useDispatch();
   const snackbar = useSnackbar();
@@ -30,6 +32,7 @@ function Profile() {
   const { saveChef } = useChef();
   const { user } = useUser();
 
+  // state
   const [cuisines, setCuisines] = useState([]);
   const [dishes, setDishes] = useState([]);
   const [selectedCuisine, setSelectedCuisine] = useState({});
@@ -115,9 +118,21 @@ function Profile() {
     saveChef(chef);
   }, [chef, saveChef]);
 
+  useEffect(() => {
+    router.prefetch("/login");
+  }, [router]);
+
   const handleSelectedCuisine = (cuisine) => {
     setLoadingDishes(true);
     setSelectedCuisine(cuisine);
+  };
+
+  const handleReviewModal = () => {
+    if (user) {
+      setShowReviewModal(true);
+      return;
+    }
+    router.push("/login");
   };
 
   return (
@@ -136,8 +151,19 @@ function Profile() {
 
       <div className="w-11/12 mx-auto">
         {/* breadcrumbs */}
-        <div className="mb-10 text-sm">
-          Home / San Diego / Party / Louis Ford
+        <div className="mb-10 text-sm capitalize">
+          <Link href="/">
+            <a>Home</a>
+          </Link>{" "}
+          /{" "}
+          <Link href="/chef/search">
+            <a>{"San Diego"}</a>
+          </Link>{" "}
+          /{" "}
+          <Link href="/chef/search">
+            <a>{"Party"}</a>
+          </Link>{" "}
+          / <span className="text-gray-500">{chef?.fullName}</span>
         </div>
 
         <div className="flex mb-14">
@@ -167,7 +193,7 @@ function Profile() {
             <p className="mb-8">{chef?.description}</p>
 
             <div className="flex items-center">
-              <Link href={`/chef/reviews/${chef.id}`}>
+              <Link href={user ? `/chef/reviews/${chef.id}` : "/login"}>
                 <a className="border border-black font-medium py-3 px-4 rounded-lg mr-4">
                   Past Bookings
                 </a>
@@ -175,7 +201,7 @@ function Profile() {
 
               <button
                 className="text-red-600 font-medium"
-                onClick={() => setShowReviewModal(true)}
+                onClick={handleReviewModal}
               >
                 + Add A Review
               </button>
@@ -220,21 +246,32 @@ function Profile() {
             <div>Loading...</div>
           ) : (
             <>
-              {syncedDishes.map((dish, index) => (
-                <Dish
-                  dishDetail={dish}
-                  handleCart={(actionType, dishId) =>
-                    cartHandler(
-                      actionType,
-                      dishId,
-                      selectedCuisine.id,
-                      syncedDishes,
-                      mutateCart
-                    )
-                  }
-                  key={index}
-                />
-              ))}
+              {syncedDishes.length ? (
+                <>
+                  {syncedDishes.map((dish, index) => (
+                    <Dish
+                      dishDetail={dish}
+                      handleCart={(actionType, dishId) =>
+                        cartHandler(
+                          actionType,
+                          dishId,
+                          selectedCuisine.id,
+                          syncedDishes,
+                          mutateCart
+                        )
+                      }
+                      key={index}
+                    />
+                  ))}
+                </>
+              ) : (
+                <div className="col-span-4">
+                  <Empty
+                    title={`No ${selectedCuisine.name} Dishes`}
+                    type="dish"
+                  />
+                </div>
+              )}
             </>
           )}
         </div>
