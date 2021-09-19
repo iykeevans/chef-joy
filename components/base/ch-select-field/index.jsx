@@ -3,15 +3,19 @@ import Down from "./down.svg";
 function ChSelectField({
   options = [],
   defaultOption = { name: "Select", value: "" },
+  onChange,
+  value,
 }) {
   return (
     <div className="relative h-full">
-      <select className="md:text-base text-sm focus:outline-none appearance-none bg-white w-full h-full px-5">
-        {defaultOption && (
-          <option disabled value={defaultOption.value}>
-            {defaultOption.name}
-          </option>
-        )}
+      <select
+        className="md:text-base text-sm focus:outline-none appearance-none bg-white w-full h-full px-5"
+        onChange={onChange}
+        value={value}
+      >
+        <option disabled value="">
+          {defaultOption.name || "Select"}
+        </option>
 
         {options.length &&
           options.map(({ value, name }, index) => (

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { getDay } from "date-fns";
-import { useRouter } from "next/router";
 import { DateTimePicker } from "@material-ui/pickers";
 import styled from "styled-components";
 
@@ -17,6 +17,7 @@ const transformCity = (response) => {
 };
 
 function SearchBar() {
+  // state
   const [searchValue, setSearchValue] = useState("");
   const [loading, setLoading] = useState(false);
   const [cities, setCities] = useState([]);
@@ -25,8 +26,10 @@ function SearchBar() {
   const [time, setTime] = useState("");
   const [day, setDay] = useState("");
 
+  // hooks
   const debouncedValue = useDebounce(searchValue);
-  const router = useRouter();
+  const dispatch = useDispatch();
+  const searchPayload = useSelector((state) => state.searchPayload);
 
   useEffect(() => {
     fetchCity({ name: debouncedValue })
@@ -38,34 +41,24 @@ function SearchBar() {
       .catch((err) => console.log(err));
   }, [debouncedValue]);
 
-  // useEffect(() => {
-  //   fetchCity({ name: debouncedValue })
-  //     .then((res) => {
-  //       setLoading(false);
-  //       setCities(transformCity(res));
-  //       console.log(transformCity(res));
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, [debouncedValue]);
-
-  const handleDateChange = (e) => {
-    const date = e.toString();
+  const handleDateChange = (event) => {
+    const date = event.toString();
     const splitTime = date.split(" ")[4].split(":");
     setTime(`${splitTime[0]}:${splitTime[1]}`);
     setDay(getDay(new Date(date)));
-    setDate(e);
+    setDate(event);
   };
 
   const handleSearch = () => {
-    const nameId = "";
-    const bookingTypes = 1;
-    router.push(
-      `/chef/search?city=${
-        selectedCity?.id
-      }&time=${time}&day=${day}&name=${nameId}&type=${bookingTypes}&cuisine_category=${1}`,
-      undefined,
-      { shallow: true }
-    );
+    const payload = {
+      city: selectedCity.id,
+      day,
+      time,
+      cuisine_category: searchPayload.cuisine_category || 1,
+      name: "",
+    };
+
+    dispatch({ type: "SET_SEARCH_PAYLOAD", payload });
   };
 
   return (
@@ -94,6 +87,9 @@ function SearchBar() {
             onChange={({ target }) => {
               if (target.value) {
                 setLoading(true);
+              } else {
+                setLoading(false);
+                setSelectedCity({ name: "", id: "" });
               }
               setSearchValue(target.value);
             }}

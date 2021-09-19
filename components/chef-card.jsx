@@ -33,7 +33,7 @@ function ChefCard({ chef }) {
             <span className="font-semibold text-lg">{chef.name}</span>
           )}
 
-          <Stargazer stars={chef.stars} />
+          <Stargazer stars={chef.stars.toFixed(1)} />
         </div>
 
         <div className="border-b pb-3 pt-2 text-gray-500">
