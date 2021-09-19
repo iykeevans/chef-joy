@@ -1,28 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { useDispatch, useSelector } from "react-redux";
 
 import ReviewMainSection from "../../../components/reviews/main-section";
 import ReviewTopSection from "../../../components/reviews/top-section";
 import ReviewModal from "../../../components/modals/review-modal";
 
 import useChef from "../../../custom-hooks/use-chef";
-import { fetchUserChefReviews } from "../../../services/review-api/user";
+import { fetchReviews } from "../../../store/actions/review-actions";
 
 function Reviews() {
   const { chef } = useChef();
   const router = useRouter();
-  const [reviews, setReviews] = useState();
+  const dispatch = useDispatch();
+  const reviews = useSelector((state) => state.reviews.data);
+
   const [showReviewModal, setShowReviewModal] = useState(false);
 
   useEffect(() => {
     if (router.isReady) {
-      fetchUserChefReviews(router.query.id)
-        .then((response) => {
-          setReviews(response);
-        })
-        .catch((err) => console.log(err));
+      dispatch(fetchReviews(router.query.id));
     }
-  }, [router]);
+  }, [router, dispatch]);
 
   return (
     <div className="pt-32 w-11/12 mx-auto">

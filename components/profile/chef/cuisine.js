@@ -1,16 +1,14 @@
 import Image from "next/image";
+import styled from "styled-components";
+
 import { IMAGE_URL } from "../../../constants/enviroment-vars";
 
 const Cuisine = ({ cuisine, setSelected, isActive }) => (
-  <div
+  <Wrapper
     className={`${
       !isActive ? "bg-gray-100" : "bg-white"
     } flex items-center md:p-5 p-3 md:mb-0 mb-5 cursor-pointer flex-none`}
-    style={{
-      borderRadius: 12,
-      width: "23%",
-      boxShadow: isActive && "0px 7px 64px rgba(0, 0, 0, 0.10)",
-    }}
+    isActive={isActive}
     onClick={() => setSelected(cuisine)}
   >
     <div className="bg-gray-500 h-16 w-16 rounded-full relative">
@@ -26,7 +24,18 @@ const Cuisine = ({ cuisine, setSelected, isActive }) => (
       <h4 className="text-lg font-semibold mb-1">{cuisine.name}</h4>
       <p>{cuisine.count} Dishes</p>
     </div>
-  </div>
+  </Wrapper>
 );
 
 export default Cuisine;
+
+const Wrapper = styled.div`
+  border-radius: 12px;
+  width: 230px;
+  ${(props) =>
+    props.isActive && "box-shadow: 0px 7px 64px rgba(0, 0, 0, 0.10)"};
+
+  @media screen and (min-width: 768px) {
+    width: 23%;
+  }
+`;
