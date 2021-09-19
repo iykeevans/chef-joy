@@ -4,6 +4,7 @@ import searchPayloadReducer from "./search-payload-reducer";
 import dishesReducer from "./dishes-reducer";
 import chefReducer from "./chef-reducer";
 import cartReducer from "./cart-reducer";
+import reviewReducer from "./review-reducer";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   dishes: dishesReducer,
   chef: chefReducer,
   cart: cartReducer,
+  reviews: reviewReducer,
 });
 
 export default rootReducer;

@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { addUserChefReviews } from "../../services/review-api/user";
+import { useDispatch } from "react-redux";
+
+import { addReview } from "../../store/actions/review-actions";
 
 import Modal from "../modal";
 
 import Star from "../svg/star.svg";
 
 function ReviewModal({ chefId, show, setShowReviewModal }) {
+  const dispatch = useDispatch();
   const stars = [1, 2, 3, 4, 5];
   const [review, setReview] = useState({
     chef_Id: "",
@@ -18,9 +21,8 @@ function ReviewModal({ chefId, show, setShowReviewModal }) {
 
   const handleReview = async () => {
     try {
-      setIsSubmitting(true);
-      await addUserChefReviews({ ...review, chef_Id: chefId });
       setShowReviewModal(false);
+      dispatch(addReview({ ...review, chef_Id: chefId }));
     } catch (err) {
       console.log(err);
     } finally {
