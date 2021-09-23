@@ -8,7 +8,7 @@ import ChSelectField from "../../base/ch-select-field";
 import SearchIcon from "./search-icon.svg";
 import { useOuterClick } from "../../../utils/useOuterClicks";
 import { fetchCity, fetchDishCuisineAndChef } from "../../../services/chef-api";
-import { getDay } from "date-fns";
+import { getDay, addDays, setHours, setMinutes } from "date-fns";
 
 const fetchData = async (query, api, cb) => {
   const { data } = await api({ name: query });
@@ -25,17 +25,19 @@ function HeroSearch() {
   const router = useRouter();
 
   // state
-  const [city, setCity] = useState("");
+  const [city, setCity] = useState("San Fransisco");
   const [cities, setCities] = useState([]);
   const dropdownRef = useRef(null);
   const [cuisine, setCuisine] = useState("");
   const [cuisines, setCuisines] = useState([]);
   const [openCityMenu, setOpenCityMenu] = useState(false);
   const [openCuisineMenu, setOpenCuisineMenu] = useState(false);
-  const [date, setDate] = useState(null);
+  const [date, setDate] = useState(
+    setMinutes(setHours(addDays(new Date(), 1), 11), 0)
+  );
   const [time, setTime] = useState("");
   const [day, setDay] = useState(null);
-  const [bookingType, setBookingType] = useState("");
+  const [bookingType, setBookingType] = useState("1");
 
   const handleDateChange = (event) => {
     const date = event.toString();
@@ -59,6 +61,7 @@ function HeroSearch() {
 
   useEffect(() => {
     debouncedFetchData(city, fetchCity, (res) => {
+      console.log("----->", res);
       if (res) setCities(res);
       else setCities([]);
     });
@@ -215,7 +218,7 @@ const DropDownMenu = ({ options, width, handleOnClick }) => {
           key={option._id}
           onClick={() => handleOnClick(option._id)}
         >
-          {option.name}
+          {option.name} {option.state_code}
           <span style={{ fontSize: "10px" }}>
             {" "}
             {option.type ? `(${option.type})` : ""}

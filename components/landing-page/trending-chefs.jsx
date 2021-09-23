@@ -7,30 +7,6 @@ import useSWR from "swr";
 import { fetchTrendingChefs } from "../../services/chef-api";
 
 function TrendingChefs() {
-  const [chefs, setChefs] = useState([
-    {
-      name: "James Andrew",
-      stars: 4.5,
-      specialty: "indian",
-      time: "5pm to 8pm",
-      image: "/assets/images/chefs/james.jpg",
-    },
-    {
-      name: "Agatha Simone",
-      stars: 4.5,
-      specialty: "chinese, italian, thai",
-      time: "5pm to 8pm",
-      image: "/assets/images/chefs/agatha.jpg",
-    },
-    {
-      name: "Rodrigo De Paul",
-      stars: 4.5,
-      specialty: "indian",
-      time: "5pm to 8pm",
-      image: "/assets/images/chefs/rodrigo.jpg",
-    },
-  ]);
-
   const { data, error } = useSWR("fetch_trending_chefs", fetchTrendingChefs);
 
   return (
@@ -46,14 +22,16 @@ function TrendingChefs() {
       </div>
 
       <GridToScroll gridCols={3} gapX={8}>
-        {data?.map((chef, index) => (
-          <ChefCard
-            chef={chef}
-            key={index}
-            className="mb-14"
-            style={{ flex: "0 0 auto" }}
-          />
-        ))}
+        {data?.map((chef, index) => {
+          return (
+            <ChefCard
+              chef={{ ...chef, link: `/chef/profile/${chef.id}` }}
+              key={index}
+              className="mb-14"
+              style={{ flex: "0 0 auto" }}
+            />
+          );
+        })}
       </GridToScroll>
 
       {data?.length > 3 && (

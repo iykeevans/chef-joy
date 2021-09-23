@@ -3,6 +3,7 @@ import { IMAGE_URL } from "../constants/enviroment-vars";
 
 const transformTrendingChefs = ({ data }) => {
   return data.map((item) => ({
+    id: item._id,
     name: item.first_name,
     stars: 4.5,
     cuisine: item.chef_cuisines.map((data) => data.name).join(", "),

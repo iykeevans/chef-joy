@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ChButton from "../base/ch-button";
 import ChefCard from "../chef-card";
 import GridToScroll from "../grid-to-scroll";
@@ -27,6 +27,17 @@ function ExploreChefs() {
       image: "/assets/images/chefs/louis.jpg",
     },
   ]);
+
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        console.log({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+      });
+    }
+  }, []);
 
   return (
     <section className="w-11/12 mx-auto md:pt-44 pt-32">

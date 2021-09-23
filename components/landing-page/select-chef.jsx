@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import Image from "next/image";
 import styled from "styled-components";
 import useSWR from "swr";
 
 import GridToScroll from "../grid-to-scroll";
 import { fetchUserCusinesAndChefs } from "../../services/cuisine-api/user";
+import { useRouter } from "next/router";
 
 function SelectChef() {
   const { data, error } = useSWR(
@@ -15,11 +17,27 @@ function SelectChef() {
   const [cusines, setCuisines] = useState([]);
   const [showMore, setShowMore] = useState(false);
 
+  const dispatch = useDispatch();
+  const router = useRouter();
+
   useEffect(() => {
     if (data) {
       setCuisines(data.slice(0, 8));
     }
   }, [data]);
+
+  const handleSearch = (cuisine) => {
+    const payload = {
+      city: "",
+      day: "",
+      time: "",
+      cuisine_category: 1,
+      name: cuisine.id,
+    };
+
+    dispatch({ type: "SET_SEARCH_PAYLOAD", payload });
+    router.push("/chef/search");
+  };
 
   return (
     <section className="w-10/12 mx-auto md:pt-44 pt-32">
@@ -31,23 +49,26 @@ function SelectChef() {
 
       <div className="mb-12">
         <GridToScroll gridCols={4} gapX={8} gapY={10} gapXSm={12}>
-          {cusines.map((dish, index) => (
-            <div className="flex flex-col items-center" key={index}>
+          {cusines.map((cuisine, index) => (
+            <button
+              className="flex flex-col items-center"
+              key={index}
+              onClick={() => handleSearch(cuisine)}
+            >
               <ImageWrapper className="rounded-full relative bg-gray-200">
                 <Image
                   className="rounded-full"
-                  src={dish.image}
-                  srcSet={`${dish.image}--mobile 1x`}
-                  alt={dish.name}
+                  src={cuisine.image}
+                  alt={cuisine.name}
                   layout="fill"
                   objectFit="cover"
                 />
               </ImageWrapper>
               <div className="mt-5 font-semibold text-lg text-gray-800">
-                {dish.name}
+                {cuisine.name}
               </div>
-              <div className="text-gray-500">{dish.chefs} Chefs</div>
-            </div>
+              <div className="text-gray-500">{cuisine.chefs} Chefs</div>
+            </button>
           ))}
         </GridToScroll>
       </div>
