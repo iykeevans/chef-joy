@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import Image from "next/image";
 
+import FadeLoader from "react-spinners/FadeLoader";
+
 import { addReview } from "../../store/actions/review-actions";
 
 import Modal from "../modal";
@@ -22,9 +24,10 @@ function ReviewModal({ chefId, show, setShowReviewModal }) {
     chef_Id: "",
     description: "Thank you for your amazing service . Thank you lot chefjoy ",
     rate_chef: 1,
-    images: ["57f146427d0e277f9e14.jpeg", "1626161829257.jpg"],
+    images: [],
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [uploadingImage, setUploadingImage] = useState(false);
 
   const handleReview = async () => {
     try {
@@ -39,6 +42,7 @@ function ReviewModal({ chefId, show, setShowReviewModal }) {
 
   const handleFileUpload = async (event) => {
     try {
+      setUploadingImage(true);
       if (event.target.files.length === 1) {
         console.log("--------->", event.target.files[0]);
         const file = event.target.files[0];
@@ -55,6 +59,8 @@ function ReviewModal({ chefId, show, setShowReviewModal }) {
       }
     } catch (err) {
       console.log(err);
+    } finally {
+      setUploadingImage(false);
     }
   };
 
@@ -131,13 +137,18 @@ function ReviewModal({ chefId, show, setShowReviewModal }) {
               className="rounded-lg mr-3 flex-none flex items-center justify-center border border-gray-300 border-dashed"
               style={{ width: "70px", height: "60px" }}
               onClick={() => fileInputRef.current.click()}
+              disabled={uploadingImage}
             >
-              <svg className="h-7 w-7" viewBox="0 0 24 24">
-                <path
-                  fill="red"
-                  d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
-                />
-              </svg>
+              {!uploadingImage ? (
+                <svg className="h-7 w-7" viewBox="0 0 24 24">
+                  <path
+                    fill="red"
+                    d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+                  />
+                </svg>
+              ) : (
+                <div style={{ fontSize: 10 }}>Uploading...</div>
+              )}
             </button>
 
             {review.images.map((image) => (

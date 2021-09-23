@@ -55,7 +55,8 @@ function HeroSearch() {
 
     if (returnType === "id") {
       const findData = data.find((item) => item.name === id);
-      return findData._id;
+      if (findData) return findData._id;
+      return "60d9717e0aeee56963e2199f";
     }
   };
 
