@@ -3,6 +3,7 @@ import { IMAGE_URL } from "../../constants/enviroment-vars";
 
 const transformCuisinesAndChefs = ({ data }) => {
   return data.map((item) => ({
+    id: item._id,
     name: item.name,
     chefs: item.chefCount[0],
     image: `${IMAGE_URL}${item.image1}`,

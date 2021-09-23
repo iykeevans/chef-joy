@@ -23,7 +23,7 @@ function Search() {
   const [chefs, setChefs] = useState([]);
   const [show, setShow] = useState(false);
   const [currentTab, setCurrentTab] = useState(1);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const transformSearchResult = ({ data }) => {
     return data.getChef.map((item) => ({

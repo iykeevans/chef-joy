@@ -1,15 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
+import Image from "next/image";
 
 import { addReview } from "../../store/actions/review-actions";
 
 import Modal from "../modal";
 
 import Star from "../svg/star.svg";
+import {
+  removeUploadedUserImage,
+  uploadUserSingleImage,
+} from "../../services/image-api/user";
+import { IMAGE_URL } from "../../constants/enviroment-vars";
 
 function ReviewModal({ chefId, show, setShowReviewModal }) {
   const dispatch = useDispatch();
+  const fileInputRef = useRef(null);
   const stars = [1, 2, 3, 4, 5];
   const [review, setReview] = useState({
     chef_Id: "",
@@ -30,7 +37,38 @@ function ReviewModal({ chefId, show, setShowReviewModal }) {
     }
   };
 
-  const uploadImage = () => {};
+  const handleFileUpload = async (event) => {
+    try {
+      if (event.target.files.length === 1) {
+        console.log("--------->", event.target.files[0]);
+        const file = event.target.files[0];
+        const formData = new FormData();
+        formData.append("image", file);
+        const response = await uploadUserSingleImage(formData);
+        console.log("--------->??", response);
+        return;
+      }
+
+      if (event.target.files.length > 1) {
+        console.log("--------->>>", event.target.files[0]);
+        return;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const removeFileUpload = async (id) => {
+    try {
+      const newReviewImages = review.images.filter((image) => image !== id);
+      setReview({ ...review, images: newReviewImages });
+
+      const data = await removeUploadedUserImage(id);
+      console.log("-------->", data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <Modal show={show} onClose={() => setShowReviewModal(false)}>
@@ -81,9 +119,18 @@ function ReviewModal({ chefId, show, setShowReviewModal }) {
           <p className="mb-2">Upload Gallery Pictures</p>
 
           <div className="flex" style={{ overflowX: "auto" }}>
-            <div
+            {/* hidden file input */}
+            <input
+              type="file"
+              className="hidden"
+              ref={fileInputRef}
+              onChange={handleFileUpload}
+            />
+
+            <button
               className="rounded-lg mr-3 flex-none flex items-center justify-center border border-gray-300 border-dashed"
               style={{ width: "70px", height: "60px" }}
+              onClick={() => fileInputRef.current.click()}
             >
               <svg className="h-7 w-7" viewBox="0 0 24 24">
                 <path
@@ -91,18 +138,32 @@ function ReviewModal({ chefId, show, setShowReviewModal }) {
                   d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
                 />
               </svg>
-            </div>
+            </button>
 
-            <div
-              className="bg-gray-300 relative rounded-lg mr-3 flex-none"
-              style={{ width: "70px", height: "60px" }}
-            >
-              <button className="absolute right-1 top-1 h-4 w-4 bg-white rounded-full flex items-center justify-center">
-                <svg className="h-3 w-3" viewBox="0 0 24 24">
-                  <path fill="currentColor" d="M19,13H5V11H19V13Z" />
-                </svg>
-              </button>
-            </div>
+            {review.images.map((image) => (
+              <div
+                key={image}
+                className="bg-gray-300 relative rounded-lg mr-3 flex-none"
+                style={{ width: "70px", height: "60px" }}
+              >
+                <Image
+                  src={`${IMAGE_URL}${image}`}
+                  alt="dish image"
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-lg"
+                />
+
+                <button
+                  className="absolute right-1 top-1 h-4 w-4 bg-white rounded-full flex items-center justify-center"
+                  onClick={() => removeFileUpload(image)}
+                >
+                  <svg className="h-3 w-3" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M19,13H5V11H19V13Z" />
+                  </svg>
+                </button>
+              </div>
+            ))}
           </div>
         </div>
 
