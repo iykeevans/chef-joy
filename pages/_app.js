@@ -16,6 +16,8 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
   }
+
+  html { scroll-behavior: smooth; }
 `;
 
 const theme = {
@@ -31,21 +33,12 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="true"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-
         <meta
           name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0"
+          content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
         />
+        <meta name="description" content="Order a chef from anywhere." />
+        <meta name="author" content="Ezeani Ikenna" />
       </Head>
 
       <GlobalStyle />

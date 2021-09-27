@@ -5,7 +5,7 @@ import HeroSearch from "./hero-search";
 
 function Hero() {
   return (
-    <section className="w-11/12 mx-auto pt-32 pb-44">
+    <section className="w-11/12 mx-auto pt-32 pb-44" id="hero">
       <div className="flex flex-col md:flex-row md:flex-row-reverse items-center w-full md:mb-0 mb-10">
         <div className="md:w-6/12 flex md:justify-end justify-center">
           <StyledChefHero />
