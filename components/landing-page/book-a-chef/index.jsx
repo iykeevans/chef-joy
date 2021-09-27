@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styled from "styled-components";
 
 import PeopleToast from "./people-toast.svg";
@@ -17,12 +18,11 @@ function BookAChef() {
             Attend to your guests and make them feel at home.
           </p>
 
-          <button
-            className="bg-black text-white py-3 px-7 mt-6 font-medium"
-            style={{ borderRadius: 8 }}
-          >
-            Book A Chef
-          </button>
+          <Link href="#hero">
+            <a className="bg-black text-white py-3 px-7 mt-6 font-medium rounded-lg inline-block">
+              Book A Chef
+            </a>
+          </Link>
         </div>
 
         <div className="md:w-1/2 flex md:justify-end justify-center">
@@ -44,12 +44,11 @@ function BookAChef() {
             Don&apos;t worry about the food, we got this.
           </p>
 
-          <button
-            className="bg-black text-white py-3 px-7 rounded mt-6 font-medium"
-            style={{ borderRadius: 8 }}
+          <Link
+            href="#hero"
           >
-            Book A Chef
-          </button>
+            <a className="bg-black text-white py-3 px-7 rounded mt-6 font-medium rounded-lg inline-block">Book A Chef</a>
+          </Link>
         </div>
       </div>
 
@@ -63,12 +62,11 @@ function BookAChef() {
             Cheaper than ordering from a restaurant.
           </p>
 
-          <button
-            className="bg-black text-white py-3 px-7 rounded mt-6 font-medium"
-            style={{ borderRadius: 8 }}
-          >
-            Book A Chef
-          </button>
+          <Link href="#hero">
+            <a className="bg-black text-white py-3 px-7 rounded mt-6 font-medium rounded-lg inline-block">
+              Book A Chef
+            </a>
+          </Link>
         </div>
 
         <div className="md:w-1/2 flex justify-end">
