@@ -95,7 +95,7 @@ function ReviewModal({ chefId, show, setShowReviewModal }) {
           </button>
         </div>
 
-        <p className="mb-2">Lorem ipsum dolor?</p>
+        <p className="mb-2">Do you have feedback about this chef?</p>
 
         <div className="flex mb-6">
           {stars.map((star) => (
