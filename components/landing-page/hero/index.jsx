@@ -3,7 +3,7 @@ import styled from "styled-components";
 import ChefHero from "./chef-hero";
 import HeroSearch from "./hero-search";
 
-function Hero({ coordinates }) {
+function Hero() {
   return (
     <section className="w-11/12 mx-auto pt-32 pb-44" id="hero">
       <div className="flex flex-col md:flex-row md:flex-row-reverse items-center w-full md:mb-0 mb-10">
@@ -22,7 +22,7 @@ function Hero({ coordinates }) {
         </div>
       </div>
 
-      <HeroSearch coordinates={coordinates} />
+      <HeroSearch />
     </section>
   );
 }

@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 import Hero from "../components/landing-page/hero";
 import BookAChef from "../components/landing-page/book-a-chef";
@@ -11,20 +12,17 @@ import SuccessfulBookings from "../components/landing-page/successful-bookings";
 import MobileAd from "../components/landing-page/mobile-ad";
 
 export default function Home() {
-  const [coordinates, setCoordinates] = useState({});
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(function (position) {
-        console.log({
-          lat: position.coords.latitude,
-          long: position.coords.longitude,
-        });
+        const payload = {
+          lat: "37.36605" || position.coords.latitude,
+          long: "-121.82718" || position.coords.longitude,
+        };
 
-        setCoordinates({
-          lat: position.coords.latitude || "37.36605",
-          long: position.coords.longitude || "-121.82718",
-        });
+        dispatch({ type: "SET_GEO_LOCATION", payload });
       });
     }
   }, []);
@@ -38,11 +36,11 @@ export default function Home() {
       </Head>
 
       <main>
-        <Hero coordinates={coordinates} />
+        <Hero />
         <BookAChef />
         <SelectChef />
         <HowItWorks />
-        <ExploreChefs coordinates={coordinates} />
+        <ExploreChefs />
         <TrendingChefs />
         <SuccessfulBookings />
         {/* <MobileAd /> */}

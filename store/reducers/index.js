@@ -5,6 +5,7 @@ import dishesReducer from "./dishes-reducer";
 import chefReducer from "./chef-reducer";
 import cartReducer from "./cart-reducer";
 import reviewReducer from "./review-reducer";
+import geoLocationReducer from "./geo-location-reducer";
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   chef: chefReducer,
   cart: cartReducer,
   reviews: reviewReducer,
+  geoLocation: geoLocationReducer,
 });
 
 export default rootReducer;

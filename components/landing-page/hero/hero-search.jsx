@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { addDays, setHours, setMinutes } from "date-fns";
 import { useRouter } from "next/router";
 import { DateTimePicker } from "@material-ui/pickers";
@@ -17,7 +17,7 @@ import {
 import useDebounce from "../../../custom-hooks/use-debounce";
 import { transformCities } from "../../../utils/transformers/chef";
 
-function HeroSearch({ coordinates }) {
+function HeroSearch() {
   // state
   const [loadingCities, setLoadingCities] = useState(false);
   const [loadingDishesCuisinesAndChefs, setLoadingDishesCuisinesAndChefs] =
@@ -41,6 +41,7 @@ function HeroSearch({ coordinates }) {
 
   // hooks
   const dispatch = useDispatch();
+  const coordinates = useSelector((state) => state.geoLocation);
   const router = useRouter();
   const debouncedCity = useDebounce(city);
   const debouncedDishCuisineAndChef = useDebounce(dishCuisineAndChef);
@@ -55,6 +56,7 @@ function HeroSearch({ coordinates }) {
               id: "60d9717e0aeee56963e219a0",
               name: "San Fransisco",
             });
+            return;
           }
           setCity(res.data[0].name);
           setSelectedCity(res.data[0]);
