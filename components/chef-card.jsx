@@ -4,10 +4,19 @@ import Link from "next/link";
 
 import Stargazer from "./stargazer";
 import trimString from "../utils/trim-string";
+import router from "next/router";
 
 function ChefCard({ chef }) {
+  const handleClick = (chefLink) => {
+    if (chefLink) router.push(chefLink);
+  };
   return (
-    <div className="w-11/12 flex-none">
+    <button
+      className={`w-11/12 md:w-full flex-none text-left ${
+        chef.link ? "cursor-pointer" : "cursor-not-allowed"
+      }`}
+      onClick={() => handleClick(chef.link)}
+    >
       <div
         className="mb-5 relative rounded-lg"
         style={{ height: 200, background: "#eee" }}
@@ -25,13 +34,7 @@ function ChefCard({ chef }) {
 
       <div>
         <div className="flex justify-between">
-          {chef.link ? (
-            <Link href={chef.link}>
-              <a className="font-semibold text-lg">{chef.name}</a>
-            </Link>
-          ) : (
-            <span className="font-semibold text-lg">{chef.name}</span>
-          )}
+          <span className="font-semibold text-lg">{chef.name}</span>
 
           <Stargazer stars={chef.stars.toFixed(1)} />
         </div>
@@ -42,7 +45,7 @@ function ChefCard({ chef }) {
 
         <div className="mt-3 text-gray-700">{chef.time}</div>
       </div>
-    </div>
+    </button>
   );
 }
 
