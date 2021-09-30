@@ -51,14 +51,14 @@ function HeroSearch() {
       fetchCities({ ...coordinates, limit: 1 })
         .then((res) => {
           if (Array.isArray(res)) {
-            setCity("San Fransisco");
+            setCity("San Fransisco CA");
             setSelectedCity({
               id: "60d9717e0aeee56963e219a0",
-              name: "San Fransisco",
+              name: "San Fransisco CA",
             });
             return;
           }
-          setCity(res.data[0].name);
+          setCity(`${res.data[0].name} ${res.data[0].state_code}`);
           setSelectedCity(res.data[0]);
         })
         .catch((err) => console.log(err));
@@ -111,7 +111,10 @@ function HeroSearch() {
             <ChDropdown
               show={city ? true : false}
               loading={loadingCities}
-              options={cities}
+              options={cities.map((city) => ({
+                ...city,
+                name: `${city.name} ${city.stateCode}`,
+              }))}
               handleOnClick={(selected) => {
                 setCity(selected.name);
                 setSelectedCity(selected);
