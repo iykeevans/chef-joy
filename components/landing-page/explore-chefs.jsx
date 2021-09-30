@@ -28,17 +28,6 @@ function ExploreChefs() {
     },
   ]);
 
-  useEffect(() => {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        console.log({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        });
-      });
-    }
-  }, []);
-
   return (
     <section className="w-11/12 mx-auto md:pt-44 pt-32">
       <h2 className="md:text-4xl text-2xl font-semibold md:text-center md:mb-4 mb-2">

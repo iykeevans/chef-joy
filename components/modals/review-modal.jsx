@@ -12,7 +12,7 @@ import Modal from "../modal";
 import Star from "../svg/star.svg";
 import {
   removeUploadedUserImage,
-  uploadUserSingleImage,
+  uploadUserBulkImage,
 } from "../../services/image-api/user";
 import { IMAGE_URL } from "../../constants/enviroment-vars";
 
@@ -22,7 +22,7 @@ function ReviewModal({ chefId, show, setShowReviewModal }) {
   const stars = [1, 2, 3, 4, 5];
   const [review, setReview] = useState({
     chef_Id: "",
-    description: "Thank you for your amazing service . Thank you lot chefjoy ",
+    description: "",
     rate_chef: 1,
     images: [],
   });
@@ -43,20 +43,17 @@ function ReviewModal({ chefId, show, setShowReviewModal }) {
   const handleFileUpload = async (event) => {
     try {
       setUploadingImage(true);
-      if (event.target.files.length === 1) {
-        console.log("--------->", event.target.files[0]);
-        const file = event.target.files[0];
-        const formData = new FormData();
+      const formData = new FormData();
+      const { files } = event.target;
+      console.log("files", files);
+
+      for (const file of files) {
         formData.append("image", file);
-        const response = await uploadUserSingleImage(formData);
-        console.log("--------->??", response);
-        return;
       }
 
-      if (event.target.files.length > 1) {
-        console.log("--------->>>", event.target.files[0]);
-        return;
-      }
+      const response = await uploadUserBulkImage(formData);
+      setReview({ ...review, images: [...review.images, ...response.data] });
+      fileInputRef.current.value = "";
     } catch (err) {
       console.log(err);
     } finally {

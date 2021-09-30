@@ -157,7 +157,7 @@ function Profile() {
           </Link>{" "}
           /{" "}
           <Link href="/chef/search">
-            <a>{"San Diego"}</a>
+            <a>{chef?.city?.name}</a>
           </Link>{" "}
           /{" "}
           <Link href="/chef/search">

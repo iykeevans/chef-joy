@@ -1,109 +1,94 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import debounce from "lodash.debounce";
+import { addDays, setHours, setMinutes } from "date-fns";
 import { useRouter } from "next/router";
 import { DateTimePicker } from "@material-ui/pickers";
 import styled, { keyframes } from "styled-components";
+
 import ChSelectField from "../../base/ch-select-field";
+import ChDropdown from "../../base/ch-dropdown";
 import SearchIcon from "./search-icon.svg";
-import { useOuterClick } from "../../../utils/useOuterClicks";
-import { fetchCity, fetchDishCuisineAndChef } from "../../../services/chef-api";
-import { getDay, addDays, setHours, setMinutes } from "date-fns";
 
-const fetchData = async (query, api, cb) => {
-  const { data } = await api({ name: query });
-  cb(data);
-};
+import {
+  fetchCities,
+  fetchDishesCuisinesAndChefs,
+} from "../../../services/chef-api";
 
-const debouncedFetchData = debounce((query, api, cb) => {
-  fetchData(query, api, cb);
-}, 500);
+import useDebounce from "../../../custom-hooks/use-debounce";
+import { transformCities } from "../../../utils/transformers/chef";
 
-function HeroSearch() {
-  // hooks
-  const dispatch = useDispatch();
-  const router = useRouter();
-
+function HeroSearch({ coordinates }) {
   // state
+  const [loadingCities, setLoadingCities] = useState(false);
+  const [loadingDishesCuisinesAndChefs, setLoadingDishesCuisinesAndChefs] =
+    useState(false);
+
   const [city, setCity] = useState("San Fransisco");
   const [cities, setCities] = useState([]);
-  const dropdownRef = useRef(null);
-  const [cuisine, setCuisine] = useState("");
-  const [cuisines, setCuisines] = useState([]);
-  const [openCityMenu, setOpenCityMenu] = useState(false);
-  const [openCuisineMenu, setOpenCuisineMenu] = useState(false);
+  const [selectedCity, setSelectedCity] = useState({});
+  const [dishCuisineAndChef, setDishCuisineAndChef] = useState("");
+  const [allDishesCuisinesAndChefs, setAllDishesCuisinesAndChefs] = useState(
+    []
+  );
+  const [selectedDishCuisineAndChef, setSelectedDishCuisineAndChef] = useState(
+    {}
+  );
+
   const [date, setDate] = useState(
     setMinutes(setHours(addDays(new Date(), 1), 11), 0)
   );
-  const [time, setTime] = useState("");
-  const [day, setDay] = useState(null);
   const [bookingType, setBookingType] = useState("1");
 
-  const handleDateChange = (event) => {
-    const date = event.toString();
-    const splitTime = date.split(" ")[4].split(":");
-    setTime(`${splitTime[0]}:${splitTime[1]}`);
-    setDay(getDay(new Date(date)));
-    setDate(event);
-  };
-
-  const pluckByIdentifier = (returnType, data, id) => {
-    if (returnType === "name") {
-      const findData = data.find((item) => item._id === id);
-      return findData.name;
-    }
-
-    if (returnType === "id") {
-      const findData = data.find((item) => item.name === id);
-      if (findData) return findData._id;
-      return "60d9717e0aeee56963e2199f";
-    }
-  };
+  // hooks
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const debouncedCity = useDebounce(city);
+  const debouncedDishCuisineAndChef = useDebounce(dishCuisineAndChef);
 
   useEffect(() => {
-    debouncedFetchData(city, fetchCity, (res) => {
-      console.log("----->", res);
-      if (res) setCities(res);
-      else setCities([]);
-    });
-  }, [city]);
+    if (coordinates && Object.keys(coordinates).length) {
+      fetchCities({ ...coordinates, limit: 1 })
+        .then((res) => {
+          if (Array.isArray(res)) {
+            setCity("San Fransisco");
+            setSelectedCity({
+              id: "60d9717e0aeee56963e219a0",
+              name: "San Fransisco",
+            });
+          }
+          setCity(res.data[0].name);
+          setSelectedCity(res.data[0]);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [coordinates]);
 
   useEffect(() => {
-    if (cuisine) {
-      debouncedFetchData(cuisine, fetchDishCuisineAndChef, (res) => {
-        if (res) setCuisines(transformDishCuisineAndChef(res));
-        else setCuisines([]);
-      });
+    if (debouncedCity) {
+      fetchCities({ name: debouncedCity })
+        .then((res) => {
+          setCities(transformCities(res));
+          setLoadingCities(false);
+        })
+        .catch((err) => console.log(err));
     }
-  }, [cuisine]);
+  }, [debouncedCity]);
 
-  const handleSelectedCityResult = (id) => {
-    setOpenCityMenu(false);
-    setCity(pluckByIdentifier("name", cities, id));
-  };
-
-  const handleSelectedCuisineResult = (id) => {
-    setOpenCuisineMenu(false);
-    setCuisine(pluckByIdentifier("name", cuisines, id));
-  };
-
-  useOuterClick(dropdownRef, () => {
-    if (openCityMenu) {
-      setOpenCityMenu(false);
-    }
-    if (openCuisineMenu) setOpenCuisineMenu(false);
-  });
+  useEffect(() => {
+    fetchDishesCuisinesAndChefs({ name: debouncedDishCuisineAndChef })
+      .then((res) => {
+        setAllDishesCuisinesAndChefs(res);
+        setLoadingDishesCuisinesAndChefs(false);
+      })
+      .catch((err) => console.log(err));
+  }, [debouncedDishCuisineAndChef]);
 
   const handleSearch = () => {
-    const cityId = city ? pluckByIdentifier("id", cities, city) : "";
-    const nameId = cuisine ? pluckByIdentifier("id", cuisines, cuisine) : "";
-
     const searchPayload = {
-      city: cityId,
-      day,
-      time,
+      city: selectedCity,
+      date,
       cuisine_category: bookingType || 1,
-      name: nameId,
+      name: selectedDishCuisineAndChef,
     };
 
     dispatch({ type: "SET_SEARCH_PAYLOAD", payload: searchPayload });
@@ -121,28 +106,30 @@ function HeroSearch() {
           style={{ height: 70 }}
         >
           <div className="w-6/12 flex flex-col justify-center border-r">
-            <div
-              ref={dropdownRef}
-              className="flex flex-col justify-center h-full"
+            <ChDropdown
+              show={city ? true : false}
+              loading={loadingCities}
+              options={cities}
+              handleOnClick={(selected) => {
+                setCity(selected.name);
+                setSelectedCity(selected);
+              }}
             >
               <input
                 type="text"
                 placeholder="City"
                 value={city}
-                onChange={(e) => {
-                  setCity(e.target.value);
-                  setOpenCityMenu(true);
+                onChange={({ target }) => {
+                  setCity(target.value);
+                  if (city) {
+                    setLoadingCities(true);
+                  } else {
+                    setLoadingCities(false);
+                  }
                 }}
                 className="md:text-base text-sm focus:outline-none appearance-none w-full h-full px-5"
               />
-            </div>
-            {openCityMenu && (
-              <DropDownMenu
-                options={cities}
-                width="25%"
-                handleOnClick={handleSelectedCityResult}
-              />
-            )}
+            </ChDropdown>
           </div>
 
           <div className="flex flex-col justify-center md:border-r px-5 w-6/12">
@@ -150,7 +137,7 @@ function HeroSearch() {
               className="md:text-base text-sm focus:outline-none appearance-none"
               value={date}
               placeholder="Date / Time"
-              onChange={handleDateChange}
+              onChange={(event) => setDate(event)}
             />
           </div>
         </div>
@@ -168,28 +155,36 @@ function HeroSearch() {
             onChange={({ target }) => setBookingType(target.value)}
           />
         </div>
-        <div>
-          <div
-            ref={dropdownRef}
-            className="flex flex-col md:flex-row justify-center"
-            style={{ height: 70 }}
+
+        <div style={{ height: 70 }}>
+          <ChDropdown
+            show={dishCuisineAndChef ? true : false}
+            loading={loadingDishesCuisinesAndChefs}
+            options={allDishesCuisinesAndChefs.map((item) => ({
+              ...item,
+              name: `${item.name} ${item.type}`,
+            }))}
+            handleOnClick={(selected) => {
+              setDishCuisineAndChef(selected.name);
+              setSelectedDishCuisineAndChef(selected);
+            }}
           >
             <input
               type="search"
               placeholder="Search for Cuisine, Dishes, Chefs.."
-              value={cuisine}
-              onChange={(e) => {
-                setCuisine(e.target.value), setOpenCuisineMenu(true);
+              value={dishCuisineAndChef}
+              onChange={({ target }) => {
+                setDishCuisineAndChef(target.value);
+
+                if (dishCuisineAndChef) {
+                  setLoadingDishesCuisinesAndChefs(true);
+                } else {
+                  setLoadingDishesCuisinesAndChefs(false);
+                }
               }}
               className="text-sm focus:outline-none pr-40 pl-3 h-full"
             />
-          </div>
-          {openCuisineMenu && (
-            <DropDownMenu
-              options={cuisines}
-              handleOnClick={handleSelectedCuisineResult}
-            />
-          )}
+          </ChDropdown>
         </div>
       </div>
 
@@ -210,54 +205,6 @@ function HeroSearch() {
   );
 }
 
-const DropDownMenu = ({ options, width, handleOnClick }) => {
-  return (
-    <StyledSection>
-      {options.map((option) => (
-        <StyledList
-          tabIndex={option._id}
-          key={option._id}
-          onClick={() => handleOnClick(option._id)}
-        >
-          {option.name} {option.state_code}
-          <span style={{ fontSize: "10px" }}>
-            {" "}
-            {option.type ? `(${option.type})` : ""}
-          </span>
-        </StyledList>
-      ))}
-    </StyledSection>
-  );
-};
-const transformDishCuisineAndChef = (data) => {
-  const { Dish, Cuisine, Chef } = data;
-
-  const modifiedDish = Dish.length
-    ? Dish.map((item) => ({
-        _id: item._id,
-        name: item.name,
-        type: "dish",
-      }))
-    : [];
-
-  const modifiedCuisine = Cuisine.length
-    ? Cuisine.map((item) => ({
-        _id: item._id,
-        name: item.name,
-        type: "cuisine",
-      }))
-    : [];
-
-  const modifiedChef = Chef.length
-    ? Chef.map((item) => ({
-        _id: item._id,
-        name: item.first_name,
-        type: "chef",
-      }))
-    : [];
-
-  return [...modifiedDish, ...modifiedCuisine, ...modifiedChef];
-};
 const StyledDatePicker = styled(DateTimePicker)`
   /* default */
   .MuiInput-underline:before {

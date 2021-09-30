@@ -1,20 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDay } from "date-fns";
 import { DateTimePicker } from "@material-ui/pickers";
 import styled from "styled-components";
 
 import useDebounce from "../../../../custom-hooks/use-debounce";
-import { fetchCity } from "../../../../services/chef-api";
+import { fetchCities } from "../../../../services/chef-api";
 import ChDropdown from "../../../base/ch-dropdown";
-
-const transformCity = (response) => {
-  if (Array.isArray(response)) return response;
-  return response.data.map((item) => ({
-    name: item.name,
-    id: item._id,
-  }));
-};
+import { transformCities } from "../../../../utils/transformers/chef";
 
 function SearchBar() {
   // state
@@ -23,8 +15,6 @@ function SearchBar() {
   const [cities, setCities] = useState([]);
   const [selectedCity, setSelectedCity] = useState("");
   const [date, setDate] = useState(null);
-  const [time, setTime] = useState("");
-  const [day, setDay] = useState("");
 
   // hooks
   const debouncedValue = useDebounce(searchValue);
@@ -32,30 +22,24 @@ function SearchBar() {
   const searchPayload = useSelector((state) => state.searchPayload);
 
   useEffect(() => {
-    fetchCity({ name: debouncedValue })
+    setSearchValue(searchPayload.city.name);
+    setSelectedCity(searchPayload.city);
+    setDate(searchPayload.date);
+  }, []);
+
+  useEffect(() => {
+    fetchCities({ name: debouncedValue })
       .then((res) => {
         setLoading(false);
-        setCities(transformCity(res));
-        console.log(transformCity(res));
+        setCities(transformCities(res));
       })
       .catch((err) => console.log(err));
   }, [debouncedValue]);
 
-  const handleDateChange = (event) => {
-    const date = event.toString();
-    const splitTime = date.split(" ")[4].split(":");
-    setTime(`${splitTime[0]}:${splitTime[1]}`);
-    setDay(getDay(new Date(date)));
-    setDate(event);
-  };
-
   const handleSearch = () => {
     const payload = {
-      city: selectedCity.id,
-      day,
-      time,
-      cuisine_category: searchPayload.cuisine_category || 1,
-      name: "",
+      city: selectedCity,
+      date,
     };
 
     dispatch({ type: "SET_SEARCH_PAYLOAD", payload });
@@ -73,6 +57,7 @@ function SearchBar() {
         <span className="text-xs text-gray-400 mb-1.5">City</span>
 
         <ChDropdown
+          show={searchValue}
           loading={loading}
           options={cities}
           handleOnClick={(selected) => {
@@ -107,7 +92,7 @@ function SearchBar() {
           className="text-sm focus:outline-none appearance-none"
           value={date}
           placeholder="Date / Time"
-          onChange={handleDateChange}
+          onChange={(event) => setDate(event)}
         />
       </div>
 

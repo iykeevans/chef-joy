@@ -22,9 +22,11 @@ export const uploadUserSingleImage = async (payload) => {
  * @function
  * @return {Promise<Object>}
  */
-export const uploadUserBulkImage = async () => {
+export const uploadUserBulkImage = async (payload) => {
   try {
-    const data = await apiClient.post("pub/upload-bulk-image").json();
+    const data = await apiClient
+      .put("pub/upload-bulk-image", { body: payload })
+      .json();
     return data;
   } catch (err) {
     throw new Error(err);
