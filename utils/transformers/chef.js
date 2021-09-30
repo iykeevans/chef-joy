@@ -3,5 +3,6 @@ export const transformCities = (response) => {
   return response.data.map((item) => ({
     name: item.name,
     id: item._id,
+    stateCode: item.state_code,
   }));
 };
