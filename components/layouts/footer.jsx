@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import { useSelector, useDispatch } from "react-redux";
 
 import Logo from "./logo";
 import Twitter from "../svg/twitter";
@@ -10,6 +11,10 @@ import { fetchCities } from "../../services/chef-api";
 function Footer() {
   const coordinates = useSelector((state) => state.geoLocation);
   const [cities, setCities] = useState([]);
+
+  //hooks
+  const router = useRouter();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (coordinates && Object.keys(coordinates).length) {
@@ -22,6 +27,11 @@ function Footer() {
         .catch((err) => console.log(err));
     }
   }, [coordinates]);
+
+  const handleClick = (name, id) => {
+    dispatch({ type: "SET_SEARCH_PAYLOAD", payload: { city: { name, id } } });
+    router.push("/chef/search");
+  };
 
   return (
     <footer className="w-11/12 mx-auto pb-5 pt-44">
@@ -54,9 +64,13 @@ function Footer() {
           {cities.length ? (
             <>
               {cities.map((city, index) => (
-                <div className="text-gray-500 mb-2" key={index}>
+                <button
+                  className="text-gray-500 mb-2 inline-block"
+                  key={index}
+                  onClick={() => handleClick(city.name, city._id)}
+                >
                   {city.name} <span>{city.state_code}</span>
-                </div>
+                </button>
               ))}
             </>
           ) : (
