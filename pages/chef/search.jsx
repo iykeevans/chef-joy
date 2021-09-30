@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useSnackbar } from "nextjs-toast";
 import FadeLoader from "react-spinners/FadeLoader";
 
@@ -13,9 +13,12 @@ import Modal from "../../components/modal/searchModal";
 import { searchChef } from "../../services/chef-api";
 import Empty from "../../components/empty";
 import { IMAGE_URL } from "../../constants/enviroment-vars";
+import getTime from "../../utils/get-time";
+import getDay from "date-fns/getDay";
 
 function Search() {
   // hooks
+  const dispatch = useDispatch();
   const searchPayload = useSelector((state) => state.searchPayload);
   const snackbar = useSnackbar();
 
@@ -45,7 +48,13 @@ function Search() {
 
   useEffect(() => {
     setLoading(true);
-    searchChef(searchPayload)
+    const payload = {
+      cuisine_category: searchPayload.cuisine_category,
+      city: searchPayload.city.id || searchPayload.city._id,
+      time: getTime(searchPayload.date),
+      day: getDay(searchPayload.date),
+    };
+    searchChef(payload)
       .then((res) => {
         setChefs(transformSearchResult(res));
       })
@@ -85,7 +94,12 @@ function Search() {
             className={`md:mr-5 flex justify-center items-center md:w-48 w-1/2 ${
               currentTab == 1 ? "border-b-2 border-red-500" : ""
             } py-2 cursor-pointer`}
-            onClick={() => setCurrentTab(1)}
+            onClick={() =>
+              dispatch({
+                type: "SET_SEARCH_PAYLOAD",
+                payload: { cuisine_category: 1 },
+              })
+            }
           >
             <Champagne className="h-7" />
             <div className="flex flex-col ml-3">
@@ -98,7 +112,12 @@ function Search() {
             className={`flex justify-center items-center md:w-48 w-1/2 ${
               currentTab == 2 ? "border-b-2 border-red-500" : ""
             } py-2 cursor-pointer`}
-            onClick={() => setCurrentTab(2)}
+            onClick={() =>
+              dispatch({
+                type: "SET_SEARCH_PAYLOAD",
+                payload: { cuisine_category: 2 },
+              })
+            }
           >
             <Dinner className="h-7" />
             <div className="flex flex-col ml-3">
@@ -113,7 +132,7 @@ function Search() {
         {chefs.length ? (
           <div className="flex md:flex-row flex-col flex-col-reverse md:items-center md:justify-between pt-8 md:pb-8 pb-5 ">
             <h2 className="md:text-2xl text-lg font-semibold">
-              Chefs Near {"San Diego"}
+              Chefs Near {searchPayload.city.name || "You"}
             </h2>
 
             <div className="text-sm flex items-center md:mb-0 mb-5">
@@ -146,7 +165,7 @@ function Search() {
         ) : (
           <div className="pt-16">
             <Empty
-              title="No Chef's Near San Diego"
+              title={`No Chef's Near ${searchPayload.city.name || "You"}`}
               subTitle="We will come to your city soon."
             />
           </div>

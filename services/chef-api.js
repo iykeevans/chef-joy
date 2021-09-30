@@ -96,16 +96,7 @@ export const fetchUserChefProfile = async (payload) => {
  * @param {payload}
  * @return {Promise<Object>} chef object
  */
-export const searchChef = async (
-  payload = {
-    city: "60d9717e0aeee56963e219a0",
-    day: "5",
-    time: "20:18",
-    name: "",
-    type: "",
-    cuisine_category: 1,
-  }
-) => {
+export const searchChef = async (payload) => {
   try {
     const data = await apiClient
       .post("user/pub/get-chef", { json: payload })
@@ -116,6 +107,38 @@ export const searchChef = async (
   }
 };
 
+const transformDishesCuisinesAndChefs = (response) => {
+  if (Array.isArray(response)) return response;
+
+  const { Dish, Cuisine, Chef } = response.data;
+
+  const modifiedDish = Dish.length
+    ? Dish.map((item) => ({
+        id: item._id,
+        name: item.name,
+        type: "dish",
+      }))
+    : [];
+
+  const modifiedCuisine = Cuisine.length
+    ? Cuisine.map((item) => ({
+        id: item._id,
+        name: item.name,
+        type: "cuisine",
+      }))
+    : [];
+
+  const modifiedChef = Chef.length
+    ? Chef.map((item) => ({
+        id: item._id,
+        name: item.first_name,
+        type: "chef",
+      }))
+    : [];
+
+  return [...modifiedDish, ...modifiedCuisine, ...modifiedChef];
+};
+
 /**
  * fetch dish, cuisine and chef
  *
@@ -123,7 +146,7 @@ export const searchChef = async (
  * @param {payload}
  * @return {Promise<Array>} Search Array
  */
-export const fetchDishCuisineAndChef = async (
+export const fetchDishesCuisinesAndChefs = async (
   payload = {
     name: "",
   }
@@ -132,9 +155,9 @@ export const fetchDishCuisineAndChef = async (
     const data = await apiClient
       .post("user/pub/find-dish-cuisine-n-chef", { json: payload })
       .json();
-    return data;
+    return transformDishesCuisinesAndChefs(data);
   } catch (err) {
-    throw [];
+    throw new Error(err);
   }
 };
 
@@ -145,7 +168,7 @@ export const fetchDishCuisineAndChef = async (
  * @param {payload}
  * @return {Promise<Array>} City Array
  */
-export const fetchCity = async (
+export const fetchCities = async (
   payload = {
     name: "",
   }

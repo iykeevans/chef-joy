@@ -1,9 +1,13 @@
+import { addDays, setHours, setMinutes } from "date-fns";
+
 const initialState = {
   cuisine_category: 1,
-  city: "60d9717d0aeee56963e2139c",
-  time: "10:30",
-  day: 3,
-  name: "",
+  city: {
+    id: "60d9717e0aeee56963e219a0",
+    name: "San Fransisco",
+  },
+  date: setMinutes(setHours(addDays(new Date(), 1), 11), 0),
+  name: {},
 };
 
 const searchPayloadReducer = (state = initialState, action) => {

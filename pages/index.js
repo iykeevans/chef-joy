@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useEffect, useState } from "react";
 
 import Hero from "../components/landing-page/hero";
 import BookAChef from "../components/landing-page/book-a-chef";
@@ -9,9 +10,25 @@ import TrendingChefs from "../components/landing-page/trending-chefs";
 import SuccessfulBookings from "../components/landing-page/successful-bookings";
 import MobileAd from "../components/landing-page/mobile-ad";
 
-// import styles from "../styles/Home.module.css";
-
 export default function Home() {
+  const [coordinates, setCoordinates] = useState({});
+
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        console.log({
+          lat: position.coords.latitude,
+          long: position.coords.longitude,
+        });
+
+        setCoordinates({
+          lat: position.coords.latitude || "37.36605",
+          long: position.coords.longitude || "-121.82718",
+        });
+      });
+    }
+  }, []);
+
   return (
     <div>
       <Head>
@@ -21,11 +38,11 @@ export default function Home() {
       </Head>
 
       <main>
-        <Hero />
+        <Hero coordinates={coordinates} />
         <BookAChef />
         <SelectChef />
         <HowItWorks />
-        <ExploreChefs />
+        <ExploreChefs coordinates={coordinates} />
         <TrendingChefs />
         <SuccessfulBookings />
         {/* <MobileAd /> */}

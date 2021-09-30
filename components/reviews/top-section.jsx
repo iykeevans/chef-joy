@@ -23,21 +23,21 @@ function ReviewTopSection({ chef, totalReviews = 0, setShowReviewModal }) {
   return (
     <div>
       <div className=" w-100 h-100 block pb-4 ">
-        <span className="text-black">
-          <small>
-            Home <span>/</span>{" "}
-          </small>
-
-          <small>
-            94601 <span>/</span>{" "}
-          </small>
-
-          <small>
-            Party <span>/</span>{" "}
-          </small>
-
-          <small className="text-gray-400 capitalize">{chef?.fullName}</small>
-        </span>
+        {/* breadcrumbs */}
+        <div className="mb-10 text-sm capitalize">
+          <Link href="/">
+            <a>Home</a>
+          </Link>{" "}
+          /{" "}
+          <Link href="/chef/search">
+            <a>{chef?.city?.name}</a>
+          </Link>{" "}
+          /{" "}
+          <Link href="/chef/search">
+            <a>{"Party"}</a>
+          </Link>{" "}
+          / <span className="text-gray-500">{chef?.fullName}</span>
+        </div>
 
         <div className={Styles.media}>
           <div className="flex">
