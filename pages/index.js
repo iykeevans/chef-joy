@@ -18,8 +18,8 @@ export default function Home() {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(function (position) {
         const payload = {
-          lat: "37.36605" || position.coords.latitude,
-          long: "-121.82718" || position.coords.longitude,
+          lat: position.coords.latitude || "37.36605",
+          long: position.coords.longitude || "-121.82718",
         };
 
         dispatch({ type: "SET_GEO_LOCATION", payload });
