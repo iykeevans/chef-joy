@@ -12,8 +12,8 @@ import Modal from "../../components/modal/searchModal";
 
 import { searchChef } from "../../services/chef-api";
 import Empty from "../../components/empty";
-import { IMAGE_URL } from "../../constants/enviroment-vars";
 import getTime from "../../utils/get-time";
+import { transformSearchResult } from "../../utils/transformers/chef";
 import getDay from "date-fns/getDay";
 
 function Search() {
@@ -27,20 +27,6 @@ function Search() {
   const [show, setShow] = useState(false);
   const [currentTab, setCurrentTab] = useState(1);
   const [loading, setLoading] = useState(true);
-
-  const transformSearchResult = ({ data }) => {
-    return data.getChef.map((item) => ({
-      id: item._id,
-      name: `${item.first_name} ${item.last_name}`,
-      stars: item.chef_review.length
-        ? item.chef_review[0].rate_chef
-        : item.default_star,
-      cuisine: item.chef_cuisines.map((data) => data.name).join(", "),
-      time: `${item.availability.routine_schedule[0].start_time} to ${item.availability.routine_schedule[0].end_time}`,
-      profilePic: `${IMAGE_URL}${item.profile_pic}`,
-      link: `/chef/profile/${item._id}`,
-    }));
-  };
 
   useEffect(() => {
     setCurrentTab(searchPayload.cuisine_category);
