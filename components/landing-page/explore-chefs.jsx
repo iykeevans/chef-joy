@@ -1,32 +1,25 @@
 import { useState, useEffect } from "react";
+import { searchChef } from "../../services/chef-api";
 import ChButton from "../base/ch-button";
 import ChefCard from "../chef-card";
 import GridToScroll from "../grid-to-scroll";
 
+import getTime from "../../utils/get-time";
+import getDay from "date-fns/getDay";
+import { transformSearchResult } from "../../utils/transformers/chef";
+import Empty from "../empty";
+
 function ExploreChefs() {
-  const [chefs, setChefs] = useState([
-    {
-      name: "Beverly James",
-      stars: 4.5,
-      specialty: "indian",
-      time: "5pm to 8pm",
-      image: "/assets/images/chefs/beverly.jpg",
-    },
-    {
-      name: "Kathy Hudson",
-      stars: 4.5,
-      specialty: "chinese, italian, thai",
-      time: "5pm to 8pm",
-      image: "/assets/images/chefs/kathy.jpg",
-    },
-    {
-      name: "Louis Ford",
-      stars: 4.5,
-      specialty: "indian",
-      time: "5pm to 8pm",
-      image: "/assets/images/chefs/louis.jpg",
-    },
-  ]);
+  const [chefs, setChefs] = useState([]);
+
+  useEffect(() => {
+    const time = getTime(new Date());
+    const day = getDay(new Date());
+
+    searchChef({ time, day })
+      .then((response) => setChefs(transformSearchResult(response)))
+      .catch((error) => console.log(error));
+  }, []);
 
   return (
     <section className="w-11/12 mx-auto md:pt-44 pt-32">
@@ -40,17 +33,28 @@ function ExploreChefs() {
         </p>
       </div>
 
-      <GridToScroll gridCols={3} gapX={8}>
-        {chefs.map((chef, index) => (
-          <ChefCard chef={chef} key={index} className="mb-14" />
-        ))}
-      </GridToScroll>
+      {chefs.length ? (
+        <>
+          <GridToScroll gridCols={3} gapX={8} gapY={8}>
+            {chefs.map((chef, index) => (
+              <ChefCard chef={chef} key={index} className="mb-14" />
+            ))}
+          </GridToScroll>
 
-      <div className="flex justify-center md:mt-16 mt-8">
-        <ChButton className="bg-black text-white py-3 px-7 font-medium">
-          45 More Chefs
-        </ChButton>
-      </div>
+          {chefs.length ? (
+            <div className="flex justify-center md:mt-16 mt-8">
+              <ChButton className="bg-black text-white py-3 px-7 font-medium">
+                45 More Chefs
+              </ChButton>
+            </div>
+          ) : null}
+        </>
+      ) : (
+        <Empty
+          title={`No Chef's Near You`}
+          subTitle="We will come to your city soon."
+        />
+      )}
     </section>
   );
 }
