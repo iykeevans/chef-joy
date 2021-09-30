@@ -1,12 +1,28 @@
-import React from "react";
-import Image from "next/image";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 import Logo from "./logo";
 import Twitter from "../svg/twitter";
 import Facebook from "../svg/facebook";
 import Instagram from "../svg/instagram";
+import { fetchCities } from "../../services/chef-api";
 
 function Footer() {
+  const coordinates = useSelector((state) => state.geoLocation);
+  const [cities, setCities] = useState([]);
+
+  useEffect(() => {
+    if (coordinates && Object.keys(coordinates).length) {
+      fetchCities({ ...coordinates, limit: 5 })
+        .then((res) => {
+          if (Array.isArray(res)) return;
+
+          setCities(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [coordinates]);
+
   return (
     <footer className="w-11/12 mx-auto pb-5 pt-44">
       <section className="grid md:grid-cols-6 grid-cols-2 gap-y-8 pb-12">
@@ -35,11 +51,17 @@ function Footer() {
 
         <div className="col-span-1">
           <h5 className="font-semibold mb-4">Nearby</h5>
-          <div className="text-gray-500 mb-2">San Diego</div>
-          <div className="text-gray-500 mb-2">San Jose</div>
-          <div className="text-gray-500 mb-2">San Francisco</div>
-          <div className="text-gray-500 mb-2">Oakland</div>
-          <div className="text-gray-500">Los Angeles</div>
+          {cities.length ? (
+            <>
+              {cities.map((city, index) => (
+                <div className="text-gray-500 mb-2" key={index}>
+                  {city.name} <span>{city.state_code}</span>
+                </div>
+              ))}
+            </>
+          ) : (
+            <div className="text-gray-500 mb-2">No Nearby Cities</div>
+          )}
         </div>
 
         <div className="col-span-1">
