@@ -53,8 +53,8 @@ function Footer() {
           <h5 className="font-semibold mb-4">Nearby</h5>
           {cities.length ? (
             <>
-              {cities.map((city) => (
-                <div className="text-gray-500 mb-2">
+              {cities.map((city, index) => (
+                <div className="text-gray-500 mb-2" key={index}>
                   {city.name} <span>{city.state_code}</span>
                 </div>
               ))}
