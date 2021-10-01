@@ -24,6 +24,7 @@ function Search() {
 
   // state
   const [chefs, setChefs] = useState([]);
+  const [chefCount, setChefCount] = useState({ meal: 0, party: 0 });
   const [show, setShow] = useState(false);
   const [currentTab, setCurrentTab] = useState(1);
   const [loading, setLoading] = useState(true);
@@ -49,6 +50,7 @@ function Search() {
     searchChef(payload)
       .then((res) => {
         setChefs(transformSearchResult(res));
+        setChefCount({ meal: res.data.mealChef, party: res.data.partyChef });
       })
       .catch((err) => {
         if (err.message.includes("404")) {
@@ -96,7 +98,9 @@ function Search() {
             <Champagne className="h-7" />
             <div className="flex flex-col ml-3">
               <span className="font-medium">Party</span>
-              <span className="text-xs text-gray-500">{0} Chefs</span>
+              <span className="text-xs text-gray-500">
+                {chefCount.party} Chefs
+              </span>
             </div>
           </div>
 
@@ -114,7 +118,9 @@ function Search() {
             <Dinner className="h-7" />
             <div className="flex flex-col ml-3">
               <span className="font-medium">Meals</span>
-              <span className="text-xs text-gray-500">{0} Chefs</span>
+              <span className="text-xs text-gray-500">
+                {chefCount.meal} Chefs
+              </span>
             </div>
           </div>
         </div>
