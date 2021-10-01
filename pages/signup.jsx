@@ -18,7 +18,12 @@ function Signup() {
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      await signUpUser(values);
+      const { first_name, email, password } = values;
+      await signUpUser({
+        first_name: first_name.trim(),
+        password: password.trim(),
+        email: email.toLowerCase().trim(),
+      });
 
       snackbar.showMessage(
         "Successfully registered your account check your mail to verify your account",

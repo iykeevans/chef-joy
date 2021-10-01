@@ -35,7 +35,12 @@ function Login() {
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      const { data } = await loginUser(values);
+      const { email, password } = values;
+      const { data } = await loginUser({
+        email: email.toLowerCase().trim(),
+        password: password.trim(),
+      });
+
       setToken("token", data.userlogin.token);
       snackbar.showMessage("User successfully logged in", "success", "filled");
       mutate(data);
