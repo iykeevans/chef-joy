@@ -99,6 +99,7 @@ function Login() {
                 <div className="mt-4">
                   <ChTextField
                     label="Password"
+                    type="password"
                     className="px-3 focus:outline-none"
                     {...formik.getFieldProps("password")}
                     hasError={hasError(formik, "password")}
