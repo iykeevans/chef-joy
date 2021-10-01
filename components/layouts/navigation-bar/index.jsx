@@ -92,46 +92,82 @@ function NavigationBar() {
 
         {/* Mobile Navigation Starts Here */}
         <div className="md:hidden">
-          <Popover className="relative">
-            <Popover.Button>
-              <div className="bg-red-100 h-9 w-9 rounded-lg flex items-center justify-center">
-                <User className="text-red-500 h-5" />
-              </div>
-            </Popover.Button>
-
-            {user ? (
-              <Popover.Panel className="absolute z-10 border right-1 bg-white rounded-lg">
-                <div className="flex flex-col w-44 py-2">
-                  <a className="px-4 py-2">Notification</a>
-
-                  <a className="px-4 py-2">Messages</a>
-
-                  <button
-                    className="px-4 py-2 text-left"
-                    onClick={() => {
-                      crushToken("token");
-                      mutate(null);
-                      router.replace("/");
-                    }}
-                  >
-                    Log out
-                  </button>
-                </div>
-              </Popover.Panel>
-            ) : (
-              <Popover.Panel className="absolute z-10 border right-1 bg-white rounded-lg">
-                <div className="flex flex-col w-44 py-2">
-                  <a className="px-4 py-2">Login As Chef</a>
-
-                  <a className="px-4 py-2">Signup As Chef</a>
-
-                  <Link href="/login">
-                    <a className="px-4 py-2">Login /Signup</a>
-                  </Link>
-                </div>
-              </Popover.Panel>
+          <div className="flex items-center">
+            {/* search icon */}
+            {isSearchPath() && (
+              <button className="w-5 h-5 mr-5" onClick={() => router.push("/")}>
+                <svg viewBox="0 0 21.115 21.115">
+                  <g id="Group_11471" transform="translate(1 -4.32)">
+                    <circle
+                      id="Ellipse_40"
+                      cx="7.48"
+                      cy="7.48"
+                      r="7.48"
+                      transform="translate(0 5.32)"
+                      fill="none"
+                      stroke="#000"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                    />
+                    <line
+                      id="Line_21"
+                      x1="5.61"
+                      y1="5.61"
+                      transform="translate(13.091 18.41)"
+                      fill="none"
+                      stroke="#000"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                    />
+                  </g>
+                </svg>
+              </button>
             )}
-          </Popover>
+
+            {/* user pop over */}
+            <Popover className="relative">
+              <Popover.Button>
+                <div className="bg-red-100 h-9 w-9 rounded-lg flex items-center justify-center">
+                  <User className="text-red-500 h-5" />
+                </div>
+              </Popover.Button>
+
+              {user ? (
+                <Popover.Panel className="absolute z-10 border right-1 bg-white rounded-lg">
+                  <div className="flex flex-col w-44 py-2">
+                    <a className="px-4 py-2">Notification</a>
+
+                    <a className="px-4 py-2">Messages</a>
+
+                    <button
+                      className="px-4 py-2 text-left"
+                      onClick={() => {
+                        crushToken("token");
+                        mutate(null);
+                        router.replace("/");
+                      }}
+                    >
+                      Log out
+                    </button>
+                  </div>
+                </Popover.Panel>
+              ) : (
+                <Popover.Panel className="absolute z-10 border right-1 bg-white rounded-lg">
+                  <div className="flex flex-col w-44 py-2">
+                    <a className="px-4 py-2">Login As Chef</a>
+
+                    <a className="px-4 py-2">Signup As Chef</a>
+
+                    <Link href="/login">
+                      <a className="px-4 py-2">Login /Signup</a>
+                    </Link>
+                  </div>
+                </Popover.Panel>
+              )}
+            </Popover>
+          </div>
         </div>
       </div>
     </NavBar>
