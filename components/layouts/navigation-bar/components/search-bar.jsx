@@ -67,7 +67,7 @@ function SearchBar() {
         >
           <input
             className="text-sm"
-            placeholder="San Diego"
+            placeholder="Enter City"
             value={searchValue}
             onChange={({ target }) => {
               if (target.value) {
@@ -91,7 +91,7 @@ function SearchBar() {
         <StyledDatePicker
           className="text-sm focus:outline-none appearance-none"
           value={date}
-          placeholder="Date / Time"
+          placeholder="Enter Date / Time"
           onChange={(event) => setDate(event)}
         />
       </div>
