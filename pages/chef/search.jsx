@@ -34,12 +34,18 @@ function Search() {
 
   useEffect(() => {
     setLoading(true);
-    const payload = {
-      cuisine_category: searchPayload.cuisine_category,
-      city: searchPayload.city.id || searchPayload.city._id,
-      time: getTime(searchPayload.date),
-      day: getDay(searchPayload.date),
-    };
+
+    const payload = {};
+    searchPayload.cuisine_category &&
+      (payload.cuisine_category = searchPayload.cuisine_category);
+    searchPayload.city &&
+      (payload.city = searchPayload.city.id || searchPayload.city._id);
+
+    if (searchPayload.date) {
+      payload.time = getTime(searchPayload.date);
+      payload.day = getDay(searchPayload.date);
+    }
+
     searchChef(payload)
       .then((res) => {
         setChefs(transformSearchResult(res));
