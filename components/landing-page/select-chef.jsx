@@ -29,10 +29,9 @@ function SelectChef() {
   const handleSearch = (cuisine) => {
     const payload = {
       city: "",
-      day: "",
-      time: "",
+      date: null,
       cuisine_category: 1,
-      name: cuisine.id,
+      name: { id: cuisine.id },
     };
 
     dispatch({ type: "SET_SEARCH_PAYLOAD", payload });
