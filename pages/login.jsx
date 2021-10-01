@@ -27,7 +27,7 @@ function Login() {
         Router.replace("/chef/order");
         return;
       }
-      Router.replace("/chef/search");
+      Router.replace("/");
     }
   }, [user, loggedOut, cart]);
 
