@@ -95,7 +95,7 @@ function NavigationBar() {
           <div className="flex items-center">
             {/* search icon */}
             {isSearchPath() && (
-              <button class="w-5 h-5 mr-5" onClick={() => router.push("/")}>
+              <button className="w-5 h-5 mr-5" onClick={() => router.push("/")}>
                 <svg viewBox="0 0 21.115 21.115">
                   <g id="Group_11471" transform="translate(1 -4.32)">
                     <circle
@@ -106,9 +106,9 @@ function NavigationBar() {
                       transform="translate(0 5.32)"
                       fill="none"
                       stroke="#000"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                     />
                     <line
                       id="Line_21"
@@ -117,9 +117,9 @@ function NavigationBar() {
                       transform="translate(13.091 18.41)"
                       fill="none"
                       stroke="#000"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                     />
                   </g>
                 </svg>
