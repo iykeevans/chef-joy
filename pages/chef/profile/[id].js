@@ -104,6 +104,7 @@ function Profile() {
 
   // useffect to fetch dishes
   useEffect(() => {
+    console.log("I was run");
     const payload = {
       cuisineId: selectedCuisine.id,
       chefId: router.query.id,
