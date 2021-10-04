@@ -7,7 +7,6 @@ import ChefCard from "../../components/chef-card";
 
 import Dinner from "../../components/dinner.svg";
 import Champagne from "../../components/champagne-glass.svg";
-import Close from "../../components/close.svg";
 import Modal from "../../components/modal/searchModal";
 
 import { searchChef } from "../../services/chef-api";
@@ -132,25 +131,6 @@ function Search() {
             <h2 className="md:text-2xl text-lg font-semibold">
               Chefs Near {searchPayload.city.name || "You"}
             </h2>
-
-            <div className="text-sm flex items-center md:mb-0 mb-5">
-              <button
-                onClick={() => setShow(true)}
-                className="border p-2 rounded-lg mr-3 flex items-center"
-              >
-                <div className="bg-red-500 text-white rounded-full h-4 w-4 text-xs mr-1">
-                  1
-                </div>
-                Filter
-              </button>
-
-              <button className="bg-black text-white p-2 rounded-lg mr-3 flex items-center">
-                Popular
-                <Close className="ml-2" />
-              </button>
-
-              <button className="border p-2 rounded-lg">Ratings</button>
-            </div>
           </div>
         ) : null}
 
