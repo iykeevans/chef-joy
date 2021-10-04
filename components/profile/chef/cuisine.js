@@ -9,6 +9,7 @@ const Cuisine = ({ cuisine, setSelected, isActive }) => (
       !isActive ? "bg-gray-100" : "bg-white"
     } flex items-center md:p-5 p-3 md:mb-0 mb-5 cursor-pointer flex-none`}
     isActive={isActive}
+    disabled={isActive}
     onClick={() => setSelected(cuisine)}
   >
     <div className="bg-gray-500 h-16 w-16 rounded-full relative">
@@ -29,7 +30,7 @@ const Cuisine = ({ cuisine, setSelected, isActive }) => (
 
 export default Cuisine;
 
-const Wrapper = styled.div`
+const Wrapper = styled.button`
   border-radius: 12px;
   width: 230px;
   ${(props) =>
