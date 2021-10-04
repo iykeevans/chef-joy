@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Hero from "../components/landing-page/hero";
 import BookAChef from "../components/landing-page/book-a-chef";
@@ -13,19 +13,22 @@ import MobileAd from "../components/landing-page/mobile-ad";
 
 export default function Home() {
   const dispatch = useDispatch();
+  const coordinates = useSelector((state) => state.geoLocation);
 
   useEffect(() => {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        const payload = {
-          lat: position.coords.latitude || "37.36605",
-          long: position.coords.longitude || "-121.82718",
-        };
+    if (!Object.keys(coordinates).length) {
+      if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          const payload = {
+            lat: position.coords.latitude || "37.36605",
+            long: position.coords.longitude || "-121.82718",
+          };
 
-        dispatch({ type: "SET_GEO_LOCATION", payload });
-      });
+          dispatch({ type: "SET_GEO_LOCATION", payload });
+        });
+      }
     }
-  }, []);
+  }, [dispatch, coordinates]);
 
   return (
     <div>

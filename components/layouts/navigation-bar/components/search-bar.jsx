@@ -25,7 +25,7 @@ function SearchBar() {
     setSearchValue(searchPayload.city.name);
     setSelectedCity(searchPayload.city);
     setDate(searchPayload.date);
-  }, []);
+  }, [searchPayload]);
 
   useEffect(() => {
     fetchCities({ name: debouncedValue })
