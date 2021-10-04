@@ -59,7 +59,10 @@ function SearchBar() {
         <ChDropdown
           show={searchValue}
           loading={loading}
-          options={cities}
+          options={cities.map((city) => ({
+            ...city,
+            name: `${city.name}, ${city.stateCode}`,
+          }))}
           handleOnClick={(selected) => {
             setSearchValue(selected.name);
             setSelectedCity(selected);
