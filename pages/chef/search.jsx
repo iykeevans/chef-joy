@@ -9,11 +9,24 @@ import Dinner from "../../components/dinner.svg";
 import Champagne from "../../components/champagne-glass.svg";
 import Modal from "../../components/modal/searchModal";
 
-import { searchChef } from "../../services/chef-api";
+import { fetchChefsByCusineId, searchChef } from "../../services/chef-api";
 import Empty from "../../components/empty";
 import getTime from "../../utils/get-time";
 import { transformSearchResult } from "../../utils/transformers/chef";
 import getDay from "date-fns/getDay";
+import { IMAGE_URL } from "../../constants/enviroment-vars";
+
+const transformCuisineSearchResult = ({ data }) => {
+  return data.map((item) => ({
+    id: item._id,
+    name: `${item.first_name} ${item.last_name}`,
+    stars: 4,
+    cuisine: item.chef_cuisines.map((data) => data.name).join(", "),
+    time: `9PM to 10PM`,
+    profilePic: `${IMAGE_URL}${item.profile_pic}`,
+    link: `/chef/profile/${item._id}`,
+  }));
+};
 
 function Search() {
   // hooks
@@ -35,38 +48,62 @@ function Search() {
   useEffect(() => {
     setLoading(true);
 
-    const payload = {};
-    searchPayload.cuisine_category &&
-      (payload.cuisine_category = searchPayload.cuisine_category);
-    searchPayload.city &&
-      (payload.city = searchPayload.city.id || searchPayload.city._id);
+    if (searchPayload.type === "regular-search") {
+      const payload = {};
+      searchPayload.cuisine_category &&
+        (payload.cuisine_category = searchPayload.cuisine_category);
+      searchPayload.city &&
+        (payload.city = searchPayload.city.id || searchPayload.city._id);
 
-    if (searchPayload.date) {
-      payload.time = getTime(searchPayload.date);
-      payload.day = getDay(searchPayload.date);
+      if (searchPayload.date) {
+        payload.time = getTime(searchPayload.date);
+        payload.day = getDay(searchPayload.date);
+      }
+
+      searchChef(payload)
+        .then((res) => {
+          setChefs(transformSearchResult(res));
+          setChefCount({ meal: res.data.mealChef, party: res.data.partyChef });
+        })
+        .catch((err) => {
+          if (err.message.includes("404")) {
+            setChefs([]);
+            snackbar.showMessage("No chefs found", "error", "filled");
+            return;
+          }
+
+          snackbar.showMessage(
+            "An error occured while fetching chefs probably a network error",
+            "error",
+            "filled"
+          );
+
+          console.log(err);
+        })
+        .finally(() => setLoading(false));
+    } else {
+      fetchChefsByCusineId(searchPayload.cuisineId)
+        .then((res) => {
+          setChefs(transformCuisineSearchResult(res));
+          //setChefCount({ meal: res.data.mealChef, party: res.data.partyChef });
+        })
+        .catch((err) => {
+          if (err.message.includes("404")) {
+            setChefs([]);
+            snackbar.showMessage("No chefs found", "error", "filled");
+            return;
+          }
+
+          snackbar.showMessage(
+            "An error occured while fetching chefs probably a network error",
+            "error",
+            "filled"
+          );
+
+          console.log(err);
+        })
+        .finally(() => setLoading(false));
     }
-
-    searchChef(payload)
-      .then((res) => {
-        setChefs(transformSearchResult(res));
-        setChefCount({ meal: res.data.mealChef, party: res.data.partyChef });
-      })
-      .catch((err) => {
-        if (err.message.includes("404")) {
-          setChefs([]);
-          snackbar.showMessage("No chefs found", "error", "filled");
-          return;
-        }
-
-        snackbar.showMessage(
-          "An error occured while fetching chefs probably a network error",
-          "error",
-          "filled"
-        );
-
-        console.log(err);
-      })
-      .finally(() => setLoading(false));
   }, [searchPayload, snackbar]);
 
   if (loading)
