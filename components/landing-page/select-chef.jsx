@@ -27,14 +27,7 @@ function SelectChef() {
   }, [data]);
 
   const handleSearch = (cuisine) => {
-    const payload = {
-      city: "",
-      date: null,
-      cuisine_category: 1,
-      name: { id: cuisine.id },
-    };
-
-    dispatch({ type: "SET_SEARCH_PAYLOAD", payload });
+    dispatch({ type: "SET_SEARCH_CUISINE_ID", payload: cuisine.id });
     router.push("/chef/search");
   };
 

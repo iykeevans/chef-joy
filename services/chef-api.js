@@ -182,3 +182,21 @@ export const fetchCities = async (
     return [];
   }
 };
+
+/**
+ * fetch chef by cuisine id
+ *
+ * @function
+ * @param {payload}
+ * @return {Promise<Array>} Chefs Array
+ */
+export const fetchChefsByCusineId = async (payload) => {
+  try {
+    const data = await apiClient
+      .get(`user/pub/get-chef-cuisines/${payload}`)
+      .json();
+    return data;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
