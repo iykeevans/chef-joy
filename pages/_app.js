@@ -8,6 +8,7 @@ import { wrapper } from "../store";
 import Layout from "../components/layouts";
 
 import "tailwindcss/tailwind.css";
+import "../styles/globals.css";
 
 const GlobalStyle = createGlobalStyle`
   * {
