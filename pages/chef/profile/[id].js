@@ -138,7 +138,7 @@ function Profile() {
 
   return (
     <div className="pt-32">
-      {/* modal */}
+      {/* review modal */}
       <ReviewModal
         chefId={router.query.id}
         show={showReviewModal}
