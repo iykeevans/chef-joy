@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useSnackbar } from "nextjs-toast";
+import getDay from "date-fns/getDay";
 import FadeLoader from "react-spinners/FadeLoader";
 
 import ChefCard from "../../components/chef-card";
@@ -13,7 +14,7 @@ import { fetchChefsByCusineId, searchChef } from "../../services/chef-api";
 import Empty from "../../components/empty";
 import getTime from "../../utils/get-time";
 import { transformSearchResult } from "../../utils/transformers/chef";
-import getDay from "date-fns/getDay";
+import formatInTimeZone from "../../utils/format-in-timezone";
 import { IMAGE_URL } from "../../constants/enviroment-vars";
 
 const transformCuisineSearchResult = ({ data }) => {
@@ -56,7 +57,9 @@ function Search() {
         (payload.city = searchPayload.city.id || searchPayload.city._id);
 
       if (searchPayload.date) {
-        payload.time = getTime(searchPayload.date);
+        const formattedDate = formatInTimeZone(searchPayload.date);
+
+        payload.time = getTime(formattedDate);
         payload.day = getDay(searchPayload.date);
       }
 

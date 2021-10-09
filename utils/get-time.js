@@ -1,6 +1,5 @@
 const getTime = (date) => {
-  const splitTime = date.toString().split(" ")[4].split(":");
-  return `${splitTime[0]}:${splitTime[1]}`;
+  return date.toString().split("T")[1].split(".")[0].slice(0, 5);
 };
 
 export default getTime;
