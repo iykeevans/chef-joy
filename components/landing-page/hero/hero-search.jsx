@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addDays, setHours, setMinutes } from "date-fns";
+
 import { useRouter } from "next/router";
 import { DateTimePicker } from "@material-ui/pickers";
 import styled, { keyframes } from "styled-components";
@@ -18,6 +19,11 @@ import useDebounce from "../../../custom-hooks/use-debounce";
 import { transformCities } from "../../../utils/transformers/chef";
 
 function HeroSearch() {
+  const defaultOpenForBusinessDate = setMinutes(
+    setHours(addDays(new Date(), 1), 11),
+    0
+  );
+
   // state
   const [loadingCities, setLoadingCities] = useState(false);
   const [loadingDishesCuisinesAndChefs, setLoadingDishesCuisinesAndChefs] =
@@ -34,9 +40,7 @@ function HeroSearch() {
     {}
   );
 
-  const [date, setDate] = useState(
-    setMinutes(setHours(addDays(new Date(), 1), 11), 0)
-  );
+  const [date, setDate] = useState(defaultOpenForBusinessDate);
   const [bookingType, setBookingType] = useState("1");
 
   // hooks
