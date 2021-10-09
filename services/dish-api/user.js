@@ -1,8 +1,11 @@
 import apiClient from "..";
 
 const transformDishesByCuisineId = ({ data }) => {
+  console.log("------>", data);
   return data.map((item) => ({
     id: item.dish_Id,
+    cookingInfo: item.cooking_info,
+    price: item.price,
     duration: "Serves 2 - 45 mins",
     name: item.name,
     description: item.description,

@@ -1,11 +1,14 @@
-function CartButton({ count, onClick }) {
+function CartButton({ count, onClick, hasExceeded }) {
   if (count)
     return (
       <div className="flex">
         <span className="flex items-center h-10 w-auto border border-black px-6 font-medium rounded-lg">
           <button
-            className="text-lg font-semibold text-red-600 mr-4"
+            className={`text-lg font-semibold mr-4 ${
+              hasExceeded ? "cursor-not-allowed text-gray-200" : "text-red-600"
+            }`}
             onClick={() => onClick("INCREMENT")}
+            disabled={hasExceeded}
           >
             {"+"}
           </button>{" "}
