@@ -1,5 +1,6 @@
 import { useState } from "react";
 import OrderCard from "./order-card";
+import ChSelectField from "../base/ch-select-field";
 
 import PaymentCard from "./payment-card.svg";
 import PaymentPaypal from "./payment-paypal.svg";
@@ -8,18 +9,13 @@ import PaymentApple from "./payment-apple.svg";
 import Mastercard from "./mastercard.svg";
 
 function OrderPayment(props) {
-  const [cards, setCards] = useState([
-    {
-      name: "American Express",
-      details: "Xxxx Xxxx Xxxx 1008",
-      slug: "american-express",
-    },
-    {
-      name: "HDFC",
-      details: "Xxxx Xxxx Xxxx 1008",
-      slug: "hdfc",
-    },
-  ]);
+  const cardOptions = [
+    { name: "Mastercard", value: "mastercard" },
+    { name: "Visa", value: "visa" },
+    { name: "Discover", value: "discover" },
+  ];
+
+  const [cards, setCards] = useState([]);
 
   const [selectedPayment, setSelectedPayment] = useState("american-express");
 
@@ -29,14 +25,20 @@ function OrderPayment(props) {
     <div {...props}>
       <h2 className="text-xl font-semibold mb-3">Address</h2>
 
-      {cards.map((card, index) => (
-        <OrderCard
-          data={card}
-          key={index}
-          selected={selectedPayment}
-          setSelected={setSelectedPayment}
-        />
-      ))}
+      {cards.length ? (
+        <>
+          {cards.map((card, index) => (
+            <OrderCard
+              data={card}
+              key={index}
+              selected={selectedPayment}
+              setSelected={setSelectedPayment}
+            />
+          ))}
+        </>
+      ) : (
+        <div>No cards</div>
+      )}
 
       {!showNewPayment && (
         <div className="flex justify-center md:mt-10">
@@ -82,12 +84,19 @@ function OrderPayment(props) {
             </div>
 
             <div className="md:border rounded-lg grid grid-cols-12 gap-x-4 gap-y-5 p-4 md:pt-8">
-              <label className="md:col-span-7 col-span-12 flex flex-col">
+              <label
+                className="md:col-span-7 col-span-12 flex flex-col"
+                htmlFor="cardTypes"
+              >
                 Credit Card Type
-                <input
-                  type="text"
-                  className="border rounded-lg py-2 px-3 mt-2"
-                />
+                <div className="mt-2" style={{ height: 40 }}>
+                  <ChSelectField
+                    className="border rounded-lg"
+                    options={cardOptions}
+                    name="cardTypes"
+                    id="cardTypes"
+                  />
+                </div>
               </label>
 
               <label className="md:col-span-3 col-span-6 flex flex-col">
