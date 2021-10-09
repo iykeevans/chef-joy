@@ -4,9 +4,10 @@ import Image from "next/image";
 import CartButton from "../../cart-button";
 import { IMAGE_URL } from "../../../constants/enviroment-vars";
 import trimString from "../../../utils/trim-string";
+import getDishMinutes from "../../../utils/get-dish-minutes";
 
 function OrderContent({ cart = [], handleCart }) {
-  if (!cart.length) return <div>Nothing here</div>;
+  if (!cart.length) return <div>Cart Empty</div>;
   return (
     <>
       {cart.map((item) => (
@@ -25,7 +26,12 @@ function OrderContent({ cart = [], handleCart }) {
             <div className="flex-col">
               <h3 className="md:text-lg font-semibold">{item.name}</h3>
               <div className="text-gray-700 mb-2 md:text-base text-sm">
-                {item.duration}
+                {item.cookingInfo.length
+                  ? `Serves ${item.count} - ${getDishMinutes(
+                      item.cookingInfo,
+                      item.count
+                    )} mins`
+                  : "Serves 0 - 0 mins"}
               </div>
               <div className="md:w-7/12 text-sm text-gray-500">
                 {trimString(item.description, 55)}
@@ -35,6 +41,7 @@ function OrderContent({ cart = [], handleCart }) {
             <div className="md:mt-0 mt-5">
               <CartButton
                 count={item.count}
+                hasExceeded={item.price.consumer_max_guest == item.count}
                 onClick={(actionType) =>
                   handleCart(actionType, item.id, item.cuisineId)
                 }
