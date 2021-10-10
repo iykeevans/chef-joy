@@ -1,11 +1,8 @@
-import Router from "next/router";
-import { useEffect } from "react";
+import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import { Formik } from "formik";
 import { useSnackbar } from "nextjs-toast";
-
-import useUser from "../custom-hooks/use-user";
 
 import { loginUser } from "../services/auth-api/user";
 import ChTextField from "../components/base/ch-text-field";
@@ -14,24 +11,11 @@ import { setToken } from "../utils/token-manager";
 
 import LayoutTwo from "../components/layouts/layout-two";
 import AuthChef from "../components/svg/auth-chef.svg";
-import useCart from "../custom-hooks/use-cart";
 import hasError from "../utils/has-error";
-function Login() {
-  const { user, mutate, loggedOut } = useUser();
+
+function ResetPassword() {
   const snackbar = useSnackbar();
-  const { cart } = useCart();
-
-  useEffect(() => {
-    if (user && !loggedOut) {
-      if (cart.length) {
-        Router.replace("/chef/order");
-        return;
-      }
-      Router.replace("/");
-    }
-  }, [user, loggedOut, cart]);
-
-  const initialValues = { email: "", password: "" };
+  const initialValues = { password: "", confirmPassword: "" };
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
@@ -79,27 +63,26 @@ function Login() {
                 onSubmit={formik.handleSubmit}
               >
                 <h1 className="text-3xl font-bold md:text-left text-center mb-2">
-                  Welcome Back
+                  Reset Password
                 </h1>
 
                 <p className="text-gray-500 md:text-left text-center mb-4">
-                  Login to Continue
+                  Enter your new password.
                 </p>
 
                 <ChTextField
-                  label="Email"
+                  label="New Password"
                   className="px-3 focus:outline-none"
-                  {...formik.getFieldProps("email")}
-                  hasError={hasError(formik, "email")}
+                  {...formik.getFieldProps("password")}
+                  hasError={hasError(formik, "password")}
                   errorMessage={
-                    hasError(formik, "email") && formik.errors.email
+                    hasError(formik, "password") && formik.errors.password
                   }
                 />
 
-                <div className="mt-4">
+                <div className="mt-5">
                   <ChTextField
-                    label="Password"
-                    type="password"
+                    label="Re-Type New Password"
                     className="px-3 focus:outline-none"
                     {...formik.getFieldProps("password")}
                     hasError={hasError(formik, "password")}
@@ -109,36 +92,19 @@ function Login() {
                   />
                 </div>
 
-                <div className="flex items-center justify-between mt-5 mb-5 text-sm">
-                  <div className="flex items-center ">
-                    <input type="checkbox" className="mr-2" />
-                    Keep me signed in
-                  </div>
-
-                  <Link href="/forgot-password">
-                    <a className="text-red-600">forgot password?</a>
-                  </Link>
+                <div className="flex justify-between items-center mt-8">
+                  <button
+                    className={`${
+                      formik.isSubmitting
+                        ? "bg-gray-200 text-gray-400"
+                        : "bg-black text-white"
+                    } py-4 px-7 rounded-lg`}
+                    type="submit"
+                    disabled={formik.isSubmitting}
+                  >
+                    {formik.isSubmitting ? "Submitting" : "Reset Password"}
+                  </button>
                 </div>
-
-                <button
-                  className={`${
-                    formik.isSubmitting
-                      ? "bg-gray-200 text-gray-400"
-                      : "bg-black text-white"
-                  } py-4 mb-5`}
-                  style={{ borderRadius: 8 }}
-                  type="submit"
-                  disabled={formik.isSubmitting}
-                >
-                  {formik.isSubmitting ? "Submitting" : "Sign in"}
-                </button>
-
-                <span className="text-center text-sm">
-                  Don&apos;t have an Account?{" "}
-                  <Link href="/signup">
-                    <a className="text-red-600">Signup</a>
-                  </Link>
-                </span>
               </Form>
             )}
           </Formik>
@@ -163,6 +129,6 @@ const Form = styled.form`
   }
 `;
 
-Login.getLayout = LayoutTwo;
+ResetPassword.getLayout = LayoutTwo;
 
-export default Login;
+export default ResetPassword;

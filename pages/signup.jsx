@@ -116,7 +116,9 @@ function Signup() {
                     Keep me signed in
                   </div>
 
-                  <div className="text-red-600">forgot password?</div>
+                  <Link href="/forgot-password">
+                    <a className="text-red-600">forgot password?</a>
+                  </Link>
                 </div>
 
                 <button
