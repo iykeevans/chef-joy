@@ -28,7 +28,7 @@ function Order() {
     mutate,
   } = useSWR("user_addresses", fetchUserAddresses);
 
-  const { cart, mutateCart } = useCart();
+  const { cart, mutateCart, cartCount } = useCart();
   const { chef } = useChef();
   const { step, updateStep, hasCompletedStep } = useOrderProgress();
 
@@ -106,7 +106,7 @@ function Order() {
           <OrderSummaryWrapper className="md:mt-0 mt-12">
             <h3 className="text-xl font-semibold mb-2">Summary</h3>
 
-            <OrderSummary />
+            <OrderSummary cart={cart} cartCount={cartCount} />
 
             <ChButton
               className={`w-full ${
