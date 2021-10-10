@@ -67,7 +67,6 @@ function ReviewModal({ chefId, show, setShowReviewModal }) {
       setReview({ ...review, images: newReviewImages });
 
       const data = await removeUploadedUserImage(id);
-      console.log("-------->", data);
     } catch (err) {
       console.log(err);
     }

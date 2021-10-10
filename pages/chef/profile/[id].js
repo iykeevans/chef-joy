@@ -147,7 +147,11 @@ function Profile() {
 
       {/* sticky cart */}
       {cartCount && !loadingDishes ? (
-        <StickyCart total={cartCount} canProceed={user ? true : false} />
+        <StickyCart
+          total={cartCount}
+          canProceed={user ? true : false}
+          cart={syncedDishes}
+        />
       ) : null}
 
       <div className="w-11/12 mx-auto">

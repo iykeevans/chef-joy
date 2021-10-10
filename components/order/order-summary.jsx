@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { getTotalAmount, getTotalMinutes } from "../../utils/cart-calculations";
 
-function OrderSummary() {
+function OrderSummary({ cart, cartCount }) {
   return (
     <Wrapper className="w-full p-4">
       <div className="flex items-center border-b pb-4">
@@ -21,7 +22,7 @@ function OrderSummary() {
 
       <div className="flex justify-between mt-3 mb-1">
         <div className="font-medium">Total Time</div>
-        <div className="font-medium">40 Mins</div>
+        <div className="font-medium">{getTotalMinutes(cart).formattedVal}</div>
       </div>
 
       <div className="flex justify-between mb-2">
@@ -43,7 +44,7 @@ function OrderSummary() {
           <span className="text-sm text-gray-500">(Goes To Chef)</span>
         </div>
 
-        <div>$40.00</div>
+        <div>${getTotalMinutes(cart).rawVal * 35}</div>
       </div>
 
       <div className="flex justify-between mb-5">
@@ -52,19 +53,19 @@ function OrderSummary() {
           <span className="text-sm text-gray-500">(Goes To Chef Joy)</span>
         </div>
 
-        <div>$10.00</div>
+        <div>${cart[0]?.price.platform_fee || 0}</div>
       </div>
 
       <div className="flex justify-between border-b pb-3">
         <div className="font-medium">Taxes</div>
 
-        <div>$6.00</div>
+        <div>${cart[0]?.price.tax_rate || 0}</div>
       </div>
 
       <div className="flex justify-between mt-3">
         <div className="font-semibold">Total</div>
 
-        <div className="font-semibold">$56.00</div>
+        <div className="font-semibold">${getTotalAmount(cart, cartCount)}</div>
       </div>
     </Wrapper>
   );
